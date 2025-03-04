@@ -26,3 +26,9 @@ There is a page where you can see the full cast and their pictures, and another 
 # Technologies Used
 
 It's going to be developed with react and react admin, whilst the programming language that will be used is going to be typescript.
+
+
+# Authors
+
+Developed and designed by
+Mr
