@@ -1,0 +1,1 @@
+//merges every script that belgons on the actor page

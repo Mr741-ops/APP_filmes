@@ -1,0 +1,1 @@
+// Script that fetchs information from the API
