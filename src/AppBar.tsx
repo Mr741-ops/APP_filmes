@@ -1,20 +1,18 @@
-import { AppBar, AppBarProps } from 'react-admin';
+import { AppBar } from 'react-admin';
 import { Button, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { JSX } from 'react/jsx-runtime';
 
+const MyAppBar = (props: any) => (
 
-const MyAppBar = (props: JSX.IntrinsicAttributes & AppBarProps) => (
-
-    <AppBar {...props}>
+    <AppBar {...props} userMenu={null}>
         <Toolbar>
-            <Button color="inherit" component={Link} to ="Home_page">
+            <Button color="inherit" component={Link} to ="/home_page">
                 Home
             </Button>
-            <Button color="inherit" component={Link} to ="movie/popular">
+            <Button color="inherit" component={Link} to ="/popular">
                 Popular
             </Button>
-            <Button color="inherit" component={Link} to ="movie/trending">
+            <Button color="inherit" component={Link} to ="/trending">
                 Trending
             </Button>
         </Toolbar>

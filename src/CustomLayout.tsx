@@ -1,8 +1,6 @@
-import { Layout, LayoutProps } from 'react-admin';
+import { Layout } from 'react-admin';
 import MyAppBar from './AppBar';
-import { JSX } from 'react/jsx-runtime';
 
-
-const MyLayout = (props: JSX.IntrinsicAttributes & LayoutProps) => <Layout {...props} appBar={MyAppBar} />
+const MyLayout = (props: any) => <Layout {...props} appBar={MyAppBar} />
 
 export default MyLayout;

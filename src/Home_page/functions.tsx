@@ -1,1 +1,2 @@
-// Cards of the movie 
+// Functions for the home page
+
