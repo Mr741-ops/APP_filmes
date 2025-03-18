@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchMovies } from "./DataFetching";
+import { dataProvider } from "./dataProvider";
 //import { get } from "http";
 import teste1 from "./Interface";
 
@@ -9,7 +9,7 @@ const MovieList = () => {
     useEffect(() => {
 
         const getMovies = async () => {
-            const data = await fetchMovies();
+            const data = await dataProvider.getList("popular", "10");
             setMovies(data);
         }
 
