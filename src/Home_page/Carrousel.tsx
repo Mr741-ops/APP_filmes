@@ -1,31 +1,21 @@
+import * as React from "react";
 import useApiCall from "./apiCall";
-import poster from "./poster";
-import useScrollButtons from "./scroll_Buttons";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
+import { CustomDialog  } from "./dialogBox";
 
-export const Carrousel = (resource: string) => {
+interface CarrouselProps {
+  resource: string;
+  page: number;
+}
 
-    const { containerRef, smoothScroll} = useScrollButtons();
 
-    const {data} = useApiCall(resource);
-
-    const moviesToDisplay = data.slice(0, 10);
-
-    return (
-        <div className="scroll-container">
-                    <button className="scroll-left" onClick={() => smoothScroll(-355)} > <ArrowBackIosNewIcon/></button>
-                    <div ref={containerRef} className="movies-container">
-                        {moviesToDisplay.map((movie) => (
-                            <div key={movie.id} className="movie-item">
-                                {poster(movie.poster_path, movie.title, movie.id)}
-                            </div>
-                        ))}
-                    </div>
-                    <button className="scroll-right" onClick={() => smoothScroll(355)}><ArrowForwardIos/></button>
-                </div>
-    );
-
+const Carrousel: React.FC<CarrouselProps> = ({ resource, page }) => {
+  const { data } = useApiCall(resource, page);
+  
+  return (
+    <div className="scroll-container">
+      {CustomDialog(data)}
+    </div>
+  );
 };
 
 export default Carrousel;

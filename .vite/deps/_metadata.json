@@ -1,0 +1,85 @@
+{
+  "hash": "7ccf58b0",
+  "configHash": "bcda82c6",
+  "lockfileHash": "6cbff50b",
+  "browserHash": "fe486997",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "8dfc3200",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "8169b317",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "5a9ee0af",
+      "needsInterop": true
+    },
+    "react-admin": {
+      "src": "../../node_modules/react-admin/dist/esm/index.js",
+      "file": "react-admin.js",
+      "fileHash": "07260435",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "e28da9c8",
+      "needsInterop": false
+    },
+    "@mui/material": {
+      "src": "../../node_modules/@mui/material/index.js",
+      "file": "@mui_material.js",
+      "fileHash": "b9202551",
+      "needsInterop": false
+    },
+    "react-error-boundary": {
+      "src": "../../node_modules/react-error-boundary/dist/react-error-boundary.development.esm.js",
+      "file": "react-error-boundary.js",
+      "fileHash": "73f02b3f",
+      "needsInterop": false
+    },
+    "@mui/icons-material/ArrowBackIosNew": {
+      "src": "../../node_modules/@mui/icons-material/esm/ArrowBackIosNew.js",
+      "file": "@mui_icons-material_ArrowBackIosNew.js",
+      "fileHash": "b531a48f",
+      "needsInterop": false
+    },
+    "@mui/icons-material/ArrowForwardIos": {
+      "src": "../../node_modules/@mui/icons-material/esm/ArrowForwardIos.js",
+      "file": "@mui_icons-material_ArrowForwardIos.js",
+      "fileHash": "bdf93130",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-TZH7ELVI": {
+      "file": "chunk-TZH7ELVI.js"
+    },
+    "chunk-BIN4X3KC": {
+      "file": "chunk-BIN4X3KC.js"
+    },
+    "chunk-GU77BQZR": {
+      "file": "chunk-GU77BQZR.js"
+    },
+    "chunk-3HR4J3QZ": {
+      "file": "chunk-3HR4J3QZ.js"
+    },
+    "chunk-C6WWHQR7": {
+      "file": "chunk-C6WWHQR7.js"
+    },
+    "chunk-YT2SDMU2": {
+      "file": "chunk-YT2SDMU2.js"
+    },
+    "chunk-WUOPJTA3": {
+      "file": "chunk-WUOPJTA3.js"
+    }
+  }
+}
