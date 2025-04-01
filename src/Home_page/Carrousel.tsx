@@ -1,5 +1,5 @@
 import * as React from "react";
-import useApiCall from "./apiCall";
+import useApiCall from "../Data/apiCall";
 import { CustomDialog  } from "./dialogBox";
 
 interface CarrouselProps {

@@ -10,10 +10,10 @@ export function Dropdown({ resource, setResource }: { resource: string; setResou
     <React.Fragment>
       <div>
         <Select
-          labelId="demo-simple-select-helper-label"
+          labelId="Categories"
           id="demo-simple-select-helper"
           value={resource}
-          label="Movies"
+          label="Categories"
           onChange={handleChange}
           sx={{
             background:'#344560',

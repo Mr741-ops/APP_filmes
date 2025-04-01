@@ -1,39 +1,33 @@
 //merges every script that belogs on the home page
 import * as React from "react";
-import "./homePage.css";
-import Carrousel from "./Carrousel";
+import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import { Dropdown } from "./dropdown";
-import Buttons from "./buttons";
+import Buttons from "../Home_page/buttons";
 
-export const HomePage = () => {
+export const ActorsGallery = () => {
   /* 
   ------------------------------ Variables ------------------------
   */
-  const [resource, setResource] = React.useState("movie/popular");
+  const resource = "person/popular";
   const [page, setPage] = useState(1);
+  const title = "Popular People";
 
   /* 
   --------------------------------- Title Function ----------------------
   */
-  const title = () => {
-    if (resource == "movie/popular") {
-      return "Popular Movies";
-    } else {
-      return "Top Rated Movies";
-    }
-  };
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="xl">
-        <Box sx={{
-          display:"flex",
-          justifyContent:"space-between"
-        }}>
-          <Dropdown resource={resource} setResource={setResource} />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* <Dropdown resource={resource} setResource={setResource} /> */}
           <Buttons page={page} setPage={setPage} />
         </Box>
         <Typography
@@ -43,12 +37,12 @@ export const HomePage = () => {
             color: "secondary.main",
           }}
         >
-          {title()}
+          {title}
         </Typography>
-        <Carrousel resource={resource} page={page} />
+        <Body resource={resource} page={page} />
       </Container>
     </React.Fragment>
   );
 };
 
-export default HomePage;
+export default ActorsGallery;

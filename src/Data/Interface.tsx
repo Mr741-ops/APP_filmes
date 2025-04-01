@@ -1,6 +1,6 @@
-export interface teste1{
+export interface movie{
     id: number;
     title: string;
 }
 
-export default teste1;
+export default movie;

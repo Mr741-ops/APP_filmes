@@ -1,8 +1,6 @@
-import { AppBar, Box, MenuItem, Select, SelectChangeEvent, Tab, Tabs, Toolbar } from "@mui/material";
+import { AppBar, Box, Tab, Tabs, Toolbar } from "@mui/material";
 import { LoadingIndicator, Logout, UserMenu } from "react-admin";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import { Dropdown } from "./Home_page/dropdown";
-import React from "react";
 
 const Header = () => {
   const location = useLocation();
@@ -40,14 +38,8 @@ const Header = () => {
                 <Tab
                   label={"People"}
                   component={Link}
-                  to="/actor_page"
-                  value="/actor_page"
-                />
-                <Tab
-                  label={"Trending"}
-                  component={Link}
-                  to="/trending"
-                  value="/trending"
+                  to="/Actors_Gallery"
+                  value="/Actors_Gallery"
                 />
               </Tabs>
             </Box>

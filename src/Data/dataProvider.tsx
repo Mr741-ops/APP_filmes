@@ -45,11 +45,15 @@ export const dataProvider: DataProvider = {
       total: json.total_results,
     };
   },
-  getOne: function <RecordType extends RaRecord = any>(
-    resource: string,
-    params: GetOneParams<RecordType> & QueryFunctionContext,
-  ): Promise<GetOneResult<RecordType>> {
-    throw new Error("Function not implemented.");
+  getOne: async (resource, id) => {
+    if (!id) {
+      throw new Error("ID is required");
+    }
+    const { json } = await fetchUtils.fetchJson(
+      `${API_URL}${resource}${id}?language=en-US`,
+      { method: "GET", headers },
+    );
+    return { data: json.results };
   },
   getMany: function <RecordType extends RaRecord = any>(
     resource: string,

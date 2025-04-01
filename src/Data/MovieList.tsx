@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { dataProvider } from "./dataProvider";
 //import { get } from "http";
-import teste1 from "./Interface";
+import movie from "./Interface";
 
 const MovieList = () => {
-    const [movies, setMovies] = useState<teste1[]>([]);
+    const [movies, setMovies] = useState<movie[]>([]);
 
     useEffect(() => {
 
