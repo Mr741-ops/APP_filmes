@@ -1,5 +1,5 @@
 import { AppBar, Box, Tab, Tabs, Toolbar } from "@mui/material";
-import { LoadingIndicator, Logout, UserMenu } from "react-admin";
+import { LoadingIndicator, Logout, useRefresh, UserMenu } from "react-admin";
 import { Link, matchPath, useLocation } from "react-router-dom";
 
 const Header = () => {
@@ -16,6 +16,8 @@ const Header = () => {
   } else {
     currentPath = false;
   }
+
+  const refresh = useRefresh();
 
   return (
     <Box component="nav" sx={{ flexGrow: 1 }}>
@@ -44,7 +46,7 @@ const Header = () => {
               </Tabs>
             </Box>
             <Box display="flex" alignItems="center">
-              <LoadingIndicator />
+              <LoadingIndicator  onClick={refresh}/>
               <UserMenu>
                 <Logout />
               </UserMenu>

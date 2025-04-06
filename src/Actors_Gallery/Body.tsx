@@ -20,9 +20,7 @@ interface Person {
 const Body: React.FC<Props> = ({ resource, page }) => {
   const { data } = useApiCall(resource, page);
 
-  const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(
-    null,
-  );
+  const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(null);
 
   const handleClickOpen = (person: Person) => () => {
     setSelectedPerson(person);
@@ -34,20 +32,30 @@ const Body: React.FC<Props> = ({ resource, page }) => {
 
   return (
     <React.Fragment>
-      <Box className="container">
+      <Box className="container" 
+      sx={{
+        
+          display: "flex",
+          justifycontent: "center",
+          aligncontent: "center",
+          alignitems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
+          width: "88vw",
+          maxwidth: "100%",
+          padding: "20px 0",
+
+          "&.MuiContainer-root": {
+            maxheight: "fit-content",
+          } ,
+      }}>
         {data.map((person) => (
           <Box key={person.id}>
-            <Button variant="outlined" onClick={handleClickOpen(person)}>
+            <Button variant="outlined" onClick={handleClickOpen(person)} sx={{
+              width:"360px",
+            }}>
               <Box
-                className="movie-item"
-                /* sx={{
-                  flexshrink: 0,
-                  height: "585px",
-                  width: "300px",
-                  textalign: "center",
-                  color: "#e6e8e6",
-                }} */
-              >
+                className="movie-item">
                 {Poster.poster(person.profile_path, person.name, person.id)}
               </Box>
             </Button>

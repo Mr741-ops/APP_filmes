@@ -29,10 +29,12 @@ export const HomePage = () => {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="xl">
-        <Box sx={{
-          display:"flex",
-          justifyContent:"space-between"
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <Dropdown resource={resource} setResource={setResource} />
           <Buttons page={page} setPage={setPage} />
         </Box>
@@ -46,6 +48,7 @@ export const HomePage = () => {
           {title()}
         </Typography>
         <Carrousel resource={resource} page={page} />
+        <Buttons page={page} setPage={setPage} />
       </Container>
     </React.Fragment>
   );

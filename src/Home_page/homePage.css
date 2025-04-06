@@ -10,14 +10,9 @@
   padding: 20px 0;
 }
 
-h1{
-  display: flex;
-  justify-content:center;
-  color:#e6e8e6;
-}
-
 .MuiContainer-root{
   margin-top: 60px !important;
+  max-height: fit-content !important;
 } 
 
 .movie-poster{

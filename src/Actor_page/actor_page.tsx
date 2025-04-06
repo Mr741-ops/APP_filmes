@@ -1,65 +1,48 @@
 //merges every script that belgons on the actor page
-import { Box, Typography } from "@mui/material";
-import "./actor_page.css";
-import useApiCall from "./apiCall";
+import { Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
+import { useGetOne } from "react-admin";
+import Info from "./info";
+import Body from "./Body_Details_Person"
+import Image from "./Image_Details_Person"
 
 const ActorPage = () => {
   const location = useLocation();
-  const resource = "person/";
   const id = location.state?.id;
-  const { data } = useApiCall(resource, id);
+
+  if (!id) return <Typography>Erro: ID não definido</Typography>;
+  const { data: person, isLoading, error } = useGetOne("person", { id });
+
+  if (isLoading) return <Typography>A carregar...</Typography>;
+  if (error) return <Typography>Erro ao carregar os dados.</Typography>;
+  if (!person) return <Typography>Nenhum dado encontrado.</Typography>;
+
+  console.log(person)
 
   return (
     <>
-      {data?.map((person) => (
-        <Box
-          className="Body"
-          sx={{
-            marginleft: "75px",
-            marginright: "75px",
-            display: "flex",
-            flexDirection: "row",
-            alignitems: "center",
-            height: "100vh",
+      <Grid
+        container
+        className="Body"
+        spacing={26}
+        sx={{
+          height: "100vh",
+          width: "100vw",
+          marginLeft:"25px",
 
-            "&.css-lqa328-MuiContainer-root": {
-              maxwidth: "100vw",
-            },
-          }}
-        >
-          <Box className="Image-Box">
-            <Typography variant="h3"> {person.name} </Typography>
-            <img src="src/Actor_page/Tom_Hanks.jpg" className="image"></img>
-          </Box>
-          <Box
-            className="Biography"
-            sx={{
-              height: "500px",
-              width: "700px",
-              padding: "10px",
-              bgcolor: "red",
-            }}
-          >
-            {person.overview}
-          </Box>
-          <Box className="Info">
-            <Typography variant="h3" sx={{ mt: 2 }}>
-              Information
-            </Typography>
-            <Typography sx={{ mt: 2 }}>
-              also_known_as: Thomas Jeffrey Hanks
-            </Typography>
-            <Typography sx={{ mt: 2 }}>birthday: 1956-07-09</Typography>
-            <Typography sx={{ mt: 2 }}>gender: male</Typography>
-            <Typography sx={{ mt: 2 }}>known_for_department: Acting</Typography>
-            <Typography sx={{ mt: 2 }}>
-              place_of_birth: Concord,California, USA
-            </Typography>
-            <Typography></Typography>
-          </Box>
-        </Box>
-      ))}
+          "&.css-lqa328-MuiContainer-root": {
+            maxwidth: "100vw",
+          },
+        }}
+      >
+        {/*  Image Box  */}
+        {Image(person)}
+        {/* Body of the page*/}
+        {Body(person)}
+        {/* Info Box */}
+        {Info(person)}
+      </Grid>
     </>
   );
 };

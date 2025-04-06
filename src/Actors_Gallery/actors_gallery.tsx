@@ -21,12 +21,7 @@ export const ActorsGallery = () => {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="xl">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+        <Box>
           {/* <Dropdown resource={resource} setResource={setResource} /> */}
           <Buttons page={page} setPage={setPage} />
         </Box>
@@ -40,6 +35,11 @@ export const ActorsGallery = () => {
           {title}
         </Typography>
         <Body resource={resource} page={page} />
+        <Box sx={{
+          marginBottom:"20px"
+        }}>
+          <Buttons page={page} setPage={setPage} />
+        </Box>
       </Container>
     </React.Fragment>
   );
