@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+
 export const poster = (posterPath: string, title: string, id: any) => {
   const fallbackImage = "src/Home_page/Rendering.jpg";
 
@@ -5,10 +7,16 @@ export const poster = (posterPath: string, title: string, id: any) => {
   const imageUrl = posterPath ? `${baseUrl}${posterPath}` : `${fallbackImage}`;
 
   return (
-    <div className="movie-item" key={id}>
+    <Box className="movie-item" key={id} sx={{
+      ".movie-poster": {
+        marginTop: "20px",
+        height: "475px",
+        width: "100%",
+      }
+    }}>
       <img src={imageUrl} className="movie-poster" />
       <h3>{title}</h3>
-    </div>
+    </Box>
   );
 };
 

@@ -13,8 +13,7 @@ import * as Poster from "./actor_image";
 
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import Card from "@mui/material/Card";
-import { Box, CardContent, CardMedia } from "@mui/material";
+import { Box } from "@mui/material";
 
 interface DialogProps {
   selectedPerson: any | null;
@@ -31,6 +30,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialog-paper": {
     backgroundColor: "#010d22",
     color: "#e6e8e6",
+    minWidth: "900px",
   },
 }));
 
@@ -49,12 +49,10 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
         aria-labelledby="customized-dialog-title"
         open={Boolean(selectedPerson)}
         maxWidth="md"
-        slotProps={{
-          backdrop: {
-            sx: {
-              backgroundColor: "rgba(255, 255, 255, 0.03)",
-              backdropFilter: "blur(8px)",
-            },
+        sx={{
+          "& .MuiBackdrop-root": {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(8px)",
           },
         }}
       >
@@ -74,41 +72,47 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
           {selectedPerson?.name}
         </DialogTitle>
         <DialogContent>
-          <Grid
-            container
-            sx={{
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Grid size={5}>
-              {Poster.personImage(selectedPerson?.profile_path ?? "")}
-            </Grid>
-            <Grid size={6}>
-              <Box>
-                <Typography variant="h3">Details </Typography>
-                <Typography sx={{ mt: 5 }}>
-                  <strong>Known for:</strong>
-                </Typography>
-                {selectedPerson?.known_for.map((movie: any) => (
-                  <Box>
-                    <Typography sx={{ mt: 1 }}> - {movie.title};</Typography>
-                  </Box>
-                ))}
-                <Typography
-                  gutterBottom
-                  sx={{
-                    mt: 4,
-                  }}
-                >
-                  <strong>Original name: </strong>
-                  {selectedPerson?.original_name}
-                </Typography>
-                <Typography gutterBottom>
-                  <strong>Known for department: </strong>
-                  {selectedPerson?.known_for_department}
-                </Typography>
+          <Grid container spacing={4}>
+            {/* Left: Poster */}
+            <Grid>
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#000", // solid bg behind the image
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                }}
+              >
+                {Poster.personImage(selectedPerson?.profile_path ?? "")}
               </Box>
+            </Grid>
+            {/* Right: Details */}
+            <Grid>
+              <Typography variant="h4" gutterBottom>
+                Details
+              </Typography>
+
+              <Typography variant="subtitle1" sx={{ mt: 2 }}>
+                <strong>Known for:</strong>
+              </Typography>
+              {selectedPerson?.known_for.map((movie: any, index: number) => (
+                <Typography key={index} sx={{ ml: 2 }}>
+                  - {movie.title};
+                </Typography>
+              ))}
+
+              <Typography variant="subtitle1" sx={{ mt: 3 }}>
+                <strong>Original name:</strong> {selectedPerson?.original_name}
+              </Typography>
+
+              <Typography variant="subtitle1" sx={{ mt: 1 }}>
+                <strong>Known for department:</strong>{" "}
+                {selectedPerson?.known_for_department}
+              </Typography>
             </Grid>
           </Grid>
         </DialogContent>

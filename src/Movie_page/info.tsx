@@ -1,7 +1,26 @@
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useGetOne } from "react-admin";
 
-export const Info = (movie: any) => {
+
+
+type InfoProps = {
+  movie: any;
+  id: any;
+};
+
+export const Info = ({ movie, id }: InfoProps) => {
+  const { data, isLoading, error } = useGetOne("movie", {
+    id,
+    meta: {type: "credits"},
+  });
+
+  if (!id) return <Typography>Erro: ID não definido</Typography>;
+  if (isLoading) return <Typography>A carregar...</Typography>;
+  if (error) return <Typography>Erro ao carregar os dados.</Typography>;
+  if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
+
+  console.log("Data: ", data);
 
   return (
     <Grid
@@ -32,6 +51,10 @@ export const Info = (movie: any) => {
       </Typography>
       <Typography sx={{ mt: 2 }}>
         <strong>Revenue</strong>: {movie.revenue}
+      </Typography>
+      <Typography sx={{ mt: 2 }}>
+        <strong>Elenco</strong>:{"\n"}
+        {data.cast.map((actor: any) => actor.name).slice(0,3).join(", ")}
       </Typography>
     </Grid>
   );

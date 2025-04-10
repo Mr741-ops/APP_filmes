@@ -12,10 +12,11 @@ export const Image = (movie: any) => {
         bgcolor: "background.dark",
         color: "secondary.main",
         padding: "4px",
+        alignContent:"baseline"
       }}
     >
-      <Typography variant="h3" sx={{ mt: 2 }}>
-        {movie.title}
+      <Typography variant="h3" sx={{ mt: 2, mb:2 }}>
+        <strong>{movie.title}</strong>
       </Typography>
       {Poster.personImage(movie.poster_path)}
     </Grid>

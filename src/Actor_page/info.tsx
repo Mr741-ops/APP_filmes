@@ -1,9 +1,28 @@
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useGetOne } from "react-admin";
 
-export const Info = (person: any) => {
+type InfoProps = {
+  person: any;
+  id: any;
+};
+
+
+export const Info = ({ person, id }: InfoProps) => {
+
+  const { data, isLoading, error } = useGetOne("person", {
+      id,
+      meta: {type: "movie_credits"},
+    });
+  
+    if (!id) return <Typography>Error: ID not defined</Typography>;
+    if (isLoading) return <Typography sx={{color:'red'}}>Loading...</Typography>;
+    if (error) return <Typography>Error loading data.</Typography>;
+    if (!data) return <Typography>Data not found.</Typography>;
+
+
+
   let gender;
-
   switch (person.gender) {
     case 0: {
       gender = "Not Specified";
@@ -39,7 +58,8 @@ export const Info = (person: any) => {
         <strong>Information</strong>
       </Typography>
       <Typography sx={{ mt: 2 }}>
-        <strong>Also known as</strong>: {person.also_known_as}
+        <strong>Also known as</strong>: <br/>
+        {person.also_known_as.join(", \n")}
       </Typography>
       <Typography sx={{ mt: 2 }}>
         <strong>Birthday</strong>: {person.birthday}
@@ -52,6 +72,10 @@ export const Info = (person: any) => {
       </Typography>
       <Typography sx={{ mt: 2 }}>
         <strong>Place of birth</strong>: {person.place_of_birth}
+      </Typography>
+      <Typography sx={{ mt: 2, whiteSpace:"pre-line" }}>
+        <strong>Movies:</strong>{"\n"}
+        {data.cast.map((movie: any) => movie.title).slice(0,4).join("; ")}
       </Typography>
     </Grid>
   );

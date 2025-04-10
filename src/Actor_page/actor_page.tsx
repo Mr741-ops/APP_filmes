@@ -41,7 +41,7 @@ const ActorPage = () => {
         {/* Body of the page*/}
         {Body(person)}
         {/* Info Box */}
-        {Info(person)}
+        <Info person={person} id={id}/>
       </Grid>
     </>
   );

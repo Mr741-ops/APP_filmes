@@ -1,7 +1,7 @@
 //merges every script that belogs on the home page
 import * as React from "react";
-import "./homePage.css";
-import Carrousel from "./Carrousel";
+import "./GlobalCSS.css";
+import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import { Dropdown } from "./dropdown";
@@ -15,7 +15,7 @@ export const HomePage = () => {
   const [page, setPage] = useState(1);
 
   /* 
-  --------------------------------- Title Function ----------------------
+  --------------------------------- Functions ----------------------
   */
   const title = () => {
     if (resource == "movie/popular") {
@@ -33,10 +33,12 @@ export const HomePage = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            justifyItems:"center",
+            marginRight: "15px"
           }}
         >
-          <Dropdown resource={resource} setResource={setResource} />
           <Buttons page={page} setPage={setPage} />
+          <Dropdown resource={resource} setResource={setResource} />
         </Box>
         <Typography
           variant="h3"
@@ -47,8 +49,13 @@ export const HomePage = () => {
         >
           {title()}
         </Typography>
-        <Carrousel resource={resource} page={page} />
-        <Buttons page={page} setPage={setPage} />
+        <Body resource={resource} page={page} />
+        <Box sx={{
+          display:"flex",
+          justifyContent:"center"
+        }}>
+          <Buttons page={page} setPage={setPage} />
+        </Box>
       </Container>
     </React.Fragment>
   );

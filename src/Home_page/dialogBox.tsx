@@ -14,13 +14,9 @@ import Grid from "@mui/material/Grid2";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
-
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-  overview: string;
+interface DialogProps {
+  selectedMovie: any | null;
+  handleClose: () => void;
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -36,93 +32,74 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export function CustomDialog(movies: Movie[]) {
-  const [selectedMovie, setSelectedMovie] = React.useState<Movie | null>(null);
+export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
   const navigate = useNavigate();
 
-  const handleClickOpen = (movie: Movie) => () => {
-    setSelectedMovie(movie);
-  };
   const movieDetailsPage = (id: number | undefined) => {
-    navigate("/movie_page", { state: {id: id}})
-    setSelectedMovie(null);
-  };
-  const handleClose = () => {
-    setSelectedMovie(null);
+    navigate("/movie_page", { state: { id: id } });
+    handleClose();
   };
 
-  const overview= selectedMovie?.overview ? `${selectedMovie.overview}` : `The overview on this film is unavailable at the moment try again later.`;
+  const overview = selectedMovie?.overview
+    ? `${selectedMovie.overview}`
+    : `The overview on this film is unavailable at the moment try again later.`;
 
   return (
     <React.Fragment>
-      <div className="movies-container">
-        {movies.map((movie) => (
-          <div key={movie.id}>
-            <Button variant="outlined" onClick={handleClickOpen(movie)}>
-              <div className="movie-item">
-                {Poster.poster(movie.poster_path, movie.title, movie.id)}
-              </div>
-            </Button>
-            <BootstrapDialog
-              onClose={handleClose}
-              aria-labelledby="customized-dialog-title"
-              open={Boolean(selectedMovie)}
-              maxWidth="md"
-              slotProps={{
-                backdrop: {
-                  sx: {
-                    backgroundColor: "rgba(255, 255, 255, 0.03)", // Fundo semi-transparente
-                    backdropFilter: "blur(8px)", // Aplica o desfoque ao fundo
-                  },
-                },
-              }}
-            >
-              <IconButton
-                aria-label="close"
-                onClick={handleClose}
-                sx={{
-                  position: "absolute",
-                  right: 8,
-                  top: 8,
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-              <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                {selectedMovie?.title}
-              </DialogTitle>
-              <DialogContent>
-                <Grid
-                  container
-                  sx={{
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Grid size={5}>
-                    {Poster.movieImage(selectedMovie?.poster_path ?? "")}
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography gutterBottom>
-                      {overview}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  autoFocus
-                  onClick={(event) => movieDetailsPage(selectedMovie?.id)}
-                  sx={{ color: "#0081a7" }}
-                >
-                  Details page
-                </Button>
-              </DialogActions>
-            </BootstrapDialog>
-          </div>
-          
-        ))}
-      </div>
+      <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={Boolean(selectedMovie)}
+        maxWidth="md"
+        slotProps={{
+          backdrop: {
+            sx: {
+              backgroundColor: "rgba(255, 255, 255, 0.03)",
+              backdropFilter: "blur(8px)",
+            },
+          },
+        }}
+      >
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+          {selectedMovie?.title}
+        </DialogTitle>
+        <DialogContent>
+          <Grid
+            container
+            sx={{
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Grid size={5}>
+              {Poster.movieImage(selectedMovie?.poster_path ?? "")}
+            </Grid>
+            <Grid size={6}>
+              <Typography gutterBottom>{overview}</Typography>
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={(event) => movieDetailsPage(selectedMovie?.id)}
+            sx={{ color: "#0081a7" }}
+          >
+            Details page
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
     </React.Fragment>
   );
 }

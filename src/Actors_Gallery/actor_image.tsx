@@ -39,7 +39,14 @@ export const personImage = (profile_Path: string) => {
     ? `${baseUrl}${profile_Path}`
     : `${fallbackImage}`;
 
-  return <img src={imageUrl} className="movie-poster" />;
+  return( 
+    <img src={imageUrl} className="movie-poster" style={{
+          width: "100%",
+          height: "525px",
+          objectFit: "cover",
+          display: "block",
+        }}/>
+);
 };
 
 export default poster;

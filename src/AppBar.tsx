@@ -17,7 +17,7 @@ const Header = () => {
     currentPath = false;
   }
 
-  const refresh = useRefresh();
+/*   const refresh = useRefresh(); */
 
   return (
     <Box component="nav" sx={{ flexGrow: 1 }}>
@@ -46,7 +46,7 @@ const Header = () => {
               </Tabs>
             </Box>
             <Box display="flex" alignItems="center">
-              <LoadingIndicator  onClick={refresh}/>
+{/*               <LoadingIndicator  onClick={refetch}/> */}
               <UserMenu>
                 <Logout />
               </UserMenu>
