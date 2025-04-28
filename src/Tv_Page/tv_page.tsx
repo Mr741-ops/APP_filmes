@@ -3,21 +3,20 @@ import * as React from "react";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import { Dropdown } from "./dropdown";
 import Buttons from "./buttons";
 
 export const TVPage = () => {
   /* 
   ------------------------------ Variables ------------------------
   */
-  const [resource, setResource] = React.useState("tv/popular");
+  const resource = localStorage.getItem("resource") || "popular";
   const [page, setPage] = useState(1);
 
   /* 
   --------------------------------- Functions ----------------------
   */
   const title = () => {
-    if (resource == "tv/popular") {
+    if (resource == "popular") {
       return "Popular Series";
     } else {
       return "Top Rated Series";
@@ -37,7 +36,6 @@ export const TVPage = () => {
           }}
         >
           <Buttons page={page} setPage={setPage} />
-          <Dropdown resource={resource} setResource={setResource} />
         </Box>
         <Typography
           variant="h3"

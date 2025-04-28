@@ -86,11 +86,11 @@ export const TabWithMenu = ({ name, value }: TabWithMenuProps) => {
     setAnchorEl(null);
   };
 
-  const handleMenuItemClick = (index: number) => {
+  const handleMenuItemClick = (value: string, index: number) => {
     setSelectedIndex(index);
     localStorage.setItem("resource", resourceOptions[index]);
     setAnchorEl(null);
-    navigate("/home_page");
+    navigate(value);
     window.location.reload();
   };
 
@@ -106,7 +106,7 @@ export const TabWithMenu = ({ name, value }: TabWithMenuProps) => {
           <MenuItem
             key={option}
             selected={index === selectedIndex}
-            onClick={() => handleMenuItemClick(index)}
+            onClick={() => handleMenuItemClick(value, index)}
           >
             {option}
           </MenuItem>

@@ -38,12 +38,7 @@ const Header = () => {
                   to="/actors_gallery"
                   value="/actors_gallery"
                 />
-                <Tab
-                  label={"Tv Series"}
-                  component={Link}
-                  to="/tv_page"
-                  value="/tv_page"
-                />
+                <TabWithMenu name="Tv Series" value={"/tv_page"} />
               </Tabs>
             </Box>
             <Box>

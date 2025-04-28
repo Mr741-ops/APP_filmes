@@ -18,7 +18,7 @@ interface Movie {
 }
 
 const Body: React.FC<BodyProps> = ({ resource, page }) => {
-  const { data, error, isPending } = useGetList(resource, {
+  const { data, error, isPending } = useGetList(`tv/${resource}`, {
     pagination: {
       page: page,
       perPage: 0,
