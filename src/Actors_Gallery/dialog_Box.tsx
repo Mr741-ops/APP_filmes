@@ -73,8 +73,7 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={4}>
-            {/* Left: Poster */}
-            <Grid>
+            <Grid size={5}>
               <Box
                 sx={{
                   width: "100%",
@@ -82,7 +81,6 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#000", // solid bg behind the image
                   borderRadius: "8px",
                   overflow: "hidden",
                 }}
@@ -90,17 +88,22 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
                 {Poster.personImage(selectedPerson?.profile_path ?? "")}
               </Box>
             </Grid>
-            {/* Right: Details */}
-            <Grid>
-              <Typography variant="h4" gutterBottom>
-                Details
+            <Grid size={6}>
+              <Typography
+                variant="h4"
+                gutterBottom
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                <strong>Details</strong>
               </Typography>
 
-              <Typography variant="subtitle1" sx={{ mt: 2 }}>
+              <Typography variant="subtitle1" sx={{ mt: 2,}}>
                 <strong>Known for:</strong>
               </Typography>
               {selectedPerson?.known_for.map((movie: any, index: number) => (
-                <Typography key={index} sx={{ ml: 2 }}>
+                <Typography key={index} sx={{ ml: 2, flexWrap: "wrap" }}>
                   - {movie.title};
                 </Typography>
               ))}

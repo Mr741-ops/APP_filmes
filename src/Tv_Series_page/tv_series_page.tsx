@@ -4,21 +4,19 @@ import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
 import Info from "./info";
-import Body from "./Body_Details_Movie";
+import Body from "./Body_Details_Series";
 import Image from "./Movie_Image";
 
-const ActorPage = () => {
+const TvSeriesPage = () => {
   const location = useLocation();
   const id = location.state?.id;
 
   if (!id) return <Typography>Erro: ID não definido</Typography>;
-  const { data: movie, isLoading, error } = useGetOne("movie", { id });
+  const { data: series, isLoading, error } = useGetOne("tv", { id });
 
   if (isLoading) return <Typography>A carregar...</Typography>;
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
-  if (!movie) return <Typography>Nenhum dado encontrado.</Typography>;
-
-  console.log(movie);
+  if (!series) return <Typography>Nenhum dado encontrado.</Typography>;
 
   return (
     <>
@@ -37,16 +35,16 @@ const ActorPage = () => {
         }}
       >
         <Grid size={{ xs: 12, md: 3}} sx={{ alignContent: "center" }}>
-          {Image(movie)}
+          {Image(series)}
         </Grid>
-        <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
-          <Body movie={movie} id={id}/>
+        <Grid size={{ xs: 12, md: 6}} sx={{ alignContent: "center" }}>
+          <Body series={series} id={id} />
         </Grid>
-        <Grid size={{ xs: 12, md: 3}}>
-          <Info movie={movie}/>
+        <Grid size={{ xs: 12, md: 3}} sx={{ alignContent: "center" }}>
+          <Info series={series} id={id} />
         </Grid>
       </Grid>
     </>
   );
 };
-export default ActorPage;
+export default TvSeriesPage;

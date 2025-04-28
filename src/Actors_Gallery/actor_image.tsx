@@ -15,7 +15,7 @@ export const poster = (profile_Path: string, name: string, id: any) => {
       sx={{
         flexshrink: 0,
         height: "585px",
-        width: "310px",
+        width: "320px",
         textalign: "center",
         color: "secondary.main",
       }}
@@ -24,7 +24,7 @@ export const poster = (profile_Path: string, name: string, id: any) => {
         component="img"
         src={imageUrl}
         className="image"
-        sx={{ height: "475px", width: "100%" }}
+        sx={{ pl:"10px", mt:"20px", height: "475px", width: "100%" }}
       />
       <Typography variant="h5">{name}</Typography>
     </Box>

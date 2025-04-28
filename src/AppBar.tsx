@@ -1,6 +1,8 @@
 import { AppBar, Box, Tab, Tabs, Toolbar } from "@mui/material";
-import { LoadingIndicator, Logout, useRefresh, UserMenu } from "react-admin";
+import { Logout, UserMenu } from "react-admin";
 import { Link, matchPath, useLocation } from "react-router-dom";
+import { LanguageMenu, TabWithMenu } from "./Menu_AppBar";
+import SearchBar from "./Search_Bar";
 
 const Header = () => {
   const location = useLocation();
@@ -9,15 +11,13 @@ const Header = () => {
   let currentPath: string | boolean = "/";
   if (!!matchPath("/home_page", location.pathname)) {
     currentPath = "/home_page";
-  } else if (!!matchPath("/actor_page", location.pathname)) {
-    currentPath = "/actor_page";
-  } else if (!!matchPath("/trending", location.pathname)) {
-    currentPath = "/trending";
+  } else if (!!matchPath("/actors_gallery", location.pathname)) {
+    currentPath = "/actors_gallery";
+  } else if (!!matchPath("/tv_page", location.pathname)) {
+    currentPath = "/tv_page";
   } else {
     currentPath = false;
   }
-
-/*   const refresh = useRefresh(); */
 
   return (
     <Box component="nav" sx={{ flexGrow: 1 }}>
@@ -31,22 +31,31 @@ const Header = () => {
                 indicatorColor="secondary"
                 textColor="inherit"
               >
-                <Tab
-                  label={"Home"}
-                  component={Link}
-                  to="/home_page"
-                  value="/home_page"
-                />
+                <TabWithMenu name="Movies" value={"/home_page"} />
                 <Tab
                   label={"People"}
                   component={Link}
-                  to="/Actors_Gallery"
-                  value="/Actors_Gallery"
+                  to="/actors_gallery"
+                  value="/actors_gallery"
+                />
+                <Tab
+                  label={"Tv Series"}
+                  component={Link}
+                  to="/tv_page"
+                  value="/tv_page"
                 />
               </Tabs>
             </Box>
+            <Box>
+              <SearchBar />
+            </Box>
             <Box display="flex" alignItems="center">
-{/*               <LoadingIndicator  onClick={refetch}/> */}
+              <Box display="flex" alignItems="center">
+                <Box sx={{ fontSize: "0.75rem", color: "white" }}>
+                  Language:
+                </Box>
+                <LanguageMenu />
+              </Box>
               <UserMenu>
                 <Logout />
               </UserMenu>

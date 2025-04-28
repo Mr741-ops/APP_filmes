@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-import { light } from "@mui/material/styles/createPalette";
 
 export const tokens = () => ({
   white: {
@@ -57,9 +56,11 @@ export const themeSettings = () => {
     palette: {
       primary: {
         main: colors.blue[600],
+        light: colors.blue[200],
       },
       secondary: {
         main: colors.white[500],
+        dark: colors.white[700],
       },
       background: {
         main: colors.darkBlue[500],

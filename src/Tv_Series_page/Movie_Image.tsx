@@ -1,9 +1,7 @@
 import { Box, Rating, Typography } from "@mui/material";
 import * as Poster from "../Actors_Gallery/actor_image";
 
-export const Image = (movie: any) => {
-
-  console.log(movie);
+export const Image = (series: any) => {
 
   return (
     <Box
@@ -17,11 +15,11 @@ export const Image = (movie: any) => {
       }}
     >
       <Typography variant="h3" sx={{ mt: 2, mb: 2, textAlign:"center"}}>
-        <strong>{movie.title}</strong>
+        <strong>{series.name}</strong>
       </Typography>
-      <Box sx={{ width: "80%", alignContent:"center", justifyItems:"center"}}>{Poster.personImage(movie.poster_path)}</Box>
+      <Box sx={{ width: "80%", alignContent:"center", justifyItems:"center"}}>{Poster.personImage(series.poster_path)}</Box>
       <Typography component="legend">Rating</Typography>
-      <Rating value={movie?.vote_average} readOnly precision={0.5} max={10} /><Box sx={{ ml: 2 }}>{movie.vote_average}</Box>
+      <Rating value={series?.vote_average} readOnly precision={0.5} max={10} /><Box sx={{ ml: 2 }}>{series.vote_average}</Box>
     </Box>
   );
 };

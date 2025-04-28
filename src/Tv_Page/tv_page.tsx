@@ -1,26 +1,26 @@
 //merges every script that belogs on the home page
 import * as React from "react";
-import "./GlobalCSS.css";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
+import { Dropdown } from "./dropdown";
 import Buttons from "./buttons";
 
-export const HomePage = () => {
+export const TVPage = () => {
   /* 
   ------------------------------ Variables ------------------------
   */
-  const resource = localStorage.getItem("resource") || "popular";
+  const [resource, setResource] = React.useState("tv/popular");
   const [page, setPage] = useState(1);
 
   /* 
   --------------------------------- Functions ----------------------
   */
   const title = () => {
-    if (resource == "popular") {
-      return "Popular Movies";
+    if (resource == "tv/popular") {
+      return "Popular Series";
     } else {
-      return "Top Rated Movies";
+      return "Top Rated Series";
     }
   };
 
@@ -37,6 +37,7 @@ export const HomePage = () => {
           }}
         >
           <Buttons page={page} setPage={setPage} />
+          <Dropdown resource={resource} setResource={setResource} />
         </Box>
         <Typography
           variant="h3"
@@ -59,4 +60,4 @@ export const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TVPage;

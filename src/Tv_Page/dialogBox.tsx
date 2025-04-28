@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
 interface DialogProps {
-  selectedMovie: any | null;
+  selectedSeries: any | null;
   handleClose: () => void;
 }
 
@@ -33,26 +33,24 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
+export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
   const navigate = useNavigate();
 
-  const movieDetailsPage = (id: number | undefined) => {
-    navigate("/movie_page", { state: { id: id } });
+  const tvSeriesDetailsPage = (id: number | undefined) => {
+    navigate("/tv_series_page", { state: { id: id } });
     handleClose();
   };
 
-  const overview = selectedMovie?.overview
-    ? `${selectedMovie.overview}`
-    : `The overview on this film is unavailable at the moment try again later.`;
-
-  console.log(selectedMovie)
+  const overview = selectedSeries?.overview
+    ? `${selectedSeries.overview}`
+    : `The overview on this series is unavailable at the moment try again later.`;
 
   return (
     <React.Fragment>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={Boolean(selectedMovie)}
+        open={Boolean(selectedSeries)}
         maxWidth="md"
         slotProps={{
           backdrop: {
@@ -75,7 +73,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
           <CloseIcon />
         </IconButton>
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          {selectedMovie?.title}
+          {selectedSeries?.name}
         </DialogTitle>
         <DialogContent>
           <Grid
@@ -93,7 +91,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                 overflow: "hidden",
               }}
             >
-              {Poster.movieImage(selectedMovie?.poster_path ?? "")}
+              {Poster.movieImage(selectedSeries?.poster_path ?? "")}
             </Grid>
             <Grid size={7}>
               <Box>
@@ -109,11 +107,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                 <Typography gutterBottom>{overview}</Typography>
                 <Typography gutterBottom>
                   <strong>Release date: </strong>
-                  {selectedMovie?.release_date}
-                </Typography>
-                <Typography>
-                  <strong>Runtime: </strong>
-                  {selectedMovie?.runtime}
+                  {selectedSeries?.first_air_date}
                 </Typography>
               </Box>
             </Grid>
@@ -122,7 +116,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
         <DialogActions>
           <Button
             autoFocus
-            onClick={(event) => movieDetailsPage(selectedMovie?.id)}
+            onClick={(event) => tvSeriesDetailsPage(selectedSeries?.id)}
             sx={{ color: "#0081a7" }}
           >
             Details page

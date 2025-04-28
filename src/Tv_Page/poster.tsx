@@ -57,29 +57,4 @@ export const movieImage = (posterPath: string) => {
   );
 };
 
-export const miniMovieImage = (posterPath: string) => {
-  const fallbackImage = "src/Home_page/Rendering.jpg";
-
-  const baseUrl = "https://image.tmdb.org/t/p/w342/";
-  const isFallback = !posterPath;
-  const imageUrl = posterPath ? `${baseUrl}${posterPath}` : `${fallbackImage}`;
-
-  return (
-    <Box>
-      <Box
-        component="img"
-        src={imageUrl}
-        className="movie-poster"
-        style={{
-          width: "75%",
-          maxWidth: isFallback ? "342px" : "none",
-          height: "200px",
-          objectFit: "cover",
-          display: "block",
-        }}
-      />
-    </Box>
-  );
-};
-
 export default poster;

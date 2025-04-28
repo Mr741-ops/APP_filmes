@@ -1,53 +1,57 @@
 import { Box, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { Button, useGetOne } from "react-admin";
 import * as Poster from "../Home_page/poster";
 import { useHandleClick } from "../Utils/Utils";
-import { Button, useGetOne } from "react-admin";
+
 
 type Props = {
-  person: any;
+  movie: any;
   id: any;
 };
 
-
-export const Body = ({ person, id }: Props) => {
-  
+export const Body = ({ movie, id }: Props) => {
   const handleClick = useHandleClick();
 
-  const { data, isLoading, error } = useGetOne("person", {
+  const { data, isLoading, error } = useGetOne("movie", {
     id,
     meta: { type: "credits" },
   }, {
     enabled: !!id, // só faz a query se o id estiver definido
   });
-  
 
   if (!id) return <Typography>Erro: ID não definido</Typography>;
   if (isLoading) return <Typography>A carregar...</Typography>;
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
 
+
   return (
-    <Grid
+    <Box
       className="Biography"
       sx={{
-        height: "500px",
-        width: "700px",
+        display: "flex",
+        flexDirection: "column",
         color: "secondary.main",
         textAlign: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        mx: "50px",
+        textWrap: "wrap",
       }}
     >
-      <Typography variant="h3" sx={{ mt: 7 }}>
-        <strong>Biography</strong>
+      <Typography variant="h3" sx={{ mt: 7, textWrap: "wrap" }}>
+        <strong>Overview</strong>
       </Typography>
       <Typography variant="body1" sx={{ mt: 7, textAlign: "justify" }}>
-        {person.biography}
+        {movie.overview}
       </Typography>
       <Box sx={{ mt: 2 }}>
         <strong>Cast</strong>:{"\n"}
-        {data.cast.map((movie: any, index: number) => (
+        {data.cast.map((actor: any, index: number) => (
           <Box>
-            <Button onClick={() => handleClick("movie_page", movie?.id)}>
+            <Button
+            onClick={() => handleClick("actor_page", actor?.id)}
+            >
               <Typography
                 key={index}
                 sx={{
@@ -56,15 +60,15 @@ export const Body = ({ person, id }: Props) => {
                   flexDirection: "column",
                   flexWrap: "wrap",
                 }}
-              >
-                {Poster.miniMovieImage(movie.poster_path)}
-                {movie.title}
+                >
+                {Poster.miniMovieImage(actor.profile_path)}
+                {actor.name}
               </Typography>
             </Button>
           </Box>
         ))}
       </Box>
-    </Grid>
+    </Box>
   );
 };
 

@@ -18,21 +18,21 @@ interface Movie {
 }
 
 const Body: React.FC<BodyProps> = ({ resource, page }) => {
-  const { data, error, isPending } = useGetList(`movie/${resource}`, {
+  const { data, error, isPending } = useGetList(resource, {
     pagination: {
       page: page,
       perPage: 0,
     },
   });
 
-  const [selectedMovie, setSelectedMovie] = React.useState<Movie | null>(null);
+  const [selectedSeries, setSelectedSeries] = React.useState<Movie | null>(null);
 
   const handleClickOpen = (movie: Movie) => () => {
-    setSelectedMovie(movie);
+    setSelectedSeries(movie);
   };
 
   const handleClose = () => {
-    setSelectedMovie(null);
+    setSelectedSeries(null);
   };
 
   if (isPending) {
@@ -41,7 +41,7 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
   if (error) {
     return <p>ERROR</p>;
   }
-
+  
   return (
     <React.Fragment>
       <Box
@@ -58,24 +58,24 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
           padding: "20px 0",
         }}
       >
-        {data.map((movie) => (
-          <Box key={movie.id}>
+        {data.map((series) => (
+          <Box key={series.id}>
             <Button
               variant="outlined"
-              onClick={handleClickOpen(movie)}
+              onClick={handleClickOpen(series)}
               sx={{
                 width: "360px",
               }}
             >
               <Box
                 className="movie-item">
-                {Poster.poster(movie.poster_path, movie.title, movie.id)}
+                {Poster.poster(series.poster_path, series.name, series.id)}
               </Box>
             </Button>
           </Box>
         ))}
       </Box>
-      <CustomDialog selectedMovie={selectedMovie} handleClose={handleClose} />
+      <CustomDialog selectedSeries={selectedSeries} handleClose={handleClose} />
     </React.Fragment>
   );
 };

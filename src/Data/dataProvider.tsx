@@ -35,11 +35,17 @@ export const dataProvider: DataProvider = {
     if (!params.pagination) {
       throw new Error("Pagination parameters are required");
     }
+
+    const lang = localStorage.getItem("language") || "en";
     const { page } = params.pagination;
-    const { json } = await fetchUtils.fetchJson(
-      `${API_URL}/${resource}?language=en-US&page=${page}`,
-      { method: "GET", headers },
-    );
+    const query = params.filter?.query || "";
+
+    const URL = `${API_URL}/${resource}?language=${lang}&page=${page}${query ? `&query=${query}` : ""}`;
+
+    const { json } = await fetchUtils.fetchJson(URL, {
+      method: "GET",
+      headers,
+    });
     return {
       data: json.results,
       total: json.total_results,
@@ -53,12 +59,12 @@ export const dataProvider: DataProvider = {
     if (!params.id) {
       throw new Error("ID is required");
     }
-
+    const lang = localStorage.getItem("language") || "en";
     const typeSuffix = params.meta?.type ? `/${params.meta.type}` : "";
 
     const response = fetchUtils
       .fetchJson(
-        `${API_URL}/${resource}/${params.id}${typeSuffix}?language=en-US`,
+        `${API_URL}/${resource}/${params.id}${typeSuffix}?language=${lang}`,
         {
           method: "GET",
           headers,
