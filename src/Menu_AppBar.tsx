@@ -3,7 +3,6 @@ import { Menu, MenuItem, IconButton, Typography, Box, Tab } from "@mui/material"
 import { useNavigate } from "react-router";
 
 const langOptions = ["en-US", "pt-Pt"];
-const resourceOptions = ["popular", "top_rated"];
 
 export function LanguageMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -65,12 +64,16 @@ export function LanguageMenu() {
   );
 }
 
+
+
+
 type TabWithMenuProps = {
+  resourceOptions: any[];
   name: string;
   value: string;
 };
 
-export const TabWithMenu = ({ name, value }: TabWithMenuProps) => {
+export const TabWithMenu = ({ name, value, resourceOptions }: TabWithMenuProps) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(() => {

@@ -15,12 +15,17 @@ export const TVPage = () => {
   /* 
   --------------------------------- Functions ----------------------
   */
-  const title = () => {
-    if (resource == "popular") {
-      return "Popular Series";
-    } else {
-      return "Top Rated Series";
-    }
+    const title = () => {
+      switch(resource) {
+        case "popular":
+          return "Popular Series";
+        case "top_rated":
+          return "Top Rated Series";
+        case "on_the_air":
+          return "Currently airing Series ";
+        case "airing_today":
+          return "Airing Today Series";
+      }
   };
 
   return (

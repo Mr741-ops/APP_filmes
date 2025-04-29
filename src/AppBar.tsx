@@ -6,6 +6,8 @@ import SearchBar from "./Search_Bar";
 
 const Header = () => {
   const location = useLocation();
+  const movieResource = ["popular","top_rated","now_playing","upcoming"]
+  const seriesResource = ["popular","top_rated","on_the_air","airing_today"]
 
   //Buttons Create navigation buttons on the navBar
   let currentPath: string | boolean = "/";
@@ -31,14 +33,14 @@ const Header = () => {
                 indicatorColor="secondary"
                 textColor="inherit"
               >
-                <TabWithMenu name="Movies" value={"/home_page"} />
+                <TabWithMenu name="Movies" value={"/home_page"} resourceOptions={movieResource} />
                 <Tab
                   label={"People"}
                   component={Link}
                   to="/actors_gallery"
                   value="/actors_gallery"
                 />
-                <TabWithMenu name="Tv Series" value={"/tv_page"} />
+                <TabWithMenu name="Tv Series" value={"/tv_page"} resourceOptions={seriesResource}/>
               </Tabs>
             </Box>
             <Box>

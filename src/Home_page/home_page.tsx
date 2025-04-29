@@ -17,11 +17,17 @@ export const HomePage = () => {
   --------------------------------- Functions ----------------------
   */
   const title = () => {
-    if (resource == "popular") {
-      return "Popular Movies";
-    } else {
-      return "Top Rated Movies";
+    switch(resource) {
+      case "popular":
+        return "Popular Movies";
+      case "top_rated":
+        return "Top Rated Movies";
+      case "now_playing":
+        return "Now playing Movies";
+      case "upcoming":
+        return "Upcoming Movies";
     }
+    
   };
 
   return (

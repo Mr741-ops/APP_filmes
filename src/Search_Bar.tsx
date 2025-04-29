@@ -31,7 +31,6 @@ export default function SearchBar() {
     }
   };
 
-  console.log(data)
   return (
     
     <Box sx={{ width: 300 }}>
