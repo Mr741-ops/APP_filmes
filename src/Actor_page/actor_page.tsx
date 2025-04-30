@@ -4,8 +4,8 @@ import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
 import Info from "./info";
-import Body from "./Body_Details_Person"
-import Image from "./Image_Details_Person"
+import Body from "./Body_Details_Person";
+import Image from "./Image_Details_Person";
 
 const ActorPage = () => {
   const location = useLocation();
@@ -18,30 +18,31 @@ const ActorPage = () => {
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!person) return <Typography>Nenhum dado encontrado.</Typography>;
 
-  console.log(person)
-
   return (
     <>
       <Grid
         container
         className="Body"
-        spacing={26}
+        direction="row"
+        spacing={2}
         sx={{
           height: "100vh",
           width: "100vw",
-          marginLeft:"25px",
-
+          marginLeft: "15px",
           "&.css-lqa328-MuiContainer-root": {
             maxwidth: "100vw",
           },
         }}
       >
-        {/*  Image Box  */}
-        {Image(person)}
-        {/* Body of the page*/}
-        <Body person={person} id={id}/>
-        {/* Info Box */}
-        <Info person={person} id={id}/>
+        <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
+          {Image(person)}
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
+          <Body person={person} id={id} />
+        </Grid>
+        <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
+          <Info person={person} id={id} />
+        </Grid>
       </Grid>
     </>
   );

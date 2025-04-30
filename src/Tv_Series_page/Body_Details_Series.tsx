@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import { Button, useGetOne } from "react-admin";
-import * as Poster from "../Home_page/poster";
-import { useHandleClick } from "../Utils/Utils"
+import { useGetOne } from "react-admin";
+import { Carroussel } from "../Utils/Carroussel";
 
 type Props = {
   series: any;
@@ -9,16 +8,14 @@ type Props = {
 };
 
 export const Body = ({ series, id }: Props) => {
-  const handleClick = useHandleClick();
-
   const { data, isLoading, error } = useGetOne(
-    "movie",
+    "tv",
     {
       id,
       meta: { type: "credits" },
     },
     {
-      enabled: !!id, 
+      enabled: !!id,
     },
   );
 
@@ -27,6 +24,7 @@ export const Body = ({ series, id }: Props) => {
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
 
+  console.log("Data: ", data);
 
   return (
     <Box
@@ -48,27 +46,15 @@ export const Body = ({ series, id }: Props) => {
       <Typography variant="body1" sx={{ mt: 7, textAlign: "justify" }}>
         {series.overview}
       </Typography>
-      <Box sx={{ mt: 2 }}>
-        <strong>Cast</strong>:{"\n"}
-        {data.cast.map((actor: any, index: number) => (
-          <Box>
-            <Button onClick={() => handleClick("actor_page", actor?.id)}>
-              <Typography
-                key={index}
-                sx={{
-                  ml: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  flexWrap: "wrap",
-                }}
-              >
-                {Poster.miniMovieImage(actor.profile_path)}
-                {actor.name}
-              </Typography>
-            </Button>
-          </Box>
-        ))}
-      </Box>
+      <Carroussel
+        title="Cast"
+        items={data.cast.map((person: any) => ({
+          id: person.id,
+          title: person.name,
+          imagePath: person.profile_path,
+          navigateTo: "actor_page",
+        }))}
+      />
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useGetOne } from "react-admin";
 
@@ -43,16 +43,16 @@ export const Info = ({ person, id }: InfoProps) => {
   }
 
   return (
-    <Grid
-      className="Info"
-      sx={{
-        aligncontent: "center",
-        height: "100%",
-        width: "375px",
-        padding: "30px",
-        bgcolor: "background.dark",
-        color: "secondary.main",
-      }}
+    <Box
+    className="Info"
+    sx={{
+      display:"flex",
+      flexDirection:"column",
+      height: "100%",
+      width: "100%",
+      bgcolor: "background.dark",
+      color: "secondary.main",
+    }}
     >
       <Typography variant="h3" sx={{ mt: 2 }}>
         <strong>Information</strong>
@@ -77,7 +77,7 @@ export const Info = ({ person, id }: InfoProps) => {
         <strong>Movies:</strong>{"\n"}
         {data.cast.map((movie: any) => movie.title).slice(0,4).join("; ")}
       </Typography>
-    </Grid>
+    </Box>
   );
 };
 

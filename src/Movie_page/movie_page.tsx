@@ -18,7 +18,6 @@ const ActorPage = () => {
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!movie) return <Typography>Nenhum dado encontrado.</Typography>;
 
-  console.log(movie);
 
   return (
     <>
@@ -26,7 +25,7 @@ const ActorPage = () => {
         container
         className="Body"
         direction="row"
-        spacing={0}
+        spacing={2}
         sx={{
           height: "100vh",
           width: "100vw",
@@ -36,13 +35,13 @@ const ActorPage = () => {
           },
         }}
       >
-        <Grid size={{ xs: 12, md: 3}} sx={{ alignContent: "center" }}>
+        <Grid size={{ xs: 12, md: 3}} sx={{ justifyContent: "center" }}>
           {Image(movie)}
         </Grid>
         <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
           <Body movie={movie} id={id}/>
         </Grid>
-        <Grid size={{ xs: 12, md: 3}}>
+        <Grid size={{ xs: 12, md: 3}} sx={{ justifyContent: "center" }}>
           <Info movie={movie}/>
         </Grid>
       </Grid>

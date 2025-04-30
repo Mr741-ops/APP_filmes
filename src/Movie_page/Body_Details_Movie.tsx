@@ -1,8 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import { Button, useGetOne } from "react-admin";
-import * as Poster from "../Home_page/poster";
-import { useHandleClick } from "../Utils/Utils";
-
+import { useGetOne } from "react-admin";
+import Carroussel from "../Utils/Carroussel";
 
 type Props = {
   movie: any;
@@ -10,20 +8,21 @@ type Props = {
 };
 
 export const Body = ({ movie, id }: Props) => {
-  const handleClick = useHandleClick();
-
-  const { data, isLoading, error } = useGetOne("movie", {
-    id,
-    meta: { type: "credits" },
-  }, {
-    enabled: !!id, // só faz a query se o id estiver definido
-  });
+  const { data, isLoading, error } = useGetOne(
+    "movie",
+    {
+      id,
+      meta: { type: "credits" },
+    },
+    {
+      enabled: !!id, // só faz a query se o id estiver definido
+    },
+  );
 
   if (!id) return <Typography>Erro: ID não definido</Typography>;
   if (isLoading) return <Typography>A carregar...</Typography>;
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
-
 
   return (
     <Box
@@ -45,29 +44,15 @@ export const Body = ({ movie, id }: Props) => {
       <Typography variant="body1" sx={{ mt: 7, textAlign: "justify" }}>
         {movie.overview}
       </Typography>
-      <Box sx={{ mt: 2 }}>
-        <strong>Cast</strong>:{"\n"}
-        {data.cast.map((actor: any, index: number) => (
-          <Box>
-            <Button
-            onClick={() => handleClick("actor_page", actor?.id)}
-            >
-              <Typography
-                key={index}
-                sx={{
-                  ml: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  flexWrap: "wrap",
-                }}
-                >
-                {Poster.miniMovieImage(actor.profile_path)}
-                {actor.name}
-              </Typography>
-            </Button>
-          </Box>
-        ))}
-      </Box>
+      <Carroussel
+        title="Cast"
+        items={data.cast.map((person: any) => ({
+          id: person.id,
+          title: person.name,
+          imagePath: person.profile_path,
+          navigateTo: "actor_page",
+        }))}
+      />
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, MenuItem, IconButton, Typography, Box, Tab } from "@mui/material";
+import { Menu, MenuItem, IconButton, Typography, Tab } from "@mui/material";
 import { useNavigate } from "react-router";
 
 const langOptions = ["en-US", "pt-Pt"];
@@ -63,9 +63,6 @@ export function LanguageMenu() {
     </>
   );
 }
-
-
-
 
 type TabWithMenuProps = {
   resourceOptions: any[];
