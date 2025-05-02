@@ -52,6 +52,7 @@ export const Body = ({ movie, id }: Props) => {
           imagePath: person.profile_path,
           navigateTo: "actor_page",
         }))}
+        size={900}
       />
     </Box>
   );

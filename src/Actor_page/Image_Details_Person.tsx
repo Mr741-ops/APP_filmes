@@ -4,19 +4,21 @@ import * as Poster from "../Actors_Gallery/actor_image";
 export const Image = (person: any) => {
   return (
     <Box
-    className="Image-Box"
+      className="Image-Box"
       sx={{
         height: "100%",
         width: "100%",
         bgcolor: "background.dark",
         color: "secondary.main",
-        alignContent: "baseline",
+        p: 2,
       }}
     >
-      <Typography variant="h3" sx={{ mt: 2 }}>
+      <Typography variant="h3" sx={{ mb: 2, textAlign: "center" }}>
         {person.name}
       </Typography>
-      {Poster.personImage(person.profile_path)}
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+        {Poster.personImage(person.profile_path)}
+      </Box>
     </Box>
   );
 };

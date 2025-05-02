@@ -1,8 +1,9 @@
 import { Box, Rating, Typography } from "@mui/material";
 import * as Poster from "../Actors_Gallery/actor_image";
 
-export const Image = (series: any) => {
+import StarIcon from "@mui/icons-material/Star";
 
+export const Image = (series: any) => {
   return (
     <Box
       className="Image-Box"
@@ -11,15 +12,30 @@ export const Image = (series: any) => {
         width: "100%",
         bgcolor: "background.dark",
         color: "secondary.main",
-        alignContent: "baseline",
+        p: 2,
       }}
     >
-      <Typography variant="h3" sx={{ mt: 2, mb: 2, textAlign:"center"}}>
+      <Typography variant="h3" sx={{ mb: 2, textAlign: "center" }}>
         <strong>{series.name}</strong>
       </Typography>
-      <Box sx={{ width: "80%", alignContent:"center", justifyItems:"center"}}>{Poster.personImage(series.poster_path)}</Box>
-      <Typography component="legend">Rating</Typography>
-      <Rating value={series?.vote_average} readOnly precision={0.5} max={10} /><Box sx={{ ml: 2 }}>{series.vote_average}</Box>
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+        {Poster.personImage(series.poster_path)}
+      </Box>
+      <Box sx={{ display: "flex", mt: 3 }}>
+        <Typography component="legend">Rating: </Typography>
+        <Rating
+          value={series?.vote_average}
+          readOnly
+          precision={0.5}
+          max={10}
+          icon={<StarIcon style={{ color: "#f5b50a" }} />}
+          emptyIcon={<StarIcon style={{ color: "background.dark" }} />}
+          sx={{
+            ml: 2,
+          }}
+        />
+        <Box sx={{ ml: 2 }}>{series.vote_average}</Box>
+      </Box>
     </Box>
   );
 };

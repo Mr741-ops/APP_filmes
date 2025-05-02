@@ -23,8 +23,9 @@ export const Info = ({ series, id }: InfoProps) => {
     <Box
       className="Info"
       sx={{
-        display:"flex",
-        flexDirection:"column",
+        display: "flex",
+        flexDirection: "column",
+        p: 2,
         height: "100%",
         width: "100%",
         bgcolor: "background.dark",
@@ -55,14 +56,6 @@ export const Info = ({ series, id }: InfoProps) => {
       <Typography sx={{ mt: 2 }}>
         <strong>Type</strong>: {series.type}
       </Typography>
-      <Box sx={{ mt: 2 }}>
-        <strong>Elenco</strong>:{"\n"}
-        {data.cast.map((actor: any, index: number) => (
-          <Typography key={index} sx={{ ml: 2, flexWrap: "wrap" }}>
-            - {actor.name};
-          </Typography>
-        )).slice(0,3)}
-      </Box>
     </Box>
   );
 };

@@ -12,8 +12,9 @@ export const Info = ({ movie}: InfoProps) => {
     <Box
       className="Info"
       sx={{
-        display:"flex",
-        flexDirection:"column",
+        display: "flex",
+        flexDirection: "column",
+        p: 2,
         height: "100%",
         width: "100%",
         bgcolor: "background.dark",

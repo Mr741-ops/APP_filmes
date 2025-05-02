@@ -32,7 +32,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Box sx={{ width: 300, bgcolor: "primary.light", borderRadius: 1  }}>
+    <Box sx={{ width: 300, bgcolor: "primary.light", borderRadius: 1 }}>
       <Autocomplete
         open={open}
         onOpen={() => setOpen(true)}
@@ -50,6 +50,21 @@ export default function SearchBar() {
           "& .MuiAutocomplete-input": {
             padding: "8px 14px !important",
           },
+        }}
+        renderOption={(props, option) => {
+          let prefix = "";
+          if (option.media_type === "movie") prefix = "Movie: ";
+          else if (option.media_type === "tv") prefix = "Series: ";
+          else if (option.media_type === "person") prefix = "Person: ";
+      
+          const label = option.name || option.title || "No title";
+      
+          return (
+            <li {...props}>
+              {prefix}
+              {label}
+            </li>
+          );
         }}
         renderInput={(params) => (
           <TextField

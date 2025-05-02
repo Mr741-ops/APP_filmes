@@ -26,12 +26,9 @@ const ActorPage = () => {
         direction="row"
         spacing={2}
         sx={{
-          height: "100vh",
-          width: "100vw",
-          marginLeft: "15px",
-          "&.css-lqa328-MuiContainer-root": {
-            maxwidth: "100vw",
-          },
+          width: "99.1vw",
+          flexWrap: "wrap",
+          minHeight: "100vh",
         }}
       >
         <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
