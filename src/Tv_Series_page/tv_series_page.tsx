@@ -8,7 +8,6 @@ import Body from "./Body_Details_Series";
 import Image from "./Movie_Image";
 
 const TvSeriesPage = () => {
-  const resource = localStorage.getItem("resource") || "popular";
   const location = useLocation();
   const id = location.state?.id;
 
@@ -38,7 +37,7 @@ const TvSeriesPage = () => {
         <Grid size={{ xs: 12, md: 3}} sx={{ alignContent: "center" }}>
           {Image(series)}
         </Grid>
-        <Grid size={{ xs: 12, md: 6}} sx={{ alignContent: "center" }}>
+        <Grid size={{ xs: 12, md: 6}}>
           <Body series={series} id={id} />
         </Grid>
         <Grid size={{ xs: 12, md: 3}} sx={{ alignContent: "center" }}>

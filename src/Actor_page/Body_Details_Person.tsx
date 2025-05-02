@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
 import { useGetOne } from "react-admin";
 import Carroussel from "../Utils/Carroussel";
 
@@ -53,6 +52,7 @@ export const Body = ({ person, id }: Props) => {
           imagePath: movie.poster_path,
           navigateTo: "movie_page",
         }))}
+        size={900}
       />
     </Box>
   );

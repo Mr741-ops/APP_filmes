@@ -9,9 +9,10 @@ import ActorsGallery from "./Actors_Gallery/actors_gallery.tsx";
 import ActorPage from "./Actor_page/actor_page.tsx";
 import TVPage  from "./Tv_Page/tv_page.tsx";
 import TvSeriesPage from "./Tv_Series_page/tv_series_page.tsx";
+import MainPage from "./Main_Page/Main.tsx";
 
 export const App = () => (
-  <Admin layout={MyLayout} dataProvider={dataProvider} theme={theme}>
+  <Admin dashboard={MainPage} layout={MyLayout} dataProvider={dataProvider} theme={theme}>
     <CustomRoutes>
       <Route path="/home_page" element={<HomePage />} />
       <Route path="/actors_gallery" element={<ActorsGallery />} />
@@ -19,6 +20,7 @@ export const App = () => (
       <Route path="/movie_page" element={<MoviePage/>} />
       <Route path="/actor_page" element={<ActorPage />} />
       <Route path="/tv_series_page" element={<TvSeriesPage/>}/>
+      <Route path="/Main" element={<MainPage/>}/>
     </CustomRoutes>
   </Admin>
 );

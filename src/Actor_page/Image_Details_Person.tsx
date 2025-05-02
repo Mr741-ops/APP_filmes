@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
 import * as Poster from "../Actors_Gallery/actor_image";
 
 export const Image = (person: any) => {

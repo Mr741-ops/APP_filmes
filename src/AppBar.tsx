@@ -6,12 +6,13 @@ import SearchBar from "./Search_Bar";
 
 const Header = () => {
   const location = useLocation();
-  const movieResource = ["popular","top_rated","now_playing","upcoming"]
-  const seriesResource = ["popular","top_rated","on_the_air","airing_today"]
+  const movieResource = ["popular", "top_rated", "now_playing", "upcoming"];
+  const seriesResource = ["popular", "top_rated", "on_the_air", "airing_today"];
 
   //Buttons Create navigation buttons on the navBar
   let currentPath: string | boolean = "/";
-  if (!!matchPath("/home_page", location.pathname)) {
+  if (!!matchPath("/Main", location.pathname)) {
+  } else if (!!matchPath("/home_page", location.pathname)) {
     currentPath = "/home_page";
   } else if (!!matchPath("/actors_gallery", location.pathname)) {
     currentPath = "/actors_gallery";
@@ -25,29 +26,50 @@ const Header = () => {
     <Box component="nav" sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" color="primary">
         <Toolbar variant="dense">
-          <Box flex={1} display="flex" justifyContent="space-between">
-            <Box>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "1fr auto 1fr",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Box display="flex" justifyContent="flex-start">
               <Tabs
                 value={currentPath}
                 aria-label="Navigation Tabs"
                 indicatorColor="secondary"
                 textColor="inherit"
               >
-                <TabWithMenu name="Movies" value={"/home_page"} resourceOptions={movieResource} />
+                <Tab
+                  label={"Home"}
+                  component={Link}
+                  to="/Main"
+                  value="/MainPage"
+                />
+                <TabWithMenu
+                  name="Movies"
+                  value={"/home_page"}
+                  resourceOptions={movieResource}
+                />
+                <TabWithMenu
+                  name="Tv Series"
+                  value={"/tv_page"}
+                  resourceOptions={seriesResource}
+                />
                 <Tab
                   label={"People"}
                   component={Link}
                   to="/actors_gallery"
                   value="/actors_gallery"
                 />
-                <TabWithMenu name="Tv Series" value={"/tv_page"} resourceOptions={seriesResource}/>
               </Tabs>
             </Box>
-            <Box>
+            <Box display="flex" justifyContent="center">
               <SearchBar />
             </Box>
-            <Box display="flex" alignItems="center">
-              <Box display="flex" alignItems="center">
+            <Box display="flex" justifyContent="flex-end" alignItems="center" gap={1}>
+              <Box display="flex" alignItems="center" gap={0.5} >
                 <Box sx={{ fontSize: "0.75rem", color: "white" }}>
                   Language:
                 </Box>

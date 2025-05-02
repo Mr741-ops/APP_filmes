@@ -16,7 +16,7 @@ export default function SearchBar() {
     },
     {
       enabled: inputValue.length > 1,
-    }
+    },
   );
 
   const handleSelect = (option: any) => {
@@ -26,14 +26,13 @@ export default function SearchBar() {
       navigate(`/actor_page`, { state: { id: option.id } });
     } else if (option.media_type === "movie") {
       navigate(`/movie_page`, { state: { id: option.id } });
-    } else if(option.media_type==="tv") {
+    } else if (option.media_type === "tv") {
       navigate(`/tv_series_page`, { state: { id: option.id } });
     }
   };
 
   return (
-    
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: 300, bgcolor: "primary.light", borderRadius: 1  }}>
       <Autocomplete
         open={open}
         onOpen={() => setOpen(true)}
@@ -44,7 +43,13 @@ export default function SearchBar() {
         onInputChange={(_, newValue) => setInputValue(newValue)}
         onChange={(_, selectedOption) => handleSelect(selectedOption)}
         sx={{
-          height:"48px",
+          "& .MuiOutlinedInput-root": {
+            height: 40,
+            padding: 0,
+          },
+          "& .MuiAutocomplete-input": {
+            padding: "8px 14px !important",
+          },
         }}
         renderInput={(params) => (
           <TextField

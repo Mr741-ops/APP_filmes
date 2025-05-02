@@ -70,6 +70,15 @@ type TabWithMenuProps = {
   value: string;
 };
 
+const displayNames: Record<string, string> = {
+  popular: "Popular",
+  top_rated: "Top Rated",
+  now_playing: "Now Playing",
+  upcoming: "Upcoming",
+  on_the_air: "Currently Airing",
+  airing_today: "Airing Today",
+};
+
 export const TabWithMenu = ({ name, value, resourceOptions }: TabWithMenuProps) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -108,7 +117,7 @@ export const TabWithMenu = ({ name, value, resourceOptions }: TabWithMenuProps) 
             selected={index === selectedIndex}
             onClick={() => handleMenuItemClick(value, index)}
           >
-            {option}
+            {displayNames[option] || option}
           </MenuItem>
         ))}
       </Menu>

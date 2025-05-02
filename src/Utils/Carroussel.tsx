@@ -5,26 +5,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-console.log("Slick styles loaded");
-
-type CarrousselItem = {
-  id: any;
-  title: string;
-  imagePath: string;
-  navigateTo: string;
-};
-
-type Props = {
-  title: string;
-  items: CarrousselItem[];
-};
-
 const settings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 5,
-  slidesToScroll: 1,
+  slidesToShow: 6,
+  slidesToScroll: 5,
   responsive: [
     {
       breakpoint: 768,
@@ -73,19 +59,32 @@ const settings = {
   ),
 };
 
-export const Carroussel = ({ title, items }: Props) => {
+type CarrousselItem = {
+  id: any;
+  title: string;
+  imagePath: string;
+  navigateTo: string;
+};
+
+type Props = {
+  title: string;
+  items: CarrousselItem[];
+  size: number;
+};
+
+export const Carroussel = ({ title, items, size}: Props) => {
   const handleClick = useHandleClick();
 
   if (!items || items.length === 0) return null;
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography variant="h5" sx={{ mb: 2 }}>
+      <Typography variant="h5" sx={{ mb: 2, color:"secondary.main" }}>
         <strong>{title}</strong>
       </Typography>
       <Box
         sx={{
-          width: "900px",
+          width: size,
           maxWidth: "100vw",
           overflow: "hidden",
           ".slick-slide": {
@@ -124,8 +123,8 @@ export const Carroussel = ({ title, items }: Props) => {
                     ? Poster.miniPersonImage(item.imagePath)
                     : Poster.miniMovieImage(item.imagePath)}
                 </Box>
-                <Typography variant="caption" sx={{ mt: 1 }}>
-                  {item.title}
+                <Typography variant="caption" sx={{ mt: 1,  color:"secondary.main"}}>
+                 <strong> {item.title} </strong>
                 </Typography>
               </Button>
             </Box>
