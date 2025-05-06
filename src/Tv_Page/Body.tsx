@@ -8,29 +8,32 @@ import { Box } from "@mui/material";
 interface BodyProps {
   resource: string;
   page: number;
+  data?: Series[] | null;
 }
 
-interface Movie {
+interface Series {
   id: number;
   title: string;
   poster_path: string;
   overview: string;
 }
 
-const Body: React.FC<BodyProps> = ({ resource, page }) => {
-  const { data, error, isPending } = useGetList(`tv/${resource}`, {
+const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }: BodyProps) => {
+  const { data: fetchedData, error, isPending } = useGetList(`tv/${resource}`, {
     pagination: {
       page: page,
       perPage: 0,
     },
   });
 
-  const [selectedSeries, setSelectedSeries] = React.useState<Movie | null>(null);
+  const displayData = searchData || fetchedData || [];
+  const [selectedSeries, setSelectedSeries] = React.useState<Series | null>(
+    null,
+  );
 
-  const handleClickOpen = (movie: Movie) => () => {
+  const handleClickOpen = (movie: Series) => () => {
     setSelectedSeries(movie);
   };
-
   const handleClose = () => {
     setSelectedSeries(null);
   };
@@ -41,7 +44,7 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
   if (error) {
     return <p>ERROR</p>;
   }
-  
+
   return (
     <React.Fragment>
       <Box
@@ -58,7 +61,7 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
           padding: "20px 0",
         }}
       >
-        {data.map((series) => (
+        {displayData.map((series) => (
           <Box key={series.id}>
             <Button
               variant="outlined"
@@ -67,8 +70,7 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
                 width: "360px",
               }}
             >
-              <Box
-                className="movie-item">
+              <Box className="movie-item">
                 {Poster.poster(series.poster_path, series.name, series.id)}
               </Box>
             </Button>

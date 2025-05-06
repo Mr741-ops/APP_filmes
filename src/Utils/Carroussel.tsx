@@ -124,7 +124,7 @@ export const Carroussel = ({ title, items, size}: Props) => {
                     : Poster.miniMovieImage(item.imagePath)}
                 </Box>
                 <Typography variant="caption" sx={{ mt: 1,  color:"secondary.main"}}>
-                 <strong> {item.title} </strong>
+                  <strong> {item.title} </strong>
                 </Typography>
               </Button>
             </Box>

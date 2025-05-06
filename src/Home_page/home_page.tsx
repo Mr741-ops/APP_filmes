@@ -5,13 +5,15 @@ import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import Buttons from "./buttons";
+import Search_Bar from "../Utils/searchBar";
 
 export const HomePage = () => {
   /* 
   ------------------------------ Variables ------------------------
   */
-  const resource = localStorage.getItem("resource") || "popular";
+  const resource = localStorage.getItem("resource") || "";
   const [page, setPage] = useState(1);
+  const [searchResults, setSearchResults] = useState<any[] | null>(null);
 
   /* 
   --------------------------------- Functions ----------------------
@@ -26,8 +28,14 @@ export const HomePage = () => {
         return "Now playing Movies";
       case "upcoming":
         return "Upcoming Movies";
+      case "search":
+        return "Search Movies";
     }
     
+  };
+
+  const handleSearchResults = (results:any[] | null) => {
+    setSearchResults(results);
   };
 
   return (
@@ -43,6 +51,7 @@ export const HomePage = () => {
           }}
         >
           <Buttons page={page} setPage={setPage} />
+          <Search_Bar onResults={handleSearchResults} resource="search/movie"/>
         </Box>
         <Typography
           variant="h3"
@@ -53,7 +62,7 @@ export const HomePage = () => {
         >
           {title()}
         </Typography>
-        <Body resource={resource} page={page} />
+        <Body resource={resource} page={page} data={searchResults}/>
         <Box sx={{
           display:"flex",
           justifyContent:"center"

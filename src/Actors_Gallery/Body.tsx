@@ -1,25 +1,43 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { Button } from "react-admin";
-import useApiCall from "../Data/apiCall";
+import { Button, Loading, useGetList } from "react-admin";
 import { CustomDialog } from "./dialog_Box";
 import * as Poster from "./actor_image";
 
 interface Props {
   resource: string;
   page: number;
+  data?: Person[] | null;
 }
 
 interface Person {
   id: number;
   name: string;
-  poster_path: string;
+  profile_path: string;
   biography: string;
 }
 
-const Body: React.FC<Props> = ({ resource, page }) => {
-  const { data } = useApiCall(resource, page);
+const Body: React.FC<Props> = ({ resource, page, data: searchData}) => {
+  const shouldFetch = !searchData;
 
+  const {
+      data: fetchedData,
+      error,
+      isPending,
+    } = useGetList(
+      `person/${resource}`,
+      {
+        pagination: {
+          page: page,
+          perPage: 0,
+        },
+      },
+      {
+        enabled: shouldFetch,
+      },
+    );
+
+  const displayData =  searchData || fetchedData ||  [];
   const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(null);
 
   const handleClickOpen = (person: Person) => () => {
@@ -29,6 +47,13 @@ const Body: React.FC<Props> = ({ resource, page }) => {
   const handleClose = () => {
     setSelectedPerson(null);
   };
+
+  if (shouldFetch && isPending) {
+      return <Loading />;
+    }
+    if (shouldFetch && error) {
+      return <p>Error</p>
+    }
 
   return (
     <React.Fragment>
@@ -49,7 +74,7 @@ const Body: React.FC<Props> = ({ resource, page }) => {
             maxheight: "fit-content",
           } ,
       }}>
-        {data.map((person) => (
+        {displayData.map((person) => (
           <Box key={person.id}>
             <Button variant="outlined" onClick={handleClickOpen(person)} sx={{
               width:"360px",

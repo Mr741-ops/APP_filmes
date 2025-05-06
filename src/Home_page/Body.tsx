@@ -1,13 +1,13 @@
 import * as React from "react";
-/* import useApiCall from "../Data/apiCall"; */
 import { CustomDialog } from "./dialogBox";
 import { Button, Loading, useGetList } from "react-admin";
 import * as Poster from "./poster";
 import { Box } from "@mui/material";
 
 interface BodyProps {
-  resource: string;
+  resource?: string;
   page: number;
+  data?: Movie[] | null;
 }
 
 interface Movie {
@@ -17,16 +17,31 @@ interface Movie {
   overview: string;
 }
 
-const Body: React.FC<BodyProps> = ({ resource, page }) => {
-  const { data, error, isPending } = useGetList(`movie/${resource}`, {
-    pagination: {
-      page: page,
-      perPage: 0,
-    },
-  });
+const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }) => {
+  const shouldFetch = !searchData;
 
+  const {
+    data: fetchedData,
+    error,
+    isPending,
+  } = useGetList(
+    `movie/${resource}`,
+    {
+      pagination: {
+        page: page,
+        perPage: 0,
+      },
+    },
+    {
+      enabled: shouldFetch,
+    },
+  );
+
+  const displayData = searchData || fetchedData || [];
   const [selectedMovie, setSelectedMovie] = React.useState<Movie | null>(null);
 
+  ///////////////////// Functions /////////////////////////////
+  
   const handleClickOpen = (movie: Movie) => () => {
     setSelectedMovie(movie);
   };
@@ -35,11 +50,11 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
     setSelectedMovie(null);
   };
 
-  if (isPending) {
+  if (shouldFetch && isPending) {
     return <Loading />;
   }
-  if (error) {
-    return <p>ERROR</p>;
+  if (shouldFetch && error) {
+    return <p>Error</p>
   }
 
   return (
@@ -48,17 +63,17 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
         className="container"
         sx={{
           display: "flex",
-          justifycontent: "center",
-          aligncontent: "center",
-          alignitems: "center",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
           gap: "10px",
           flexWrap: "wrap",
           width: "88vw",
-          maxwidth: "100%",
+          maxWidth: "100%",
           padding: "20px 0",
         }}
       >
-        {data.map((movie) => (
+        {displayData.map((movie) => (
           <Box key={movie.id}>
             <Button
               variant="outlined"
@@ -67,8 +82,7 @@ const Body: React.FC<BodyProps> = ({ resource, page }) => {
                 width: "360px",
               }}
             >
-              <Box
-                className="movie-item">
+              <Box className="movie-item">
                 {Poster.poster(movie.poster_path, movie.title, movie.id)}
               </Box>
             </Button>

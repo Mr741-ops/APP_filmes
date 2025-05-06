@@ -4,6 +4,7 @@ import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import Buttons from "./buttons";
+import Search_Bar from "../Utils/searchBar";
 
 export const TVPage = () => {
   /* 
@@ -11,6 +12,7 @@ export const TVPage = () => {
   */
   const resource = localStorage.getItem("resource") || "popular";
   const [page, setPage] = useState(1);
+  const [searchResults, setSearchResults] = useState<any[] | null>(null);
 
   /* 
   --------------------------------- Functions ----------------------
@@ -28,6 +30,10 @@ export const TVPage = () => {
       }
   };
 
+  const handleSearchResults = (results:any[] | null) => {
+    setSearchResults(results);
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -41,6 +47,7 @@ export const TVPage = () => {
           }}
         >
           <Buttons page={page} setPage={setPage} />
+          <Search_Bar onResults={handleSearchResults} resource="search/tv" />
         </Box>
         <Typography
           variant="h3"
@@ -51,12 +58,12 @@ export const TVPage = () => {
         >
           {title()}
         </Typography>
-        <Body resource={resource} page={page} />
+        <Body resource={resource} page={page}  data={searchResults}/>
         <Box sx={{
           display:"flex",
           justifyContent:"center"
         }}>
-          <Buttons page={page} setPage={setPage} />
+          <Buttons page={page} setPage={setPage}/>
         </Box>
       </Container>
     </React.Fragment>
