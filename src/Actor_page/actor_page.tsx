@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
 import Body from "./Body_Details_Person";
 import Image from "./Image_Details_Person";
+import BackButton from "../Utils/backButton";
 
 const ActorPage = () => {
   const location = useLocation();
@@ -31,6 +32,7 @@ const ActorPage = () => {
           justifyContent:"center",
         }}
       >
+        <BackButton />
         <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
           {Image(person)}
         </Grid>

@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
 import Body from "./Body_Details_Series";
 import Image from "./Movie_Image";
+import BackButton from "../Utils/backButton";
 
 const TvSeriesPage = () => {
   const location = useLocation();
@@ -28,19 +29,14 @@ const TvSeriesPage = () => {
           width: "100%",
           flexWrap: "wrap",
           minHeight: "100vh",
-          justifyContent:"center"
+          justifyContent: "center",
         }}
       >
-        <Grid
-          size={{ xs: 12, md: 3 }}
-          sx={{ justifyContent: "center" }}
-        >
-          <Image series={series} id={id}/>
+          <BackButton />
+        <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
+          <Image series={series} id={id} />
         </Grid>
-        <Grid
-          size={{ xs: 12, md: 6 }}
-          sx={{ justifyContent: "center" }}
-        >
+        <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
           <Body series={series} id={id} />
         </Grid>
       </Grid>

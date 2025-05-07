@@ -3,9 +3,9 @@ import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
-import Info from "./info";
 import Body from "./Body_Details_Movie";
 import Image from "./Movie_Image";
+import BackButton from "../Utils/backButton";
 
 const ActorPage = () => {
   const location = useLocation();
@@ -33,6 +33,7 @@ const ActorPage = () => {
           justifyContent:"center"
         }}
       >
+        <BackButton />
         <Grid size={{ xs: 12, md: 3}} sx={{ justifyContent: "center" }}>
           {Image(movie)}
         </Grid>
