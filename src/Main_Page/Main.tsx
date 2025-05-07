@@ -49,7 +49,7 @@ export const MainPage = () => {
 
 
   return (
-    <Box>
+    <Box sx={{mb:3}}>
       <Typography
         variant="h1"
         sx={{
@@ -59,7 +59,7 @@ export const MainPage = () => {
           textAlign: "center",
           alignItems: "center",
           justifyContent: "center",
-          mt:"50px",
+          mt: 4,
           textWrap: "wrap",
         }}
       >
