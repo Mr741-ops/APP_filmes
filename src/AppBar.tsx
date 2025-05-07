@@ -1,8 +1,10 @@
-import { AppBar, Box, Tab, Tabs, Toolbar } from "@mui/material";
+import { AppBar, Box, IconButton, Tab, Tabs, Toolbar } from "@mui/material";
 import { Logout, UserMenu } from "react-admin";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { LanguageMenu, TabWithMenu } from "./Menu_AppBar";
 import SearchBar from "./Search_Bar";
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 
 const Header = () => {
   const location = useLocation();
@@ -20,6 +22,10 @@ const Header = () => {
     currentPath = "/tv_page";
   } else {
     currentPath = false;
+  }
+
+  const handleClick = () =>{
+    window.location.reload();
   }
 
   return (
@@ -68,12 +74,20 @@ const Header = () => {
             <Box display="flex" justifyContent="center">
               <SearchBar />
             </Box>
-            <Box display="flex" justifyContent="flex-end" alignItems="center" gap={1}>
-              <Box display="flex" alignItems="center" gap={0.5} >
-                <Box sx={{ fontSize: "0.75rem", color: "white" }}>
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+              gap={1}
+            >
+              <IconButton aria-label="refresh" size="small" onClick={handleClick} sx={{ color:"secondary.main"}}>
+                <RefreshIcon fontSize="inherit" />
+              </IconButton>
+              <Box display="flex" alignItems="center">
+                <Box sx={{ fontSize: "0.85rem", color: "white" }}>
                   Language:
+                  <LanguageMenu />
                 </Box>
-                <LanguageMenu />
               </Box>
               <UserMenu>
                 <Logout />

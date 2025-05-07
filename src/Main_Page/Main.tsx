@@ -40,7 +40,7 @@ export const MainPage = () => {
   const { data, isLoading, isError } = useLists();
 
   if (isLoading) {
-    return <Loading />; // or custom loading UI
+    return <Loading />;
   }
 
   if (isError) {

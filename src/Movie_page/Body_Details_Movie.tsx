@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useGetOne } from "react-admin";
+import { Loading, useGetList, useGetOne } from "react-admin";
 import Carroussel from "../Utils/Carroussel";
 
 type Props = {
@@ -7,8 +7,8 @@ type Props = {
   id: any;
 };
 
-export const Body = ({ movie, id }: Props) => {
-  const { data, isLoading, error } = useGetOne(
+const useLists = (id: any) => {
+  const persons = useGetOne(
     "movie",
     {
       id,
@@ -19,11 +19,36 @@ export const Body = ({ movie, id }: Props) => {
     },
   );
 
-  if (!id) return <Typography>Erro: ID não definido</Typography>;
-  if (isLoading) return <Typography>A carregar...</Typography>;
-  if (error) return <Typography>Erro ao carregar os dados.</Typography>;
-  if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
+  const similarMovies = useGetList(`movie/${id}/similar`, {
+    pagination: {
+      page: 1,
+      perPage: 0,
+    },
+  });
 
+  const isLoading = similarMovies.isLoading || persons.isLoading;
+  const isError = similarMovies.error || persons.error;
+
+  return {
+    isLoading,
+    isError,
+    data: {
+      similarMovies: similarMovies.data || [],
+      persons: persons.data || [],
+    },
+  };
+};
+
+export const Body = ({ movie, id }: Props) => {
+  const { data, isLoading, isError } = useLists(id);
+
+  if (isLoading) {
+    return <Loading />; // or custom loading UI
+  }
+
+  if (isError) {
+    return <p>Error loading movie lists.</p>;
+  }
   return (
     <Box
       className="Biography"
@@ -46,13 +71,23 @@ export const Body = ({ movie, id }: Props) => {
       </Typography>
       <Carroussel
         title="Cast"
-        items={data.cast.map((person: any) => ({
+        items={data.persons.cast.map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
           navigateTo: "actor_page",
         }))}
         size={900}
+      />
+      <Carroussel
+        title="Similar Movies"
+        items={data.similarMovies.map((movie: any) => ({
+          id: movie.id,
+          title: movie.title,
+          imagePath: movie.poster_path,
+          navigateTo: "movie_page",
+        }))}
+        size={975}
       />
     </Box>
   );

@@ -26,7 +26,7 @@ const TvSeriesPage = () => {
         direction="row"
         spacing={0}
         sx={{
-          width: "99.1vw",
+          width: "100%",
           flexWrap: "wrap",
           minHeight: "100vh",
         }}
@@ -35,20 +35,20 @@ const TvSeriesPage = () => {
           size={{ xs: 12, md: 3 }}
           sx={{ justifyContent: "center" }}
         >
-          {Image(series)}
+          <Image series={series} id={id}/>
         </Grid>
         <Grid
-          size={{ xs: 12, md: 6 }}
+          size={{ xs: 12, md: 7 }}
           sx={{ justifyContent: "center" }}
         >
           <Body series={series} id={id} />
         </Grid>
-        <Grid
+        {/* <Grid
           size={{ xs: 12, md: 3 }}
           sx={{ justifyContent: "center" }}
         >
           <Info series={series} id={id} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

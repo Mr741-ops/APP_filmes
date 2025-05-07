@@ -70,7 +70,7 @@ export const miniMovieImage = (posterPath: string) => {
       alt="Poster"
       style={{
         width: "100%",     
-        height: "150px",      
+        height: "240px",      
         objectFit: "cover",
         borderRadius: "8px",
         display: "block",

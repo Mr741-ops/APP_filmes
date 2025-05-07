@@ -80,7 +80,6 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
             container
             sx={{
               justifyContent: "space-between",
-              alignItems: "center",
             }}
           >
             <Grid
@@ -110,18 +109,18 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
                   {selectedSeries?.first_air_date}
                 </Typography>
               </Box>
+              <DialogActions>
+                <Button
+                  autoFocus
+                  onClick={(event) => tvSeriesDetailsPage(selectedSeries?.id)}
+                  sx={{  bgcolor:"primary.main", color: "secondary.main", mt:25 }}
+                >
+                  Details page
+                </Button>
+              </DialogActions>
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={(event) => tvSeriesDetailsPage(selectedSeries?.id)}
-            sx={{ color: "#0081a7" }}
-          >
-            Details page
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
     </React.Fragment>
   );

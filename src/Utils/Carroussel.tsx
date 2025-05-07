@@ -111,7 +111,7 @@ export const Carroussel = ({ title, items, size}: Props) => {
                 <Box
                   sx={{
                     width: "100%",
-                    maxWidth: "110px",
+                    maxWidth: "140px",
                     height: "auto",
                     overflow: "hidden",
                     display: "flex",

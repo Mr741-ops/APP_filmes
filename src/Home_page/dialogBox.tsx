@@ -45,7 +45,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
     ? `${selectedMovie.overview}`
     : `The overview on this film is unavailable at the moment try again later.`;
 
-  console.log(selectedMovie)
+  console.log(selectedMovie);
 
   return (
     <React.Fragment>
@@ -82,7 +82,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
             container
             sx={{
               justifyContent: "space-between",
-              alignItems: "center",
+              /*  alignItems: "center", */
             }}
           >
             <Grid
@@ -107,27 +107,23 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   <strong>Overview</strong>
                 </Typography>
                 <Typography gutterBottom>{overview}</Typography>
-                <Typography gutterBottom>
+                <Typography gutterBottom sx={{mt:5}}>
                   <strong>Release date: </strong>
                   {selectedMovie?.release_date}
                 </Typography>
-                <Typography>
-                  <strong>Runtime: </strong>
-                  {selectedMovie?.runtime}
-                </Typography>
               </Box>
+              <DialogActions>
+                <Button
+                  autoFocus
+                  onClick={(event) => movieDetailsPage(selectedMovie?.id)}
+                  sx={{ bgcolor:"primary.main", color: "secondary.main", mt:34.5 }}
+                >
+                  Details page
+                </Button>
+              </DialogActions>
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={(event) => movieDetailsPage(selectedMovie?.id)}
-            sx={{ color: "#0081a7" }}
-          >
-            Details page
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
     </React.Fragment>
   );

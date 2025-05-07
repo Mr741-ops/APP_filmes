@@ -99,15 +99,6 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
                 <strong>Details</strong>
               </Typography>
 
-              <Typography variant="subtitle1" sx={{ mt: 2,}}>
-                <strong>Known for:</strong>
-              </Typography>
-              {selectedPerson?.known_for.map((movie: any, index: number) => (
-                <Typography key={index} sx={{ ml: 2, flexWrap: "wrap" }}>
-                  - {movie.title};
-                </Typography>
-              ))}
-
               <Typography variant="subtitle1" sx={{ mt: 3 }}>
                 <strong>Original name:</strong> {selectedPerson?.original_name}
               </Typography>
@@ -116,6 +107,15 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
                 <strong>Known for department:</strong>{" "}
                 {selectedPerson?.known_for_department}
               </Typography>
+
+              <Typography variant="subtitle1" sx={{ mt: 1,}}>
+                <strong>Known for:</strong>
+              </Typography>
+              {selectedPerson?.known_for.map((movie: any, index: number) => (
+                <Typography key={index} sx={{ ml: 2, flexWrap: "wrap" }}>
+                  - {movie.title};
+                </Typography>
+              ))}
             </Grid>
           </Grid>
         </DialogContent>
