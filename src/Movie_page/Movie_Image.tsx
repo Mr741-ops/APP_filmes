@@ -23,7 +23,7 @@ export const Image = (movie: any) => {
       >
         {Poster.personImage(movie.poster_path)}
       </Box>
-      <Box sx={{ display: "flex", mt: 3}}>
+      <Box sx={{ display: "flex", mt: 3 }}>
         <Typography component="legend">Rating: </Typography>
         <Rating
           value={movie?.vote_average}
@@ -33,10 +33,32 @@ export const Image = (movie: any) => {
           icon={<StarIcon style={{ color: "#f5b50a" }} />}
           emptyIcon={<StarIcon style={{ color: "background.dark" }} />}
           sx={{
-            ml:2
+            ml: 2,
           }}
         />
-        <Box sx={{ml:2}}>{movie.vote_average}</Box>
+        <Box sx={{ ml: 2 }}>{movie.vote_average}</Box>
+      </Box>
+      <Box
+        className="Info"
+        sx={{
+          color: "secondary.main",
+        }}
+      >
+        <Typography sx={{ mt: 6 }}>
+          <strong>Title</strong>: {movie.title}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Budget</strong>: {movie.budget}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Release date</strong>: {movie.release_date}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Runtime</strong>: {movie.runtime}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Revenue</strong>: {movie.revenue}
+        </Typography>
       </Box>
     </Box>
   );

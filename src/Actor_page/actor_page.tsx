@@ -3,7 +3,6 @@ import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
-import Info from "./info";
 import Body from "./Body_Details_Person";
 import Image from "./Image_Details_Person";
 
@@ -26,9 +25,10 @@ const ActorPage = () => {
         direction="row"
         spacing={2}
         sx={{
-          width: "99.1vw",
+          width: "100%",
           flexWrap: "wrap",
           minHeight: "100vh",
+          justifyContent:"center",
         }}
       >
         <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
@@ -36,9 +36,6 @@ const ActorPage = () => {
         </Grid>
         <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
           <Body person={person} id={id} />
-        </Grid>
-        <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
-          <Info person={person} id={id} />
         </Grid>
       </Grid>
     </>

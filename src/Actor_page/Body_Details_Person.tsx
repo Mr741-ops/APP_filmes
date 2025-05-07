@@ -38,10 +38,10 @@ export const Body = ({ person, id }: Props) => {
       textWrap: "wrap",
     }}
     >
-      <Typography variant="h3" sx={{ mt: 7 }}>
+      <Typography variant="h3" sx={{ mt: 4 }}>
         <strong>Biography</strong>
       </Typography>
-      <Typography variant="body1" sx={{ mt: 7, textAlign: "justify" }}>
+      <Typography variant="body1" sx={{ mt: 5, textAlign: "justify" }}>
         {person.biography}
       </Typography>
       <Carroussel

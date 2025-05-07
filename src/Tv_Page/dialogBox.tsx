@@ -103,7 +103,7 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
                 >
                   <strong>Overview</strong>
                 </Typography>
-                <Typography gutterBottom>{overview}</Typography>
+                <Typography gutterBottom sx={{ textAlign:"justify"}}>{overview}</Typography>
                 <Typography gutterBottom>
                   <strong>Release date: </strong>
                   {selectedSeries?.first_air_date}
@@ -113,7 +113,7 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
                 <Button
                   autoFocus
                   onClick={(event) => tvSeriesDetailsPage(selectedSeries?.id)}
-                  sx={{  bgcolor:"primary.main", color: "secondary.main", mt:25 }}
+                  sx={{  bgcolor:"primary.main", color: "secondary.main", position: 'fixed', bottom: '180px',}}
                 >
                   Details page
                 </Button>

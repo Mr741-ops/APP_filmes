@@ -25,11 +25,12 @@ const ActorPage = () => {
         container
         className="Body"
         direction="row"
-        spacing={2}
+        gap={7}
         sx={{
-          width: "99.1vw",
+          width: "100%",
           flexWrap: "wrap",
           minHeight: "100vh",
+          justifyContent:"center"
         }}
       >
         <Grid size={{ xs: 12, md: 3}} sx={{ justifyContent: "center" }}>
@@ -37,9 +38,6 @@ const ActorPage = () => {
         </Grid>
         <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
           <Body movie={movie} id={id}/>
-        </Grid>
-        <Grid size={{ xs: 12, md: 3}} sx={{ justifyContent: "center" }}>
-          <Info movie={movie}/>
         </Grid>
       </Grid>
     </>

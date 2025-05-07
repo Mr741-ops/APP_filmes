@@ -3,7 +3,6 @@ import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
-import Info from "./info";
 import Body from "./Body_Details_Series";
 import Image from "./Movie_Image";
 
@@ -29,6 +28,7 @@ const TvSeriesPage = () => {
           width: "100%",
           flexWrap: "wrap",
           minHeight: "100vh",
+          justifyContent:"center"
         }}
       >
         <Grid
@@ -38,17 +38,11 @@ const TvSeriesPage = () => {
           <Image series={series} id={id}/>
         </Grid>
         <Grid
-          size={{ xs: 12, md: 7 }}
+          size={{ xs: 12, md: 6 }}
           sx={{ justifyContent: "center" }}
         >
           <Body series={series} id={id} />
         </Grid>
-        {/* <Grid
-          size={{ xs: 12, md: 3 }}
-          sx={{ justifyContent: "center" }}
-        >
-          <Info series={series} id={id} />
-        </Grid> */}
       </Grid>
     </>
   );

@@ -40,10 +40,10 @@ export const Body = ({ series, id }: Props) => {
         textWrap: "wrap",
       }}
     >
-      <Typography variant="h3" sx={{ mt: 7, textWrap: "wrap" }}>
+      <Typography variant="h3" sx={{ mt: 4, textWrap: "wrap" }}>
         <strong>Overview</strong>
       </Typography>
-      <Typography variant="body1" sx={{ mt: 7, textAlign: "justify" }}>
+      <Typography variant="body1" sx={{ mt: 5, textAlign: "justify" }}>
         {series.overview}
       </Typography>
       <Carroussel
@@ -53,6 +53,18 @@ export const Body = ({ series, id }: Props) => {
           title: person.name,
           imagePath: person.profile_path,
           navigateTo: "actor_page",
+          character: person.character,
+        }))}
+        size={900}
+      />
+      <Carroussel
+        title="Crew"
+        items={data.crew.map((person: any) => ({
+          id: person.id,
+          title: person.name,
+          imagePath: person.profile_path,
+          navigateTo: "actor_page",
+          character: person.job,
         }))}
         size={900}
       />
