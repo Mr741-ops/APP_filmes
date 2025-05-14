@@ -29,6 +29,7 @@ const ActorPage = () => {
           width: "100%",
           flexWrap: "wrap",
           minHeight: "100vh",
+          minWidth:"100vw",
           justifyContent:"center",
         }}
       >

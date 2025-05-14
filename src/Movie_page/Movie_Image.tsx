@@ -45,19 +45,19 @@ export const Image = (movie: any) => {
         }}
       >
         <Typography sx={{ mt: 6 }}>
-          <strong>Title</strong>: {movie.title || "N/A"}
+          <strong>Title</strong>: {movie.title ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Release date</strong>: {movie.release_date || "N/A"}
+          <strong>Release date</strong>: {movie.release_date ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Runtime</strong>: {movie.runtime || "N/A"}
+          <strong>Runtime</strong>: {movie.runtime ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Budget</strong>: {movie.budget.toLocaleString() || "N/A"}
+          <strong>Budget</strong>: {movie.budget.toLocaleString() ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Revenue</strong>: {movie.revenue.toLocaleString() || "N/A"}
+          <strong>Revenue</strong>: {movie.revenue.toLocaleString() ?? "N/A"}
         </Typography>
       </Box>
     </Box>

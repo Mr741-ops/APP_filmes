@@ -56,9 +56,9 @@ export default function SearchBar() {
           if (option.media_type === "movie") prefix = "Movie: ";
           else if (option.media_type === "tv") prefix = "Series: ";
           else if (option.media_type === "person") prefix = "Person: ";
-      
+
           const label = option.name || option.title || "No title";
-      
+
           return (
             <li {...props}>
               {prefix}
@@ -71,14 +71,17 @@ export default function SearchBar() {
             {...params}
             placeholder="Search movies, actors..."
             variant="outlined"
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {isLoading && <CircularProgress color="inherit" size={20} />}
-                  {params.InputProps.endAdornment}
-                </>
-              ),
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <>
+                    {isLoading && (
+                      <CircularProgress color="inherit" size={20} />
+                    )}
+                    {params.InputProps?.endAdornment}
+                  </>
+                ),
+              },
             }}
           />
         )}

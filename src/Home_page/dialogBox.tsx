@@ -48,83 +48,85 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
   console.log(selectedMovie);
 
   return (
-    <React.Fragment>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={Boolean(selectedMovie)}
-        maxWidth="md"
-        slotProps={{
-          backdrop: {
-            sx: {
-              backgroundColor: "rgba(255, 255, 255, 0.03)",
-              backdropFilter: "blur(8px)",
-            },
+    <BootstrapDialog
+      onClose={handleClose}
+      aria-labelledby="customized-dialog-title"
+      open={Boolean(selectedMovie)}
+      maxWidth="md"
+      slotProps={{
+        backdrop: {
+          sx: {
+            backgroundColor: "rgba(255, 255, 255, 0.03)",
+            backdropFilter: "blur(8px)",
           },
+        },
+      }}
+    >
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
         }}
       >
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
+        <CloseIcon />
+      </IconButton>
+      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+        {selectedMovie?.title}
+      </DialogTitle>
+      <DialogContent>
+        <Grid
+          container
           sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
+            justifyContent: "space-between",
+            /*  alignItems: "center", */
           }}
         >
-          <CloseIcon />
-        </IconButton>
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          {selectedMovie?.title}
-        </DialogTitle>
-        <DialogContent>
           <Grid
-            container
+            size={5}
             sx={{
-              justifyContent: "space-between",
-              /*  alignItems: "center", */
+              maxWidth: "342px",
+              height: "525px",
+              overflow: "hidden",
             }}
           >
-            <Grid
-              size={5}
-              sx={{
-                maxWidth: "342px",
-                height: "525px",
-                overflow: "hidden",
-              }}
-            >
-              {Poster.movieImage(selectedMovie?.poster_path ?? "")}
-            </Grid>
-            <Grid size={7}>
-              <Box>
-                <Typography
-                  variant="h4"
-                  gutterBottom
-                  sx={{
-                    textAlign: "center",
-                  }}
-                >
-                  <strong>Overview</strong>
-                </Typography>
-                <Typography gutterBottom>{overview}</Typography>
-                <Typography gutterBottom sx={{mt:5}}>
-                  <strong>Release date: </strong>
-                  {selectedMovie?.release_date}
-                </Typography>
-              </Box>
-              <DialogActions>
-                <Button
-                  autoFocus
-                  onClick={(event) => movieDetailsPage(selectedMovie?.id)}
-                  sx={{ bgcolor:"primary.main", color: "secondary.main", mt:34.5 }}
-                >
-                  Details page
-                </Button>
-              </DialogActions>
-            </Grid>
+            {Poster.movieImage(selectedMovie?.poster_path ?? "")}
           </Grid>
-        </DialogContent>
-      </BootstrapDialog>
-    </React.Fragment>
+          <Grid size={7}>
+            <Box>
+              <Typography
+                variant="h4"
+                gutterBottom
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                <strong>Overview</strong>
+              </Typography>
+              <Typography gutterBottom>{overview}</Typography>
+              <Typography gutterBottom sx={{ mt: 5 }}>
+                <strong>Release date: </strong>
+                {selectedMovie?.release_date}
+              </Typography>
+            </Box>
+            <DialogActions>
+              <Button
+                autoFocus
+                onClick={(event) => movieDetailsPage(selectedMovie?.id)}
+                sx={{
+                  bgcolor: "primary.main",
+                  color: "secondary.main",
+                  mt: 34.5,
+                }}
+              >
+                Details page
+              </Button>
+            </DialogActions>
+          </Grid>
+        </Grid>
+      </DialogContent>
+    </BootstrapDialog>
   );
 }

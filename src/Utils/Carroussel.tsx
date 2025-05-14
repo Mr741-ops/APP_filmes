@@ -44,7 +44,7 @@ const settings = {
       sx={{
         position: "absolute",
         top: "50%",
-        left:"0px",
+        left: "0px",
         zIndex: 10,
         backgroundColor: "rgba(0, 0, 0, 0)",
         borderRadius: "50%",
@@ -73,14 +73,14 @@ type Props = {
   size: number;
 };
 
-export const Carroussel = ({ title, items, size}: Props) => {
+export const Carroussel = ({ title, items, size }: Props) => {
   const handleClick = useHandleClick();
 
   if (!items || items.length === 0) return null;
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography variant="h5" sx={{ mb: 2, color:"secondary.main" }}>
+      <Typography variant="h5" sx={{ mb: 2, color: "secondary.main" }}>
         <strong>{title}</strong>
       </Typography>
       <Box
@@ -124,9 +124,12 @@ export const Carroussel = ({ title, items, size}: Props) => {
                     ? Poster.miniPersonImage(item.imagePath)
                     : Poster.miniMovieImage(item.imagePath)}
                 </Box>
-                <Typography variant="caption" sx={{ mt: 1,  color:"secondary.main"}}>
-                  <strong> {item.title} </strong> <br/>
-                  { item.character ? `(${item.character}) `: "" }
+                <Typography
+                  variant="caption"
+                  sx={{ mt: 1, color: "secondary.main" }}
+                >
+                  <strong> {item.title} </strong> <br />
+                  {item.character ? `(${item.character}) ` : ""}
                 </Typography>
               </Button>
             </Box>

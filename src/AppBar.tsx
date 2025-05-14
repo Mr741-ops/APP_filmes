@@ -2,9 +2,8 @@ import { AppBar, Box, IconButton, Tab, Tabs, Toolbar } from "@mui/material";
 import { Logout, UserMenu } from "react-admin";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { LanguageMenu, TabWithMenu } from "./Menu_AppBar";
-import SearchBar from "./Search_Bar";
-import RefreshIcon from '@mui/icons-material/Refresh';
-
+import SearchBar from "./SearchBar";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Header = () => {
   const location = useLocation();
@@ -24,9 +23,9 @@ const Header = () => {
     currentPath = false;
   }
 
-  const handleClick = () =>{
+  const handleClick = () => {
     window.location.reload();
-  }
+  };
 
   return (
     <Box component="nav" sx={{ flexGrow: 1 }}>
@@ -80,7 +79,12 @@ const Header = () => {
               alignItems="center"
               gap={1}
             >
-              <IconButton aria-label="refresh" size="small" onClick={handleClick} sx={{ color:"secondary.main"}}>
+              <IconButton
+                aria-label="refresh"
+                size="small"
+                onClick={handleClick}
+                sx={{ color: "secondary.main" }}
+              >
                 <RefreshIcon fontSize="inherit" />
               </IconButton>
               <Box display="flex" alignItems="center">

@@ -18,30 +18,28 @@ const ActorPage = () => {
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!movie) return <Typography>Nenhum dado encontrado.</Typography>;
 
-
   return (
-    <>
-      <Grid
-        container
-        className="Body"
-        direction="row"
-        gap={7}
-        sx={{
-          width: "100%",
-          flexWrap: "wrap",
-          minHeight: "100vh",
-          justifyContent:"center"
-        }}
-      >
-        <BackButton />
-        <Grid size={{ xs: 12, md: 3}} sx={{ justifyContent: "center" }}>
-          {Image(movie)}
-        </Grid>
-        <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
-          <Body movie={movie} id={id}/>
-        </Grid>
+    <Grid
+      container
+      className="Body"
+      direction="row"
+      gap={7}
+      sx={{
+        width: "100%",
+        flexWrap: "wrap",
+        minHeight: "100vh",
+        minWidth:"100vw",
+        justifyContent: "center",
+      }}
+    >
+      <BackButton />
+      <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
+        {Image(movie)}
       </Grid>
-    </>
+      <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
+        <Body movie={movie} id={id} />
+      </Grid>
+    </Grid>
   );
 };
 export default ActorPage;

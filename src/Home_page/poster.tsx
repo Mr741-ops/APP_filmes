@@ -69,8 +69,8 @@ export const miniMovieImage = (posterPath: string) => {
       src={imageUrl}
       alt="Poster"
       style={{
-        width: "100%",     
-        height: "240px",      
+        width: "100%",
+        height: "240px",
         objectFit: "cover",
         borderRadius: "8px",
         display: "block",
@@ -91,7 +91,7 @@ export const miniPersonImage = (posterPath: string) => {
       alt="Profile"
       sx={{
         width: "100%",
-        height: "150px",
+        height: "200px",
         objectFit: "cover",
         display: "block",
       }}

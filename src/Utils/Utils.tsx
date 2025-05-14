@@ -6,6 +6,6 @@ export function useHandleClick() {
   const navigate = useNavigate();
 
   return (resource: string, id: any) => {
-    navigate(`/${resource}`,{ state: { id: id } });
+    navigate(`/${resource}`, { state: { id: id } });
   };
 }

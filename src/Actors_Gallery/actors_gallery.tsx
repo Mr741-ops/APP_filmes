@@ -10,8 +10,8 @@ export const ActorsGallery = () => {
   /* 
   ------------------------------ Variables ------------------------
   */
-    const [page, setPage] = useState(1);
-    const [searchResults, setSearchResults] = useState<any[] | null>(null);
+  const [page, setPage] = useState(1);
+  const [searchResults, setSearchResults] = useState<any[] | null>(null);
 
   /* 
   --------------------------------- Title Function ----------------------
@@ -24,40 +24,42 @@ export const ActorsGallery = () => {
     
   }; */
 
-  const handleSearchResults = (results:any[] | null) => {
+  const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
   };
 
   return (
-    <React.Fragment>
+    <Container maxWidth="xl" sx={{ minWidth: "1500px", minHeight: "1050px" }}>
       <CssBaseline />
-      <Container maxWidth="xl">
-        <Box sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            justifyItems:"center",
-            marginRight: "15px"
-          }}>
-          <Buttons page={page} setPage={setPage} />
-          <Search_Bar onResults={handleSearchResults} resource="search/person"/>
-        </Box>
-        <Typography
-          variant="h3"
-          sx={{
-            textAlign: "center",
-            color: "secondary.main",
-          }}
-        >
-          Popular People
-        </Typography>
-        <Body resource="popular" page={page} data={searchResults}/>
-        <Box sx={{
-          marginBottom:"20px"
-        }}>
-          <Buttons page={page} setPage={setPage} />
-        </Box>
-      </Container>
-    </React.Fragment>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          justifyItems: "center",
+          marginRight: "15px",
+        }}
+      >
+        <Buttons page={page} setPage={setPage} />
+        <Search_Bar onResults={handleSearchResults} resource="search/person" />
+      </Box>
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          color: "secondary.main",
+        }}
+      >
+        Popular People
+      </Typography>
+      <Body resource="popular" page={page} data={searchResults} />
+      <Box
+        sx={{
+          marginBottom: "20px",
+        }}
+      >
+        <Buttons page={page} setPage={setPage} />
+      </Box>
+    </Container>
   );
 };
 

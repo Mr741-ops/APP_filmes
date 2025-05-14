@@ -47,9 +47,8 @@ export const MainPage = () => {
     return <p>Error loading movie lists.</p>;
   }
 
-
   return (
-    <Box sx={{mb:3}}>
+    <Box sx={{ mb: 3 }}>
       <Typography
         variant="h1"
         sx={{

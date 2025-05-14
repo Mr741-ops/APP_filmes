@@ -41,7 +41,7 @@ const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }) => {
   const [selectedMovie, setSelectedMovie] = React.useState<Movie | null>(null);
 
   ///////////////////// Functions /////////////////////////////
-  
+
   const handleClickOpen = (movie: Movie) => () => {
     setSelectedMovie(movie);
   };
@@ -54,43 +54,41 @@ const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }) => {
     return <Loading />;
   }
   if (shouldFetch && error) {
-    return <p>Error</p>
+    return <p>Error</p>;
   }
 
   return (
-    <React.Fragment>
-      <Box
-        className="container"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          gap: "10px",
-          flexWrap: "wrap",
-          width: "88vw",
-          maxWidth: "100%",
-          padding: "20px 0",
-        }}
-      >
-        {displayData.map((movie) => (
-          <Box key={movie.id}>
-            <Button
-              variant="outlined"
-              onClick={handleClickOpen(movie)}
-              sx={{
-                width: "360px",
-              }}
-            >
-              <Box className="movie-item">
-                {Poster.poster(movie.poster_path, movie.title, movie.id)}
-              </Box>
-            </Button>
-          </Box>
-        ))}
-      </Box>
+    <Box
+      className="container"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+        gap: "10px",
+        flexWrap: "wrap",
+        width: "88vw",
+        maxWidth: "100%",
+        padding: "20px 0",
+      }}
+    >
+      {displayData.map((movie) => (
+        <Box key={movie.id}>
+          <Button
+            variant="outlined"
+            onClick={handleClickOpen(movie)}
+            sx={{
+              width: "360px",
+            }}
+          >
+            <Box className="movie-item">
+              {Poster.poster(movie.poster_path, movie.title, movie.id)}
+            </Box>
+          </Button>
+        </Box>
+      ))}
       <CustomDialog selectedMovie={selectedMovie} handleClose={handleClose} />
-    </React.Fragment>
+    </Box>
   );
 };
 
