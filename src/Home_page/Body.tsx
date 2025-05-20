@@ -1,8 +1,8 @@
-import * as React from "react";
 import { CustomDialog } from "./dialogBox";
 import { Button, Loading, useGetList } from "react-admin";
 import * as Poster from "./poster";
 import { Box } from "@mui/material";
+import React from "react";
 
 interface BodyProps {
   resource?: string;

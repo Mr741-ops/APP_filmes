@@ -1,6 +1,4 @@
-import * as React from "react";
-import * as Poster from "./poster";
-
+import * as Poster from "./poster"
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";

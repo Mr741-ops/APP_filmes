@@ -1,4 +1,3 @@
-import * as React from "react";
 import * as Poster from "./poster";
 
 import Button from "@mui/material/Button";
@@ -23,13 +22,14 @@ interface DialogProps {
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
+    overflow:"hidden"
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
   },
   "& .MuiDialog-paper": {
-    backgroundColor: "#010d22", // Change background color
-    color: "#e6e8e6", // Change text color
+    backgroundColor: "#010d22",
+    color: "#e6e8e6",
   },
 }));
 
@@ -40,12 +40,6 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
     navigate("/movie_page", { state: { id: id } });
     handleClose();
   };
-
-  const overview = selectedMovie?.overview
-    ? `${selectedMovie.overview}`
-    : `The overview on this film is unavailable at the moment try again later.`;
-
-  console.log(selectedMovie);
 
   return (
     <BootstrapDialog
@@ -69,6 +63,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
           position: "absolute",
           right: 8,
           top: 8,
+          color:"secondary.main"
         }}
       >
         <CloseIcon />
@@ -76,26 +71,31 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
         {selectedMovie?.title}
       </DialogTitle>
-      <DialogContent>
+      <DialogContent
+        sx={{
+          maxHeight: "555px",
+        }}
+      >
         <Grid
           container
           sx={{
             justifyContent: "space-between",
-            /*  alignItems: "center", */
+            maxHeight: "555px",
+            mb:0
           }}
         >
           <Grid
             size={5}
             sx={{
               maxWidth: "342px",
-              height: "525px",
+              height: "555px",
               overflow: "hidden",
             }}
           >
             {Poster.movieImage(selectedMovie?.poster_path ?? "")}
           </Grid>
           <Grid size={7}>
-            <Box>
+            <Box sx={{height:"288px"}}>
               <Typography
                 variant="h4"
                 gutterBottom
@@ -105,20 +105,24 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
               >
                 <strong>Overview</strong>
               </Typography>
-              <Typography gutterBottom>{overview}</Typography>
+              <Typography gutterBottom>
+                {selectedMovie?.overview
+                  ? `${selectedMovie.overview}`
+                  : `The overview on this film is unavailable at the moment.`}
+              </Typography>
               <Typography gutterBottom sx={{ mt: 5 }}>
                 <strong>Release date: </strong>
                 {selectedMovie?.release_date}
               </Typography>
             </Box>
-            <DialogActions>
+            <DialogActions sx={{ justifyContent: "flex-end" }}>
               <Button
                 autoFocus
                 onClick={(event) => movieDetailsPage(selectedMovie?.id)}
                 sx={{
                   bgcolor: "primary.main",
                   color: "secondary.main",
-                  mt: 34.5,
+                  mt: 25,
                 }}
               >
                 Details page

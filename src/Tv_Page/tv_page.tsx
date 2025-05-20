@@ -1,5 +1,4 @@
 //merges every script that belogs on the home page
-import * as React from "react";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";

@@ -4,10 +4,10 @@ import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
 import Body from "./Body_Details_Movie";
-import Image from "./Movie_Image";
+import SideBar from "./MovieSideBar";
 import BackButton from "../Utils/backButton";
 
-const ActorPage = () => {
+const MovieDetailsPage = () => {
   const location = useLocation();
   const id = location.state?.id;
 
@@ -28,13 +28,13 @@ const ActorPage = () => {
         width: "100%",
         flexWrap: "wrap",
         minHeight: "100vh",
-        minWidth:"100vw",
+        minWidth: "100vw",
         justifyContent: "center",
       }}
     >
       <BackButton />
       <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
-        {Image(movie)}
+        {SideBar(movie)}
       </Grid>
       <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
         <Body movie={movie} id={id} />
@@ -42,4 +42,4 @@ const ActorPage = () => {
     </Grid>
   );
 };
-export default ActorPage;
+export default MovieDetailsPage;

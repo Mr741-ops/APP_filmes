@@ -1,5 +1,3 @@
-//merges every script that belogs on the home page
-import * as React from "react";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
@@ -13,17 +11,6 @@ export const ActorsGallery = () => {
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
 
-  /* 
-  --------------------------------- Title Function ----------------------
-  */
-  /* const title = () => {
-    switch(resource) {
-      case "popular":
-        return "Popular People";
-    }
-    
-  }; */
-
   const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
   };
@@ -36,7 +23,7 @@ export const ActorsGallery = () => {
           display: "flex",
           justifyContent: "space-between",
           justifyItems: "center",
-          marginRight: "15px",
+          mr: "15px",
         }}
       >
         <Buttons page={page} setPage={setPage} />

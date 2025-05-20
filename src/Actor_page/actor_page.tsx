@@ -1,4 +1,3 @@
-//merges every script that belgons on the actor page
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
@@ -19,29 +18,27 @@ const ActorPage = () => {
   if (!person) return <Typography>Nenhum dado encontrado.</Typography>;
 
   return (
-    <>
-      <Grid
-        container
-        className="Body"
-        direction="row"
-        spacing={2}
-        sx={{
-          width: "100%",
-          flexWrap: "wrap",
-          minHeight: "100vh",
-          minWidth:"100vw",
-          justifyContent:"center",
-        }}
-      >
-        <BackButton />
-        <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
-          {Image(person)}
-        </Grid>
-        <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
-          <Body person={person} id={id} />
-        </Grid>
+    <Grid
+      container
+      className="Body"
+      direction="row"
+      spacing={2}
+      sx={{
+        width: "100%",
+        flexWrap: "wrap",
+        minHeight: "100vh",
+        minWidth: "100vw",
+        justifyContent: "center",
+      }}
+    >
+      <BackButton />
+      <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
+        {Image(person)}
       </Grid>
-    </>
+      <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
+        <Body person={person} id={id} />
+      </Grid>
+    </Grid>
   );
 };
 export default ActorPage;

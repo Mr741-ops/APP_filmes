@@ -1,6 +1,5 @@
 import { Box, Rating, Typography } from "@mui/material";
 import * as Poster from "../Actors_Gallery/actor_image";
-
 import StarIcon from "@mui/icons-material/Star";
 import { useGetOne } from "react-admin";
 

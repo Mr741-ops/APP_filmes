@@ -3,7 +3,7 @@ import * as Poster from "../Actors_Gallery/actor_image";
 
 import StarIcon from "@mui/icons-material/Star";
 
-export const Image = (movie: any) => {
+export const SideBar = (movie: any) => {
   return (
     <Box
       className="Image-Box"
@@ -54,14 +54,16 @@ export const Image = (movie: any) => {
           <strong>Runtime</strong>: {movie.runtime ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Budget</strong>: {movie.budget.toLocaleString() ?? "N/A"}
+          <strong>Budget</strong>:{" "}
+          {movie.budget ? `$ ${movie.budget.toLocaleString()}` : "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Revenue</strong>: {movie.revenue.toLocaleString() ?? "N/A"}
+          <strong>Revenue</strong>:{" "}
+          {movie.revenue ? `$ ${movie.revenue.toLocaleString()}` : "N/A"}
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default Image;
+export default SideBar;

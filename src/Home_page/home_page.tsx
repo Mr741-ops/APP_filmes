@@ -1,11 +1,10 @@
-//merges every script that belogs on the home page
-import * as React from "react";
 import "./GlobalCSS.css";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import Buttons from "./buttons";
 import Search_Bar from "../Utils/searchBar";
+import { AdvancedSearch } from "../Utils/AdvencedSearch";
 
 export const HomePage = () => {
   /* 
@@ -45,10 +44,12 @@ export const HomePage = () => {
           display: "flex",
           justifyContent: "space-between",
           justifyItems: "center",
-          marginRight: "15px",
+          mr: "10px",
+          ml: "10px",
         }}
       >
         <Buttons page={page} setPage={setPage} />
+        <AdvancedSearch/>
         <Search_Bar onResults={handleSearchResults} resource="search/movie" />
       </Box>
       <Typography
@@ -64,7 +65,7 @@ export const HomePage = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
+          ml: "10px",
         }}
       >
         <Buttons page={page} setPage={setPage} />

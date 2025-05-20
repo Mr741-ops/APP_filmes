@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import MyLayout from "./MyLayout";
 import HomePage from "./Home_page/home_page";
 import { theme } from "./theme.tsx";
-import MoviePage from "./Movie_page/movie_page.tsx";
+import MoviePage from "./Movie_page/MovieDetailsPage.tsx";
 import ActorsGallery from "./Actors_Gallery/actors_gallery.tsx";
 import ActorPage from "./Actor_page/actor_page.tsx";
 import TVPage from "./Tv_Page/tv_page.tsx";
