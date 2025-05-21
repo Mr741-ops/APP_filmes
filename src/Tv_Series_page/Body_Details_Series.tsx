@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useGetOne } from "react-admin";
+import { Loading, useGetList, useGetOne } from "react-admin";
 import { Carroussel } from "../Utils/Carroussel";
 
 type Props = {
@@ -7,8 +7,8 @@ type Props = {
   id: any;
 };
 
-export const Body = ({ series, id }: Props) => {
-  const { data, isLoading, error } = useGetOne(
+const useLists = (id: any) => {
+  const movies = useGetOne(
     "tv",
     {
       id,
@@ -19,10 +19,36 @@ export const Body = ({ series, id }: Props) => {
     },
   );
 
-  if (!id) return <Typography>Erro: ID não definido</Typography>;
-  if (isLoading) return <Typography>A carregar...</Typography>;
-  if (error) return <Typography>Erro ao carregar os dados.</Typography>;
-  if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
+  const similarSeries = useGetList(`tv/${id}/similar`, {
+    pagination: {
+      page: 1,
+      perPage: 0,
+    },
+  });
+
+  const isLoading = similarSeries.isLoading ?? movies.isLoading;
+  const isError = similarSeries.error ?? movies.error;
+
+  return {
+    isLoading,
+    isError,
+    data: {
+      similarSeries: similarSeries.data ?? [],
+      movies: movies.data ?? [],
+    },
+  };
+};
+
+export const Body = ({ series, id }: Props) => {
+  const { data, isLoading, isError } = useLists(id);
+
+  if (isLoading) {
+    return <Loading />; // or custom loading UI
+  }
+
+  if (isError) {
+    return <p>Error loading movie lists.</p>;
+  }
 
   console.log("Data: ", data);
 
@@ -48,7 +74,7 @@ export const Body = ({ series, id }: Props) => {
       </Typography>
       <Carroussel
         title="Cast"
-        items={data.cast.map((person: any) => ({
+        items={data.movies.cast.map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
@@ -59,12 +85,22 @@ export const Body = ({ series, id }: Props) => {
       />
       <Carroussel
         title="Crew"
-        items={data.crew.map((person: any) => ({
+        items={data.movies.crew.map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
           navigateTo: "actor_page",
           character: person.job,
+        }))}
+        size={900}
+      />
+      <Carroussel
+        title="Similar Series"
+        items={data.similarSeries.map((series: any) => ({
+          id: series.id,
+          title: series.name,
+          imagePath: series.poster_path,
+          navigateTo: "tv_series_page",
         }))}
         size={900}
       />
