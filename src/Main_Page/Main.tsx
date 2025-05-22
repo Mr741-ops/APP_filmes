@@ -47,9 +47,8 @@ export const MainPage = () => {
     return <p>Error loading movie lists.</p>;
   }
 
-
   return (
-    <Box sx={{mb:3}}>
+    <Box sx={{ mb: 3 }}>
       <Typography
         variant="h1"
         sx={{
@@ -83,6 +82,16 @@ export const MainPage = () => {
           title: series.name,
           imagePath: series.poster_path,
           navigateTo: "tv_series_page",
+        }))}
+        size={1200}
+      />
+      <Carroussel
+        title={"Trending people"}
+        items={data.persons.map((person: any) => ({
+          id: person.id,
+          title: person.name,
+          imagePath: person.profile_path,
+          navigateTo: "actor_page",
         }))}
         size={1200}
       />

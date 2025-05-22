@@ -79,7 +79,11 @@ const displayNames: Record<string, string> = {
   airing_today: "Airing Today",
 };
 
-export const TabWithMenu = ({ name, value, resourceOptions }: TabWithMenuProps) => {
+export const TabWithMenu = ({
+  name,
+  value,
+  resourceOptions,
+}: TabWithMenuProps) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(() => {
@@ -105,11 +109,7 @@ export const TabWithMenu = ({ name, value, resourceOptions }: TabWithMenuProps) 
 
   return (
     <>
-      <Tab
-        label={name}
-        onClick={handleClick}
-        value={value}
-      />
+      <Tab label={name} onClick={handleClick} value={value} />
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         {resourceOptions.map((option, index) => (
           <MenuItem
@@ -124,4 +124,3 @@ export const TabWithMenu = ({ name, value, resourceOptions }: TabWithMenuProps) 
     </>
   );
 };
-

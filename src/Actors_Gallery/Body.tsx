@@ -17,28 +17,30 @@ interface Person {
   biography: string;
 }
 
-const Body: React.FC<Props> = ({ resource, page, data: searchData}) => {
+const Body: React.FC<Props> = ({ resource, page, data: searchData }) => {
   const shouldFetch = !searchData;
 
   const {
-      data: fetchedData,
-      error,
-      isPending,
-    } = useGetList(
-      `person/${resource}`,
-      {
-        pagination: {
-          page: page,
-          perPage: 0,
-        },
+    data: fetchedData,
+    error,
+    isPending,
+  } = useGetList(
+    `person/${resource}`,
+    {
+      pagination: {
+        page: page,
+        perPage: 0,
       },
-      {
-        enabled: shouldFetch,
-      },
-    );
+    },
+    {
+      enabled: shouldFetch,
+    },
+  );
 
-  const displayData =  searchData || fetchedData ||  [];
-  const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(null);
+  const displayData = searchData || fetchedData || [];
+  const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(
+    null,
+  );
 
   const handleClickOpen = (person: Person) => () => {
     setSelectedPerson(person);
@@ -49,46 +51,48 @@ const Body: React.FC<Props> = ({ resource, page, data: searchData}) => {
   };
 
   if (shouldFetch && isPending) {
-      return <Loading />;
-    }
-    if (shouldFetch && error) {
-      return <p>Error</p>
-    }
+    return <Loading />;
+  }
+  if (shouldFetch && error) {
+    return <p>Error</p>;
+  }
 
   return (
-    <React.Fragment>
-      <Box className="container" 
+    <Box
+      className="container"
       sx={{
-        
-          display: "flex",
-          justifycontent: "center",
-          aligncontent: "center",
-          alignitems: "center",
-          gap: "10px",
-          flexWrap: "wrap",
-          width: "88vw",
-          maxwidth: "100%",
-          padding: "20px 0",
+        display: "flex",
+        justifycontent: "center",
+        aligncontent: "center",
+        alignitems: "center",
+        gap: "10px",
+        flexWrap: "wrap",
+        width: "88vw",
+        maxwidth: "100%",
+        padding: "20px 0",
 
-          "&.MuiContainer-root": {
-            maxheight: "fit-content",
-          } ,
-      }}>
-        {displayData.map((person) => (
-          <Box key={person.id}>
-            <Button variant="outlined" onClick={handleClickOpen(person)} sx={{
-              width:"360px",
-            }}>
-              <Box
-                className="movie-item">
-                {Poster.poster(person.profile_path, person.name, person.id)}
-              </Box>
-            </Button>
-          </Box>
-        ))}
-      </Box>
+        "&.MuiContainer-root": {
+          maxheight: "fit-content",
+        },
+      }}
+    >
+      {displayData.map((person) => (
+        <Box key={person.id}>
+          <Button
+            variant="outlined"
+            onClick={handleClickOpen(person)}
+            sx={{
+              width: "360px",
+            }}
+          >
+            <Box className="movie-item">
+              {Poster.poster(person.profile_path, person.name, person.id)}
+            </Box>
+          </Button>
+        </Box>
+      ))}
       <CustomDialog selectedPerson={selectedPerson} handleClose={handleClose} />
-    </React.Fragment>
+    </Box>
   );
 };
 

@@ -1,11 +1,10 @@
-//merges every script that belogs on the home page
-import * as React from "react";
 import "./GlobalCSS.css";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import Buttons from "./buttons";
 import Search_Bar from "../Utils/searchBar";
+import { AdvancedSearch } from "../Utils/AdvencedSearch";
 
 export const HomePage = () => {
   /* 
@@ -19,7 +18,7 @@ export const HomePage = () => {
   --------------------------------- Functions ----------------------
   */
   const title = () => {
-    switch(resource) {
+    switch (resource) {
       case "popular":
         return "Popular Movies";
       case "top_rated":
@@ -31,46 +30,47 @@ export const HomePage = () => {
       case "search":
         return "Search Movies";
     }
-    
   };
 
-  const handleSearchResults = (results:any[] | null) => {
+  const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
   };
 
   return (
-    <React.Fragment>
+    <Container maxWidth="xl" sx={{ minWidth: "1500px", minHeight: "3220px" }}>
       <CssBaseline />
-      <Container maxWidth="xl">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            justifyItems:"center",
-            marginRight: "15px"
-          }}
-        >
-          <Buttons page={page} setPage={setPage} />
-          <Search_Bar onResults={handleSearchResults} resource="search/movie"/>
-        </Box>
-        <Typography
-          variant="h3"
-          sx={{
-            textAlign: "center",
-            color: "secondary.main",
-          }}
-        >
-          {title()}
-        </Typography>
-        <Body resource={resource} page={page} data={searchResults}/>
-        <Box sx={{
-          display:"flex",
-          justifyContent:"center"
-        }}>
-          <Buttons page={page} setPage={setPage} />
-        </Box>
-      </Container>
-    </React.Fragment>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          justifyItems: "center",
+          mr: "10px",
+          ml: "10px",
+        }}
+      >
+        <Buttons page={page} setPage={setPage} />
+        <AdvancedSearch/>
+        <Search_Bar onResults={handleSearchResults} resource="search/movie" />
+      </Box>
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          color: "secondary.main",
+        }}
+      >
+        {title()}
+      </Typography>
+      <Body resource={resource} page={page} data={searchResults} />
+      <Box
+        sx={{
+          display: "flex",
+          ml: "10px",
+        }}
+      >
+        <Buttons page={page} setPage={setPage} />
+      </Box>
+    </Container>
   );
 };
 

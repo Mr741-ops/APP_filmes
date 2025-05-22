@@ -8,13 +8,13 @@ export const BackButton = () => {
     <Button
       onClick={() => navigate(-1)}
       sx={{
-        width:150,
-        height:40,
+        width: 150,
+        height: 40,
         bgcolor: "primary.main",
         color: "secondary.main",
         position: "fixed",
-        left:10,
-        top:60,
+        left: 10,
+        top: 60,
       }}
     >
       Go Back

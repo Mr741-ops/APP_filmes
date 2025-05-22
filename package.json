@@ -14,8 +14,13 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.0",
     "@mui/material": "^6.4.0",
+<<<<<<< HEAD
     "i18next": "^25.2.0",
     "react": "^19.1.0",
+=======
+    "ra-i18n-polyglot": "^5.8.2",
+    "react": "^19.0.0",
+>>>>>>> 929e8b83532a50a9d9420f8ffe880b82002b34ca
     "react-admin": "^5.6.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.5.1",

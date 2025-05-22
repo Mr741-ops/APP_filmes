@@ -1,6 +1,5 @@
 import { Box, Rating, Typography } from "@mui/material";
 import * as Poster from "../Actors_Gallery/actor_image";
-
 import StarIcon from "@mui/icons-material/Star";
 import { useGetOne } from "react-admin";
 
@@ -53,36 +52,36 @@ export const Image = ({ series, id }: InfoProps) => {
         <Box sx={{ ml: 2 }}>{series.vote_average}</Box>
       </Box>
       <Box
-          className="Info"
-          sx={{
-            color: "secondary.main",
-          }}
-        >
-          <Typography variant="h5" sx={{ mt: 6, textAlign: "baseline" }}>
-            <strong>Information</strong>
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            <strong>Title</strong>: {series.name || "N/A"}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            <strong>Episode runtime</strong>: {series.episode_run_time || "N/A"}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            <strong>First air date</strong>: {series.first_air_date || "N/A"}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            <strong>Episodes</strong>: {series.number_of_episodes || "N/A"}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            <strong>Seasons</strong>: {series.number_of_seasons || "N/A"}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            <strong>Status</strong>: {series.status || "N/A"}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            <strong>Type</strong>: {series.type || "N/A"}
-          </Typography>
-        </Box>
+        className="Info"
+        sx={{
+          color: "secondary.main",
+        }}
+      >
+        <Typography variant="h5" sx={{ mt: 6, textAlign: "baseline" }}>
+          <strong>Information</strong>
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Title</strong>: {series.name ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Episode runtime</strong>: {series.episode_run_time ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>First air date</strong>: {series.first_air_date ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Episodes</strong>: {series.number_of_episodes ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Seasons</strong>: {series.number_of_seasons ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Status</strong>: {series.status ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Type</strong>: {series.type ?? "N/A"}
+        </Typography>
+      </Box>
     </Box>
   );
 };

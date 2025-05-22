@@ -1,5 +1,3 @@
-//merges every script that belogs on the home page
-import * as React from "react";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
@@ -10,54 +8,45 @@ export const ActorsGallery = () => {
   /* 
   ------------------------------ Variables ------------------------
   */
-    const [page, setPage] = useState(1);
-    const [searchResults, setSearchResults] = useState<any[] | null>(null);
+  const [page, setPage] = useState(1);
+  const [searchResults, setSearchResults] = useState<any[] | null>(null);
 
-  /* 
-  --------------------------------- Title Function ----------------------
-  */
-  /* const title = () => {
-    switch(resource) {
-      case "popular":
-        return "Popular People";
-    }
-    
-  }; */
-
-  const handleSearchResults = (results:any[] | null) => {
+  const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
   };
 
   return (
-    <React.Fragment>
+    <Container maxWidth="xl" sx={{ minWidth: "1500px", minHeight: "1050px" }}>
       <CssBaseline />
-      <Container maxWidth="xl">
-        <Box sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            justifyItems:"center",
-            marginRight: "15px"
-          }}>
-          <Buttons page={page} setPage={setPage} />
-          <Search_Bar onResults={handleSearchResults} resource="search/person"/>
-        </Box>
-        <Typography
-          variant="h3"
-          sx={{
-            textAlign: "center",
-            color: "secondary.main",
-          }}
-        >
-          Popular People
-        </Typography>
-        <Body resource="popular" page={page} data={searchResults}/>
-        <Box sx={{
-          marginBottom:"20px"
-        }}>
-          <Buttons page={page} setPage={setPage} />
-        </Box>
-      </Container>
-    </React.Fragment>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          justifyItems: "center",
+          mr: "15px",
+        }}
+      >
+        <Buttons page={page} setPage={setPage} />
+        <Search_Bar onResults={handleSearchResults} resource="search/person" />
+      </Box>
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          color: "secondary.main",
+        }}
+      >
+        Popular People
+      </Typography>
+      <Body resource="popular" page={page} data={searchResults} />
+      <Box
+        sx={{
+          marginBottom: "20px",
+        }}
+      >
+        <Buttons page={page} setPage={setPage} />
+      </Box>
+    </Container>
   );
 };
 

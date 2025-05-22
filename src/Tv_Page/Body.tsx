@@ -1,9 +1,9 @@
-import * as React from "react";
 /* import useApiCall from "../Data/apiCall"; */
 import { CustomDialog } from "./dialogBox";
 import { Button, Loading, useGetList } from "react-admin";
 import * as Poster from "./poster";
 import { Box } from "@mui/material";
+import React from "react";
 
 interface BodyProps {
   resource: string;
@@ -18,8 +18,16 @@ interface Series {
   overview: string;
 }
 
-const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }: BodyProps) => {
-  const { data: fetchedData, error, isPending } = useGetList(`tv/${resource}`, {
+const Body: React.FC<BodyProps> = ({
+  resource,
+  page,
+  data: searchData,
+}: BodyProps) => {
+  const {
+    data: fetchedData,
+    error,
+    isPending,
+  } = useGetList(`tv/${resource}`, {
     pagination: {
       page: page,
       perPage: 0,
@@ -46,39 +54,37 @@ const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }: BodyPro
   }
 
   return (
-    <React.Fragment>
-      <Box
-        className="container"
-        sx={{
-          display: "flex",
-          justifycontent: "center",
-          aligncontent: "center",
-          alignitems: "center",
-          gap: "10px",
-          flexWrap: "wrap",
-          width: "88vw",
-          maxwidth: "100%",
-          padding: "20px 0",
-        }}
-      >
-        {displayData.map((series) => (
-          <Box key={series.id}>
-            <Button
-              variant="outlined"
-              onClick={handleClickOpen(series)}
-              sx={{
-                width: "360px",
-              }}
-            >
-              <Box className="movie-item">
-                {Poster.poster(series.poster_path, series.name, series.id)}
-              </Box>
-            </Button>
-          </Box>
-        ))}
-      </Box>
+    <Box
+      className="container"
+      sx={{
+        display: "flex",
+        justifycontent: "center",
+        aligncontent: "center",
+        alignitems: "center",
+        gap: "10px",
+        flexWrap: "wrap",
+        width: "88vw",
+        maxwidth: "100%",
+        padding: "20px 0",
+      }}
+    >
+      {displayData.map((series) => (
+        <Box key={series.id}>
+          <Button
+            variant="outlined"
+            onClick={handleClickOpen(series)}
+            sx={{
+              width: "360px",
+            }}
+          >
+            <Box className="movie-item">
+              {Poster.poster(series.poster_path, series.name, series.id)}
+            </Box>
+          </Button>
+        </Box>
+      ))}
       <CustomDialog selectedSeries={selectedSeries} handleClose={handleClose} />
-    </React.Fragment>
+    </Box>
   );
 };
 

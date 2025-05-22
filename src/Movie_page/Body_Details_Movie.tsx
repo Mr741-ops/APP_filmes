@@ -78,7 +78,7 @@ export const Body = ({ movie, id }: Props) => {
           navigateTo: "actor_page",
           character: person.character,
         }))}
-        size={900}
+        size={1000}
       />
       <Carroussel
         title="Crew"
@@ -89,7 +89,7 @@ export const Body = ({ movie, id }: Props) => {
           navigateTo: "actor_page",
           character: person.job,
         }))}
-        size={900}
+        size={1000}
       />
       <Carroussel
         title="Similar Movies"
@@ -99,7 +99,7 @@ export const Body = ({ movie, id }: Props) => {
           imagePath: movie.poster_path,
           navigateTo: "movie_page",
         }))}
-        size={975}
+        size={1000}
       />
     </Box>
   );

@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import * as Poster from "../Actors_Gallery/actor_image";
 
 export const Image = (person: any) => {
-
   let gender;
   switch (person.gender) {
     case 0: {
@@ -41,28 +40,29 @@ export const Image = (person: any) => {
         {Poster.personImage(person.profile_path)}
       </Box>
       <Box
-      className="Info"
-      sx={{
-        color: "secondary.main",
-      }}
-    >
-      <Typography sx={{ mt: 6 }}>
-        <strong>Also known as</strong>: {person.also_known_as.join(", \n") || "N/A"}
-      </Typography>
-      <Typography sx={{ mt: 2 }}>
-        <strong>Birthday</strong>: {person.birthday || "N/A"}
-      </Typography>
-      <Typography sx={{ mt: 2 }}>
-        <strong>Gender</strong>: {gender || "N/A"}
-      </Typography>
-      <Typography sx={{ mt: 2 }}>
-        <strong>Known for department</strong>:{" "}
-        {person.known_for_department || "N/A"}
-      </Typography>
-      <Typography sx={{ mt: 2 }}>
-        <strong>Place of birth</strong>: {person.place_of_birth || "N/A"}
-      </Typography>
-    </Box>
+        className="Info"
+        sx={{
+          color: "secondary.main",
+        }}
+      >
+        <Typography sx={{ mt: 6 }}>
+          <strong>Also known as</strong>:{" "}
+          {person.also_known_as.join(", \n") ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Birthday</strong>: {person.birthday ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Gender</strong>: {gender ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Known for department</strong>:{" "}
+          {person.known_for_department ?? "N/A"}
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          <strong>Place of birth</strong>: {person.place_of_birth ?? "N/A"}
+        </Typography>
+      </Box>
     </Box>
   );
 };

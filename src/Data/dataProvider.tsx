@@ -36,9 +36,9 @@ export const dataProvider: DataProvider = {
       throw new Error("Pagination parameters are required");
     }
 
-    const lang = localStorage.getItem("language") || "en";
-    const { page } = params.pagination;
-    const query = params.filter?.query || "";
+    const lang = localStorage.getItem("language") ?? "en";
+    const { page } = params?.pagination;
+    const query = params.filter?.query ?? "";
 
     const URL = `${API_URL}/${resource}?language=${lang}&page=${page}${query ? `&query=${query}` : ""}`;
 
@@ -59,7 +59,7 @@ export const dataProvider: DataProvider = {
     if (!params.id) {
       throw new Error("ID is required");
     }
-    const lang = localStorage.getItem("language") || "en";
+    const lang = localStorage.getItem("language") ?? "en";
     const typeSuffix = params.meta?.type ? `/${params.meta.type}` : "";
 
     const response = fetchUtils
