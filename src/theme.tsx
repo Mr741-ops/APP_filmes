@@ -63,11 +63,11 @@ export const themeSettings = () => {
         dark: colors.white[700],
       },
       background: {
-        main: colors.darkBlue[500],
-        default: colors.darkBlue[500],
+        main: colors.black[500],
+        default: colors.black[500],
         contrastText: colors.white[500],
-        dark: colors.darkBlue[700],
-        light: colors.darkBlue[400],
+        dark: colors.black[600],
+        light: colors.black[500],
       },
     },
   };
