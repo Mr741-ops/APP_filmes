@@ -1,6 +1,7 @@
-import { Box, Typography } from "@mui/material";
-import { Loading, useGetList, useGetOne } from "react-admin";
-import { Carroussel } from "../Utils/Carroussel";
+import { Box, Typography } from '@mui/material';
+import { Loading, useGetList, useGetOne } from 'react-admin';
+import { Carroussel } from '../Utils/Carroussel';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   series: any;
@@ -9,21 +10,21 @@ type Props = {
 
 const useLists = (id: any) => {
   const movies = useGetOne(
-    "tv",
+    'tv',
     {
       id,
-      meta: { type: "credits" },
+      meta: { type: 'credits' }
     },
     {
-      enabled: !!id,
-    },
+      enabled: !!id
+    }
   );
 
   const similarSeries = useGetList(`tv/${id}/similar`, {
     pagination: {
       page: 1,
-      perPage: 0,
-    },
+      perPage: 0
+    }
   });
 
   const isLoading = similarSeries.isLoading ?? movies.isLoading;
@@ -34,73 +35,72 @@ const useLists = (id: any) => {
     isError,
     data: {
       similarSeries: similarSeries.data ?? [],
-      movies: movies.data ?? [],
-    },
+      movies: movies.data ?? []
+    }
   };
 };
 
 export const Body = ({ series, id }: Props) => {
+  const { t } = useTranslation();
   const { data, isLoading, isError } = useLists(id);
 
   if (isLoading) {
-    return <Loading />; // or custom loading UI
+    return <Loading />;
   }
 
   if (isError) {
     return <p>Error loading movie lists.</p>;
   }
 
-  console.log("Data: ", data);
-
   return (
     <Box
       className="Biography"
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        color: "secondary.main",
-        textAlign: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        mx: "50px",
-        textWrap: "wrap",
+        display: 'flex',
+        flexDirection: 'column',
+        color: 'secondary.main',
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        mx: '50px',
+        textWrap: 'wrap'
       }}
     >
-      <Typography variant="h3" sx={{ mt: 4, textWrap: "wrap" }}>
-        <strong>Overview</strong>
+      <Typography variant="h3" sx={{ mt: 4, textWrap: 'wrap' }}>
+        <strong>{t('Overview')}</strong>
       </Typography>
-      <Typography variant="body1" sx={{ mt: 5, textAlign: "justify" }}>
+      <Typography variant="body1" sx={{ mt: 5, textAlign: 'justify' }}>
         {series.overview}
       </Typography>
       <Carroussel
-        title="Cast"
+        title={t('Cast')}
         items={data.movies.cast.map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
-          navigateTo: "actor_page",
-          character: person.character,
+          navigateTo: 'actor_page',
+          character: person.character
         }))}
         size={900}
       />
       <Carroussel
-        title="Crew"
+        title={t('Crew')}
         items={data.movies.crew.map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
-          navigateTo: "actor_page",
-          character: person.job,
+          navigateTo: 'actor_page',
+          character: person.job
         }))}
         size={900}
       />
       <Carroussel
-        title="Similar Series"
+        title={t('SimilarSeries')}
         items={data.similarSeries.map((series: any) => ({
           id: series.id,
           title: series.name,
           imagePath: series.poster_path,
-          navigateTo: "tv_series_page",
+          navigateTo: 'tv_series_page'
         }))}
         size={900}
       />

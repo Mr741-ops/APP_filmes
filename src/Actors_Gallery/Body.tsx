@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
-import React from "react";
-import { Button, Loading, useGetList } from "react-admin";
-import { CustomDialog } from "./dialog_Box";
-import * as Poster from "./actor_image";
+import { Box } from '@mui/material';
+import React from 'react';
+import { Button, Loading, useGetList } from 'react-admin';
+import { CustomDialog } from './dialog_Box';
+import * as Poster from './actor_image';
 
 interface Props {
   resource: string;
@@ -23,24 +23,22 @@ const Body: React.FC<Props> = ({ resource, page, data: searchData }) => {
   const {
     data: fetchedData,
     error,
-    isPending,
+    isPending
   } = useGetList(
     `person/${resource}`,
     {
       pagination: {
         page: page,
-        perPage: 0,
-      },
+        perPage: 0
+      }
     },
     {
-      enabled: shouldFetch,
-    },
+      enabled: shouldFetch
+    }
   );
 
   const displayData = searchData || fetchedData || [];
-  const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(
-    null,
-  );
+  const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(null);
 
   const handleClickOpen = (person: Person) => () => {
     setSelectedPerson(person);
@@ -61,33 +59,31 @@ const Body: React.FC<Props> = ({ resource, page, data: searchData }) => {
     <Box
       className="container"
       sx={{
-        display: "flex",
-        justifycontent: "center",
-        aligncontent: "center",
-        alignitems: "center",
-        gap: "10px",
-        flexWrap: "wrap",
-        width: "88vw",
-        maxwidth: "100%",
-        padding: "20px 0",
+        display: 'flex',
+        justifycontent: 'center',
+        aligncontent: 'center',
+        alignitems: 'center',
+        gap: '10px',
+        flexWrap: 'wrap',
+        width: '88vw',
+        maxwidth: '100%',
+        padding: '20px 0',
 
-        "&.MuiContainer-root": {
-          maxheight: "fit-content",
-        },
+        '&.MuiContainer-root': {
+          maxheight: 'fit-content'
+        }
       }}
     >
-      {displayData.map((person) => (
+      {displayData.map(person => (
         <Box key={person.id}>
           <Button
             variant="outlined"
             onClick={handleClickOpen(person)}
             sx={{
-              width: "360px",
+              width: '360px'
             }}
           >
-            <Box className="movie-item">
-              {Poster.poster(person.profile_path, person.name, person.id)}
-            </Box>
+            <Box className="movie-item">{Poster.poster(person.profile_path, person.name, person.id)}</Box>
           </Button>
         </Box>
       ))}

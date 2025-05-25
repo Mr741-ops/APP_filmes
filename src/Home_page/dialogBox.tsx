@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid2";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface DialogProps {
   selectedMovie: any | null;
@@ -34,6 +35,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const movieDetailsPage = (id: number | undefined) => {
@@ -103,7 +105,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   textAlign: "center",
                 }}
               >
-                <strong>Overview</strong>
+                <strong>{t('Overview')}</strong>
               </Typography>
               <Typography gutterBottom>
                 {selectedMovie?.overview
@@ -111,7 +113,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   : `The overview on this film is unavailable at the moment.`}
               </Typography>
               <Typography gutterBottom sx={{ mt: 5 }}>
-                <strong>Release date: </strong>
+                <strong>{t('ReleaseDate')}: </strong>
                 {selectedMovie?.release_date}
               </Typography>
             </Box>
@@ -125,7 +127,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   mt: 25,
                 }}
               >
-                Details page
+                {t('DetailsPage')}
               </Button>
             </DialogActions>
           </Grid>

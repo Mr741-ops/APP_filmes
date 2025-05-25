@@ -1,33 +1,26 @@
 //merges every script that belogs on the home page
-import Body from "./Body";
-import { useState } from "react";
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import Buttons from "./buttons";
-import Search_Bar from "../Utils/searchBar";
+import Body from './Body';
+import { useState } from 'react';
+import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import Buttons from '../Home_page/buttons';
+import Search_Bar from '../Utils/searchBar';
+import { TitleSeries } from '../Utils/title';
+import { useTranslation } from 'react-i18next';
 
 export const TVPage = () => {
+  const { t } = useTranslation();
+
   /* 
   ------------------------------ Variables ------------------------
   */
-  const resource = localStorage.getItem("resource") || "popular";
+  const resource = localStorage.getItem('resource') || 'popular';
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
+  const title = TitleSeries(resource, t);
 
   /* 
   --------------------------------- Functions ----------------------
   */
-  const title = () => {
-    switch (resource) {
-      case "popular":
-        return "Popular Series";
-      case "top_rated":
-        return "Top Rated Series";
-      case "on_the_air":
-        return "Currently airing Series ";
-      case "airing_today":
-        return "Airing Today Series";
-    }
-  };
 
   const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
@@ -38,10 +31,10 @@ export const TVPage = () => {
       <CssBaseline />
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          justifyItems: "center",
-          marginRight: "15px",
+          display: 'flex',
+          justifyContent: 'space-between',
+          justifyItems: 'center',
+          marginRight: '15px'
         }}
       >
         <Buttons page={page} setPage={setPage} />
@@ -50,17 +43,17 @@ export const TVPage = () => {
       <Typography
         variant="h3"
         sx={{
-          textAlign: "center",
-          color: "secondary.main",
+          textAlign: 'center',
+          color: 'secondary.main'
         }}
       >
-        {title()}
+        {title}
       </Typography>
       <Body resource={resource} page={page} data={searchResults} />
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
+          display: 'flex',
+          justifyContent: 'center'
         }}
       >
         <Buttons page={page} setPage={setPage} />

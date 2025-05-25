@@ -56,6 +56,7 @@ export const themeSettings = () => {
     palette: {
       primary: {
         main: colors.blue[600],
+        dark:"#006482",
         light: colors.blue[200],
       },
       secondary: {
@@ -63,11 +64,11 @@ export const themeSettings = () => {
         dark: colors.white[700],
       },
       background: {
-        main: colors.black[500],
-        default: colors.black[500],
-        contrastText: colors.white[500],
+        main: "#D1D1D1",
+        default: "#D1D1D1",
+        contrastText: colors.black[600],
         dark: colors.black[600],
-        light: colors.black[500],
+        light: "#D1D1D1",
       },
     },
   };

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid2";
 import { useLocation } from "react-router-dom";
 import { useGetOne } from "react-admin";
 import Body from "./Body_Details_Series";
-import Image from "./Movie_Image";
+import Image from "./SeriesBar";
 import BackButton from "../Utils/backButton";
 
 const TvSeriesPage = () => {

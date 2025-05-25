@@ -1,9 +1,9 @@
 /* import useApiCall from "../Data/apiCall"; */
-import { CustomDialog } from "./dialogBox";
-import { Button, Loading, useGetList } from "react-admin";
-import * as Poster from "./poster";
-import { Box } from "@mui/material";
-import React from "react";
+import { CustomDialog } from './dialogBox';
+import { Button, Loading, useGetList } from 'react-admin';
+import * as Poster from './poster';
+import { Box } from '@mui/material';
+import React from 'react';
 
 interface BodyProps {
   resource: string;
@@ -18,26 +18,20 @@ interface Series {
   overview: string;
 }
 
-const Body: React.FC<BodyProps> = ({
-  resource,
-  page,
-  data: searchData,
-}: BodyProps) => {
+const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }: BodyProps) => {
   const {
     data: fetchedData,
     error,
-    isPending,
+    isPending
   } = useGetList(`tv/${resource}`, {
     pagination: {
       page: page,
-      perPage: 0,
-    },
+      perPage: 0
+    }
   });
 
   const displayData = searchData || fetchedData || [];
-  const [selectedSeries, setSelectedSeries] = React.useState<Series | null>(
-    null,
-  );
+  const [selectedSeries, setSelectedSeries] = React.useState<Series | null>(null);
 
   const handleClickOpen = (movie: Series) => () => {
     setSelectedSeries(movie);
@@ -57,29 +51,27 @@ const Body: React.FC<BodyProps> = ({
     <Box
       className="container"
       sx={{
-        display: "flex",
-        justifycontent: "center",
-        aligncontent: "center",
-        alignitems: "center",
-        gap: "10px",
-        flexWrap: "wrap",
-        width: "88vw",
-        maxwidth: "100%",
-        padding: "20px 0",
+        display: 'flex',
+        justifycontent: 'center',
+        aligncontent: 'center',
+        alignitems: 'center',
+        gap: '10px',
+        flexWrap: 'wrap',
+        width: '88vw',
+        maxwidth: '100%',
+        padding: '20px 0'
       }}
     >
-      {displayData.map((series) => (
+      {displayData.map(series => (
         <Box key={series.id}>
           <Button
             variant="outlined"
             onClick={handleClickOpen(series)}
             sx={{
-              width: "360px",
+              width: '360px'
             }}
           >
-            <Box className="movie-item">
-              {Poster.poster(series.poster_path, series.name, series.id)}
-            </Box>
+            <Box className="movie-item">{Poster.poster(series.poster_path, series.name, series.id)}</Box>
           </Button>
         </Box>
       ))}

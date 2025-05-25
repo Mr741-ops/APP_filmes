@@ -5,32 +5,21 @@ import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import Buttons from "./buttons";
 import Search_Bar from "../Utils/searchBar";
 import { AdvancedSearch } from "../Utils/AdvencedSearch";
+import { useTranslation } from "react-i18next";
+import { TitleMovies } from "../Utils/title";
 
 export const HomePage = () => {
+  const { t } = useTranslation();
   /* 
   ------------------------------ Variables ------------------------
   */
   const resource = localStorage.getItem("resource") || "";
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
-
+  const title = TitleMovies(resource, t);
   /* 
   --------------------------------- Functions ----------------------
   */
-  const title = () => {
-    switch (resource) {
-      case "popular":
-        return "Popular Movies";
-      case "top_rated":
-        return "Top Rated Movies";
-      case "now_playing":
-        return "Now playing Movies";
-      case "upcoming":
-        return "Upcoming Movies";
-      case "search":
-        return "Search Movies";
-    }
-  };
 
   const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
@@ -59,7 +48,7 @@ export const HomePage = () => {
           color: "secondary.main",
         }}
       >
-        {title()}
+        {title}
       </Typography>
       <Body resource={resource} page={page} data={searchResults} />
       <Box

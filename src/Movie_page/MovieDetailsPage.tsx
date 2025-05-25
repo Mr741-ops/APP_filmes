@@ -34,7 +34,7 @@ const MovieDetailsPage = () => {
     >
       <BackButton />
       <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
-        {SideBar(movie)}
+        <SideBar movie={movie} />
       </Grid>
       <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
         <Body movie={movie} id={id} />

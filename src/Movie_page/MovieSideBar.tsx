@@ -1,39 +1,49 @@
-import { Box, Rating, Typography } from "@mui/material";
-import * as Poster from "../Actors_Gallery/actor_image";
+import { Box, Rating, Typography } from '@mui/material';
+import * as Poster from '../Actors_Gallery/actor_image';
+import StarIcon from '@mui/icons-material/Star';
+import { useTranslation } from 'react-i18next';
 
-import StarIcon from "@mui/icons-material/Star";
+type Movie = {
+  title: string;
+  poster_path: string;
+  vote_average: number;
+  release_date: string;
+  runtime: number | null;
+  budget: number | null;
+  revenue: number | null;
+};
 
-export const SideBar = (movie: any) => {
+export const SideBar = ({ movie }: { movie: Movie }) => {
+  const { t } = useTranslation();
+
   return (
     <Box
       className="Image-Box"
       sx={{
-        height: "100%",
-        width: "100%",
-        bgcolor: "background.dark",
-        color: "secondary.main",
-        p: 2,
+        height: '100%',
+        width: '100%',
+        bgcolor: 'background.dark',
+        color: 'secondary.main',
+        p: 2
       }}
     >
-      <Typography variant="h3" sx={{ mt: 2, mb: 2, textAlign: "center" }}>
+      <Typography variant="h3" sx={{ mt: 2, mb: 2, textAlign: 'center' }}>
         <strong>{movie.title}</strong>
       </Typography>
-      <Box
-        sx={{ width: "100%", alignContent: "center", justifyItems: "center" }}
-      >
+      <Box sx={{ width: '100%', alignContent: 'center', justifyItems: 'center' }}>
         {Poster.personImage(movie.poster_path)}
       </Box>
-      <Box sx={{ display: "flex", mt: 3 }}>
-        <Typography component="legend">Rating: </Typography>
+      <Box sx={{ display: 'flex', mt: 3 }}>
+        <Typography component="legend">{t('Rating')}: </Typography>
         <Rating
           value={movie?.vote_average}
           readOnly
           precision={0.5}
           max={10}
-          icon={<StarIcon style={{ color: "#f5b50a" }} />}
-          emptyIcon={<StarIcon style={{ color: "background.dark" }} />}
+          icon={<StarIcon style={{ color: '#f5b50a' }} />}
+          emptyIcon={<StarIcon style={{ color: 'background.dark' }} />}
           sx={{
-            ml: 2,
+            ml: 2
           }}
         />
         <Box sx={{ ml: 2 }}>{movie.vote_average}</Box>
@@ -41,25 +51,23 @@ export const SideBar = (movie: any) => {
       <Box
         className="Info"
         sx={{
-          color: "secondary.main",
+          color: 'secondary.main'
         }}
       >
         <Typography sx={{ mt: 6 }}>
-          <strong>Title</strong>: {movie.title ?? "N/A"}
+          <strong>{t('Title')}</strong>: {movie.title ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Release date</strong>: {movie.release_date ?? "N/A"}
+          <strong>{t('ReleaseDate')}</strong>: {movie.release_date ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Runtime</strong>: {movie.runtime ?? "N/A"}
+          <strong>{t('Runtime')}</strong>: {movie.runtime ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Budget</strong>:{" "}
-          {movie.budget ? `$ ${movie.budget.toLocaleString()}` : "N/A"}
+          <strong>{t('Budget')}</strong>: {movie.budget ? `$ ${movie.budget.toLocaleString()}` : 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Revenue</strong>:{" "}
-          {movie.revenue ? `$ ${movie.revenue.toLocaleString()}` : "N/A"}
+          <strong>{t('Revenue')}</strong>: {movie.revenue ? `$ ${movie.revenue.toLocaleString()}` : 'N/A'}
         </Typography>
       </Box>
     </Box>

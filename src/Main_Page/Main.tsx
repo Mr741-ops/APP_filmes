@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Carroussel from "../Utils/Carroussel";
 import { Loading, useGetList } from "react-admin";
+import { useTranslation } from "react-i18next";
 
 export const useLists = () => {
   const movies = useGetList(`trending/movie/week`, {
@@ -37,6 +38,8 @@ export const useLists = () => {
 };
 
 export const MainPage = () => {
+  const { t } = useTranslation();
+
   const { data, isLoading, isError } = useLists();
 
   if (isLoading) {
@@ -62,11 +65,11 @@ export const MainPage = () => {
           textWrap: "wrap",
         }}
       >
-        <strong>Welcome to the app</strong>
+        <strong>{t('Greetings')}</strong>
       </Typography>
 
       <Carroussel
-        title={"Trending movies"}
+        title={t('TrendingMovies')}
         items={data.movies.map((movie: any) => ({
           id: movie.id,
           title: movie.title,
@@ -76,7 +79,7 @@ export const MainPage = () => {
         size={1200}
       />
       <Carroussel
-        title={"Trending series"}
+        title={t('TrendingSeries')}
         items={data.series.map((series: any) => ({
           id: series.id,
           title: series.name,
@@ -86,7 +89,7 @@ export const MainPage = () => {
         size={1200}
       />
       <Carroussel
-        title={"Trending people"}
+        title={t('TrendingPeople')}
         items={data.persons.map((person: any) => ({
           id: person.id,
           title: person.name,

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useGetOne } from "react-admin";
 import Carroussel from "../Utils/Carroussel";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   person: any;
@@ -8,6 +9,7 @@ type Props = {
 };
 
 export const Body = ({ person, id }: Props) => {
+  const { t } = useTranslation();
   const { data, isLoading, error } = useGetOne(
     "person",
     {
@@ -24,6 +26,7 @@ export const Body = ({ person, id }: Props) => {
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
 
+
   return (
     <Box
     className="Biography"
@@ -39,13 +42,13 @@ export const Body = ({ person, id }: Props) => {
     }}
     >
       <Typography variant="h3" sx={{ mt: 4 }}>
-        <strong>Biography</strong>
+        <strong>{t('Biography')}</strong>
       </Typography>
       <Typography variant="body1" sx={{ mt: 5, textAlign: "justify" }}>
         {person.biography}
       </Typography>
       <Carroussel
-        title="Titles"
+        title={t('Titles')}
         items={data.cast.map((movie: any) => ({
           id: movie.id,
           title: movie.title,

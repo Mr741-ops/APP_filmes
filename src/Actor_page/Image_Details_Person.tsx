@@ -1,66 +1,58 @@
-import { Box, Typography } from "@mui/material";
-import * as Poster from "../Actors_Gallery/actor_image";
+import { Box, Typography } from '@mui/material';
+import * as Poster from '../Actors_Gallery/actor_image';
+import { Gender } from '../Utils/gender';
+import { useTranslation } from 'react-i18next';
 
-export const Image = (person: any) => {
-  let gender;
-  switch (person.gender) {
-    case 0: {
-      gender = "Not Specified";
-      break;
-    }
-    case 1: {
-      gender = "Female";
-      break;
-    }
-    case 2: {
-      gender = "Male";
-      break;
-    }
-    case 3: {
-      gender = "Non Binary";
-      break;
-    }
-  }
+type Person = {
+  name: string;
+  gender: number;
+  profile_path: string;
+  also_known_as: string[];
+  birthday?: string | null;
+  known_for_department?: string | null;
+  place_of_birth?: string | null;
+};
+
+export const Image = ({ person }: {person: Person}) => {
+  const { t } = useTranslation();
+
+  const gender = Gender(person.gender, t);
 
   return (
     <Box
       className="Image-Box"
       sx={{
-        height: "100%",
-        width: "100%",
-        bgcolor: "background.dark",
-        color: "secondary.main",
-        p: 2,
+        height: '100%',
+        width: '100%',
+        bgcolor: 'background.dark',
+        color: 'secondary.main',
+        p: 2
       }}
     >
-      <Typography variant="h3" sx={{ mb: 2, textAlign: "center" }}>
+      <Typography variant="h3" sx={{ mb: 2, textAlign: 'center' }}>
         {person.name}
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-        {Poster.personImage(person.profile_path)}
-      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>{Poster.personImage(person.profile_path)}</Box>
       <Box
         className="Info"
         sx={{
-          color: "secondary.main",
+          color: 'secondary.main'
         }}
       >
         <Typography sx={{ mt: 6 }}>
-          <strong>Also known as</strong>:{" "}
-          {person.also_known_as.join(", \n") ?? "N/A"}
+          <strong>{t('AlsoKnownAs')}</strong>: {person.also_known_as?.length ? person.also_known_as.join(', \n') : 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Birthday</strong>: {person.birthday ?? "N/A"}
+          <strong>{t('Birthday')}</strong>: {person.birthday ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Gender</strong>: {gender ?? "N/A"}
+          <strong>{t('Gender')}</strong>: {gender}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Known for department</strong>:{" "}
-          {person.known_for_department ?? "N/A"}
+          <strong>{t('KnownForDepartment')}</strong>: {person.known_for_department ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>Place of birth</strong>: {person.place_of_birth ?? "N/A"}
+          <strong>{t('PlaceOfBirth')}</strong>: {person.place_of_birth ?? 'N/A'}
         </Typography>
       </Box>
     </Box>
