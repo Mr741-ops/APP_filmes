@@ -2,9 +2,9 @@ import "./GlobalCSS.css";
 import Body from "./Body";
 import { useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import Buttons from "./buttons";
+import Buttons from "../Utils/buttons";
 import Search_Bar from "../Utils/searchBar";
-import { AdvancedSearch } from "../Utils/AdvencedSearch";
+import { AdvancedSearch } from "../Utils/AdvancedSearch/AdvencedSearch";
 import { useTranslation } from "react-i18next";
 import { TitleMovies } from "../Utils/title";
 
@@ -13,7 +13,7 @@ export const HomePage = () => {
   /* 
   ------------------------------ Variables ------------------------
   */
-  const resource = localStorage.getItem("resource") || "";
+  const resource = localStorage.getItem("resource") ?? "";
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
   const title = TitleMovies(resource, t);

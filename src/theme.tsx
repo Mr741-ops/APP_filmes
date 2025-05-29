@@ -1,7 +1,32 @@
 import { createTheme } from "@mui/material/styles";
 
 export const tokens = () => ({
+  
   white: {
+    100: "#f6f6f6",
+    200: "#ededed",
+    300: "#e3e3e3",
+    400: "#dadada",
+    500: "#d1d1d1",
+    600: "#a7a7a7",
+    700: "#7d7d7d",
+    800: "#545454",
+    900: "#2a2a2a",
+  },
+
+  indigo: {
+    100: "#cce0e6",
+    200: "#99c1cd",
+    300: "#66a2b4",
+    400: "#33839b",
+    500: "#006482",
+    600: "#005068",
+    700: "#003c4e",
+    800: "#002834",
+    900: "#00141a",
+  },
+
+  platinnum: {
     100: "#fafafa",
     200: "#f5f6f5",
     300: "#f0f1f0",
@@ -56,19 +81,20 @@ export const themeSettings = () => {
     palette: {
       primary: {
         main: colors.blue[600],
-        dark:"#006482",
-        light: colors.blue[200],
+        dark: colors.white[800],
+        light: colors.blue[300],
+        contrast:colors.white[500],
       },
       secondary: {
         main: colors.white[500],
-        dark: colors.white[700],
+        dark: colors.platinnum[900],
       },
       background: {
-        main: "#D1D1D1",
-        default: "#D1D1D1",
-        contrastText: colors.black[600],
+        main: colors.white[700],
+        default: colors.black[700],
+        contrastText: colors.platinnum[600],
         dark: colors.black[600],
-        light: "#D1D1D1",
+        light: colors.white[500],
       },
     },
   };

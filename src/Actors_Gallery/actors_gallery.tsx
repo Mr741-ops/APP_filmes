@@ -1,7 +1,7 @@
 import Body from './Body';
 import { useState } from 'react';
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
-import Buttons from '../Home_page/buttons';
+import Buttons from '../Utils/buttons';
 import Search_Bar from '../Utils/searchBar';
 import { useTranslation } from 'react-i18next';
 

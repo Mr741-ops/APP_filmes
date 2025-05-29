@@ -4,15 +4,17 @@ import { Link, matchPath, useLocation } from "react-router-dom";
 import { LanguageMenu, TabWithMenu } from "./Menu_AppBar";
 import SearchBar from "./SearchBar";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
   const location = useLocation();
   const movieResource = ["popular", "top_rated", "now_playing", "upcoming"];
   const seriesResource = ["popular", "top_rated", "on_the_air", "airing_today"];
+  const { t } = useTranslation();
 
-  //Buttons Create navigation buttons on the navBar
   let currentPath: string | boolean = "/";
   if (!!matchPath("/Main", location.pathname)) {
+    currentPath = "/Main";
   } else if (!!matchPath("/home_page", location.pathname)) {
     currentPath = "/home_page";
   } else if (!!matchPath("/actors_gallery", location.pathname)) {
@@ -47,23 +49,29 @@ const Header = () => {
                 textColor="inherit"
               >
                 <Tab
-                  label={"Home"}
+                  label={t('Home')}
                   component={Link}
                   to="/Main"
-                  value="/MainPage"
+                  value="/Main"
+                />
+                <Tab
+                  label={t('AdvancedSearch')}
+                  component={Link}
+                  to="/AdvancedSearchPage"
+                  value="/AdvancedSearchPage"
                 />
                 <TabWithMenu
-                  name="Movies"
+                  name={t('Movies')}
                   value={"/home_page"}
                   resourceOptions={movieResource}
                 />
                 <TabWithMenu
-                  name="Tv Series"
+                  name={t('TvSeries')}
                   value={"/tv_page"}
                   resourceOptions={seriesResource}
                 />
                 <Tab
-                  label={"People"}
+                  label={t('People')}
                   component={Link}
                   to="/actors_gallery"
                   value="/actors_gallery"
@@ -88,8 +96,7 @@ const Header = () => {
                 <RefreshIcon fontSize="inherit" />
               </IconButton>
               <Box display="flex" alignItems="center">
-                <Box sx={{ fontSize: "0.85rem", color: "white" }}>
-                  Language:
+                <Box>
                   <LanguageMenu />
                 </Box>
               </Box>

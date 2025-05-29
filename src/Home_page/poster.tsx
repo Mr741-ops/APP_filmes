@@ -58,7 +58,7 @@ export const movieImage = (posterPath: string) => {
 };
 
 export const miniMovieImage = (posterPath: string) => {
-  const fallbackImage = "src/Home_page/Rendering.jpg";
+  const fallbackImage = "src/Utils/person.jpg";
 
   const baseUrl = "https://image.tmdb.org/t/p/w342";
   const imageUrl = posterPath ? `${baseUrl}${posterPath}` : `${fallbackImage}`;
@@ -70,7 +70,7 @@ export const miniMovieImage = (posterPath: string) => {
       alt="Poster"
       style={{
         width: "100%",
-        height: "240px",
+        height: "230px",
         objectFit: "cover",
         borderRadius: "8px",
         display: "block",
@@ -80,7 +80,7 @@ export const miniMovieImage = (posterPath: string) => {
 };
 
 export const miniPersonImage = (posterPath: string) => {
-  const fallbackImage = "src/Home_page/Rendering.jpg";
+  const fallbackImage = "src/Utils/person.jpg";
   const baseUrl = "https://image.tmdb.org/t/p/w185/";
   const imageUrl = posterPath ? `${baseUrl}${posterPath}` : fallbackImage;
 

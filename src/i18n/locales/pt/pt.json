@@ -9,7 +9,9 @@
     "AiringToday":"Estereiam hoje",
     "PopularPeople":"Pessoas Populares",
     "MovieSearchBar":"Pesquisar Filmes",
-    "AppBarSearchBar":"Pesquisar Filmes, Atores e series",
+    "SeriesSearchBar":"Pesquisar Séries",
+    "PeopleSearchBar":"Pesquisar Pessoas",
+    "AppBarSearchBar":"Pesquisar Filmes, Atores, Séries",
     "NextPage":"Próxima",
     "PreviousPage":"Anterior",
     "DetailsPage":"Página de Detalhes",
@@ -44,5 +46,15 @@
     "Episodes":"Episódios",
     "Seasons":"Temporadas",
     "Status":"Estado",
-    "Type":"Tipo"
+    "Type":"Tipo",
+    "Language": "Idioma",
+    "Home":"Inicio",
+    "Movies":"Filmes",
+    "TvSeries":"Séries",
+    "People":"Pessoas",
+    "Popular": "Popular",
+    "TopRated" : "Melhor Classificação",
+    "NowPlaying": "Nos Conemas",
+    "Upcoming": "Brevemente",
+    "OnTheAir": "Em Lançamento"
 }

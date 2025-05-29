@@ -9,6 +9,8 @@
     "AiringToday":"Airing Today",
     "PopularPeople":"Popular People",
     "MovieSearchBar":"Search Movies",
+    "SeriesSearchBar":"Search Series",
+    "PeopleSearchBar":"Search People",
     "AppBarSearchBar":"Search Movies, Actors, Series",
     "NextPage":"Next",
     "PreviousPage":"Previous",
@@ -23,6 +25,7 @@
     "ReleaseDate":"Release date",
     "Budget":"Budget",
     "Revenue":"Revenue",
+    "Runtime":"Runtime",
     "Biography":"Biography",
     "Titles":"Titles",
     "AlsoKnownAs":"Also known as",
@@ -43,5 +46,15 @@
     "Episodes":"Episodes",
     "Seasons":"Seasons",
     "Status":"Status",
-    "Type":"Type"
+    "Type": "Type",
+    "Language": "Language",
+    "Home":"Home",
+    "Movies":"Movies",
+    "TvSeries":"TV Series",
+    "People":"People",
+    "Popular": "Popular",
+    "TopRated" : "Top Rated",
+    "NowPlaying": "Now Playing",
+    "Upcoming": "Upcoming",
+    "OnTheAir": "Currently Airing"
 }

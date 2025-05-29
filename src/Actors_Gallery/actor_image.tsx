@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
 export const poster = (profile_Path: string, name: string, id: any) => {
-  const fallbackImage = "src/Home_page/Rendering.jpg";
+  const fallbackImage = "src/Utils/person.jpg";
 
   const baseUrl = "https://image.tmdb.org/t/p/w342/";
   const imageUrl = profile_Path
@@ -32,7 +32,7 @@ export const poster = (profile_Path: string, name: string, id: any) => {
 };
 
 export const personImage = (profile_Path: string) => {
-  const fallbackImage = "src/Home_page/Rendering.jpg";
+  const fallbackImage = "src/Utils/person.jpg";
 
   const baseUrl = "https://image.tmdb.org/t/p/original/";
   const imageUrl = profile_Path

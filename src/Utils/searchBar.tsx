@@ -8,7 +8,6 @@ interface SearchResult {
   name?: string;
   poster_path?: string;
   profile_path?: string;
-  media_type?: "movie" | "tv" | "person";
 }
 
 interface SearchBarProps {
@@ -26,7 +25,7 @@ export const Search_Bar = ({ onResults, resource }: SearchBarProps) => {
       filter: { query: inputValue },
     },
     {
-      enabled: inputValue.length > 1,
+      enabled: inputValue.length >= 1,
     },
   );
 
@@ -53,7 +52,7 @@ export const Search_Bar = ({ onResults, resource }: SearchBarProps) => {
   }, [data, inputValue, onResults]);
 
   return (
-    <Box sx={{ width: 200, bgcolor: "primary.light", borderRadius: 1 }}>
+    <Box sx={{ width: 200, bgcolor: "secondary.main", borderRadius: 1 }}>
       <TextField
         placeholder={placeHolder}
         variant="outlined"

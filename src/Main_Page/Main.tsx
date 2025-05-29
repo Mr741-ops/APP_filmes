@@ -23,8 +23,8 @@ export const useLists = () => {
     },
   });
 
-  const isLoading = movies.isLoading || persons.isLoading || series.isLoading;
-  const isError = movies.error || persons.error || series.error;
+  const isLoading = movies.isLoading ?? persons.isLoading ?? series.isLoading;
+  const isError = movies.error ?? persons.error ?? series.error;
 
   return {
     isLoading,

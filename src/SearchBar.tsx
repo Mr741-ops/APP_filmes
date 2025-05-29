@@ -1,22 +1,24 @@
 import { Autocomplete, TextField, CircularProgress, Box } from "@mui/material";
 import { useState } from "react";
 import { useGetList } from "react-admin";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { data = [], isLoading } = useGetList(
     "search/multi",
     {
-      pagination: { page: 1, perPage: 10 },
+      pagination: { page: 1, perPage: 20 },
       filter: { query: inputValue },
     },
     {
-      enabled: inputValue.length > 1,
-    },
+      enabled: inputValue.length >= 1,
+    }
   );
 
   const handleSelect = (option: any) => {
@@ -32,13 +34,13 @@ export default function SearchBar() {
   };
 
   return (
-    <Box sx={{ width: 300, bgcolor: "primary.light", borderRadius: 1 }}>
+    <Box sx={{ width: 300, bgcolor: "secondary.main", borderRadius: 1 }}>
       <Autocomplete
-        open={open}
+        open={open && data.length > 0}
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
         options={data.slice(0, 5)}
-        getOptionLabel={(option) => option.name || option.title || "No title"}
+        getOptionLabel={(option) => option.name ?? option.title ?? "No title"}
         loading={isLoading}
         onInputChange={(_, newValue) => setInputValue(newValue)}
         onChange={(_, selectedOption) => handleSelect(selectedOption)}
@@ -53,14 +55,14 @@ export default function SearchBar() {
         }}
         renderOption={(props, option) => {
           let prefix = "";
-          if (option.media_type === "movie") prefix = "Movie: ";
+          if (option.media_type === "movie") prefix = "Movies: " ;
           else if (option.media_type === "tv") prefix = "Series: ";
           else if (option.media_type === "person") prefix = "Person: ";
 
-          const label = option.name || option.title || "No title";
+          const label = option.name ?? option.title ?? "No title";
 
           return (
-            <li {...props}>
+            <li {...props} key={option.id}>
               {prefix}
               {label}
             </li>
@@ -69,19 +71,16 @@ export default function SearchBar() {
         renderInput={(params) => (
           <TextField
             {...params}
-            placeholder="Search movies, actors..."
+            placeholder={t("AppBarSearchBar")}
             variant="outlined"
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <>
-                    {isLoading && (
-                      <CircularProgress color="inherit" size={20} />
-                    )}
-                    {params.InputProps?.endAdornment}
-                  </>
-                ),
-              },
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {isLoading && <CircularProgress color="inherit" size={20} />}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
             }}
           />
         )}

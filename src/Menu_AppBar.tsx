@@ -1,6 +1,15 @@
 import React from "react";
-import { Menu, MenuItem, IconButton, Typography, Tab } from "@mui/material";
+import {
+  Menu,
+  MenuItem,
+  IconButton,
+  Typography,
+  Tab,
+  InputLabel,
+  Box,
+} from "@mui/material";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const langOptions = ["en-US", "pt-Pt"];
 
@@ -10,6 +19,7 @@ export function LanguageMenu() {
     const stored = localStorage.getItem("language");
     return stored ? langOptions.indexOf(stored) : 0;
   });
+  const { t } = useTranslation();
 
   const open = Boolean(anchorEl);
 
@@ -30,11 +40,26 @@ export function LanguageMenu() {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <InputLabel
+        id="label"
+        sx={{
+          fontSize: "0.8rem",
+          color: "secondary.main",
+        }}
+      >
+        {" "}
+        {t("Language")}{":"}
+      </InputLabel>
       <IconButton
         onClick={handleClick}
         size="small"
-        sx={{ ml: 2, color: "white" }}
+        sx={{ color: "white" }}
       >
         <Typography variant="body2">{langOptions[selectedIndex]}</Typography>
       </IconButton>
@@ -60,7 +85,7 @@ export function LanguageMenu() {
           </MenuItem>
         ))}
       </Menu>
-    </>
+    </Box>
   );
 }
 
@@ -68,15 +93,6 @@ type TabWithMenuProps = {
   resourceOptions: any[];
   name: string;
   value: string;
-};
-
-const displayNames: Record<string, string> = {
-  popular: "Popular",
-  top_rated: "Top Rated",
-  now_playing: "Now Playing",
-  upcoming: "Upcoming",
-  on_the_air: "Currently Airing",
-  airing_today: "Airing Today",
 };
 
 export const TabWithMenu = ({
@@ -90,6 +106,17 @@ export const TabWithMenu = ({
     const stored = localStorage.getItem("resource");
     return stored ? resourceOptions.indexOf(stored) : 0;
   });
+
+  const { t } = useTranslation();
+
+  const displayNames: Record<string, string> = {
+    popular: t("Popular"),
+    top_rated: t("TopRated"),
+    now_playing: t("NowPlaying"),
+    upcoming: t("Upcoming"),
+    on_the_air: t("OnTheAir"),
+    airing_today: t("AiringToday"),
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -117,7 +144,7 @@ export const TabWithMenu = ({
             selected={index === selectedIndex}
             onClick={() => handleMenuItemClick(value, index)}
           >
-            {displayNames[option] || option}
+            {displayNames[option] ?? option}
           </MenuItem>
         ))}
       </Menu>
