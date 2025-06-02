@@ -16,7 +16,11 @@ interface Genre {
   name: string;
 }
 
-export const AdvancedSearch = () => {
+interface AdvancedSearchProps {
+  disabled?: boolean;
+}
+
+export const AdvancedSearch = ({ disabled = false }: AdvancedSearchProps) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [year, setYear] = useState<string>();
@@ -36,23 +40,16 @@ export const AdvancedSearch = () => {
     fetchGenres();
   }, []);
 
-  const  queryBuild = () =>{
+  const queryBuild = () => {
     const query = new URLSearchParams();
 
-    if(selectedGenres)[
-      query.append("with_genres", selectedGenres.join(","))
-    ]
-    if(year && year.length == 4)[
-      query.append("primary_release_year", year)
-    ]
-    if(minRating && minRating.length < 3)[
-      query.append("vote_average.gte", minRating)
-    ]
-    if(sortBy)[
-      query.append("sortBy", sortBy)
-    ]
+    if (selectedGenres) [query.append("with_genres", selectedGenres.join(","))];
+    if (year && year.length == 4) [query.append("primary_release_year", year)];
+    if (minRating && minRating.length < 3)
+      [query.append("vote_average.gte", minRating)];
+    if (sortBy) [query.append("sortBy", sortBy)];
     return query.toString();
-  }
+  };
 
   const handleChangeGenres = (event: SelectChangeEvent<number[]>) => {
     setSelectedGenres(event.target.value as number[]);
@@ -60,9 +57,8 @@ export const AdvancedSearch = () => {
 
   const handleSearch = () => {
     const query = queryBuild();
-    console.log("Query: ", query)
-  }
-
+    console.log("Query: ", query);
+  };
 
   return (
     <Grid
@@ -71,7 +67,11 @@ export const AdvancedSearch = () => {
       sx={{ padding: 2, width: "100%", maxWidth: "100%", flexWrap: "wrap" }}
     >
       <Grid>
-        <FormControl fullWidth sx={{ minWidth: 200, bgcolor:"secondary.main", borderRadius: 1 }}>
+        <FormControl
+          fullWidth
+          sx={{ minWidth: 200, bgcolor: "secondary.main", borderRadius: 1 }}
+          disabled={disabled}
+        >
           <InputLabel id="genres-select-label">Genre</InputLabel>
           <Select
             multiple
@@ -91,7 +91,11 @@ export const AdvancedSearch = () => {
       </Grid>
 
       <Grid>
-        <FormControl fullWidth sx={{ minWidth: 200,  bgcolor:"secondary.main", borderRadius: 1 }}>
+        <FormControl
+          fullWidth
+          sx={{ minWidth: 200, bgcolor: "secondary.main", borderRadius: 1 }}
+          disabled={disabled}
+        >
           <InputLabel id="sort-by-label">Sort By</InputLabel>
           <Select
             labelId="sort-by-label"
@@ -113,7 +117,8 @@ export const AdvancedSearch = () => {
           variant="outlined"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          sx={{ minWidth: 120, bgcolor:"secondary.main", borderRadius:1}}
+          sx={{ minWidth: 120, bgcolor: "secondary.main", borderRadius: 1 }}
+          disabled={disabled}
         />
       </Grid>
 
@@ -122,24 +127,23 @@ export const AdvancedSearch = () => {
           label="Min. Rating"
           placeholder="Minimum Rating"
           variant="outlined"
+          disabled={disabled}
           value={minRating}
           onChange={(e) => setMinRating(e.target.value)}
-          sx={{ minWidth: 150, bgcolor:"secondary.main", borderRadius:1}}
+          sx={{ minWidth: 150, bgcolor: "secondary.main", borderRadius: 1 }}
         />
       </Grid>
 
       <Grid>
         <Button
-        variant="contained"
-        onClick={handleSearch}
-        sx={{
-          height: "100%",
-          minHeight:40
-        }}
-
-        >
-          
-        </Button>
+          disabled={disabled}
+          variant="contained"
+          onClick={handleSearch}
+          sx={{
+            height: "100%",
+            minHeight: 40,
+          }}
+        ></Button>
       </Grid>
     </Grid>
   );

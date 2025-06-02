@@ -22,6 +22,7 @@ const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }) => {
 
   const {
     data: fetchedData,
+    total,
     error,
     isPending,
   } = useGetList(
@@ -34,7 +35,7 @@ const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }) => {
     },
     {
       enabled: shouldFetch,
-    },
+    }
   );
 
   const displayData = searchData ?? fetchedData ?? [];
@@ -79,7 +80,7 @@ const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }) => {
             onClick={handleClickOpen(movie)}
             sx={{
               width: "360px",
-              bgcolor:"primary.dark"
+              bgcolor: "primary.dark",
             }}
           >
             <Box className="movie-item">

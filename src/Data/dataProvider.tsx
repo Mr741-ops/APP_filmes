@@ -48,7 +48,7 @@ export const dataProvider: DataProvider = {
     });
     return {
       data: json.results,
-      total: json.total_results,
+      total: json.total_pages,
     };
   },
 

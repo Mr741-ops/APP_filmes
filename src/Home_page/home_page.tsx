@@ -17,6 +17,8 @@ export const HomePage = () => {
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
   const title = TitleMovies(resource, t);
+  const [isVisible, setIsVisible] = useState(false);
+  
   /* 
   --------------------------------- Functions ----------------------
   */
@@ -24,6 +26,14 @@ export const HomePage = () => {
   const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
   };
+
+  const getIsVisible = (): void => {
+    setIsVisible(true);
+  }
+
+  if(resource === "AdvancedSearch"){
+    getIsVisible();
+  }
 
   return (
     <Container maxWidth="xl" sx={{ minWidth: "1500px", minHeight: "3220px" }}>
@@ -37,8 +47,8 @@ export const HomePage = () => {
           ml: "10px",
         }}
       >
-        <Buttons page={page} setPage={setPage} />
-        <AdvancedSearch/>
+        <Buttons page={page} setPage={setPage} /> 
+        {isVisible && <AdvancedSearch disabled={true}/>}
         <Search_Bar onResults={handleSearchResults} resource="search/movie" />
       </Box>
       <Typography
