@@ -29,13 +29,10 @@ const Buttons: React.FC<ButtonsProps> = ({ page, setPage }) => {
           justifycontent: "space-evenly",
           gap: 1,
           height: "100%",
+          maxHeight: "40px",
         }}
       >
-        <Button
-          variant="contained"
-          onClick={decreasePage}
-          disabled={page === 1}
-        >
+        <Button variant="contained" onClick={decreasePage} disabled={page <= 1}>
           {t("PreviousPage")}
         </Button>
         <Box
@@ -48,20 +45,29 @@ const Buttons: React.FC<ButtonsProps> = ({ page, setPage }) => {
           <TextField
             label={page}
             value={page}
-            onChange={(e) => setPage(() => Number(e.target.value))}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (!isNaN(value) && value >= 1) {
+                setPage(() => value);
+              } else {
+                setPage(() => 1);
+              }
+            }}
             sx={{
               color: "secondary.dark",
               width: "100%",
               height: "100%",
               bgcolor: "secondary.main",
               textAlign: "center",
+              borderRadius: 1,
+              "& .MuiOutlinedInput-root": {
+                height: 40,
+                padding: 0,
+              },
             }}
           ></TextField>
         </Box>
-        <Button
-          variant="contained"
-          onClick={incrementPage}
-        >
+        <Button variant="contained" onClick={incrementPage}>
           {t("NextPage")}
         </Button>
       </Grid>

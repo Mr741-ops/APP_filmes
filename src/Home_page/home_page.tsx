@@ -1,6 +1,6 @@
 import "./GlobalCSS.css";
 import Body from "./Body";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import Buttons from "../Utils/buttons";
 import Search_Bar from "../Utils/searchBar";
@@ -18,7 +18,9 @@ export const HomePage = () => {
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
   const title = TitleMovies(resource, t);
   const [isVisible, setIsVisible] = useState(false);
-  
+  const [advancedSearchResults, setAdvancedSearchResults] = useState<any[] | null> ();
+  const [isDisabled, setIsDisabled] = useState(true);
+
   /* 
   --------------------------------- Functions ----------------------
   */
@@ -26,17 +28,24 @@ export const HomePage = () => {
   const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
   };
+  const handleAdvancedSearchResults = (results: any[] | null) => {
+    setAdvancedSearchResults(results);
+  };
 
   const getIsVisible = (): void => {
     setIsVisible(true);
-  }
+    setIsDisabled(false);
+  };
+  useEffect(() => {
+    if (resource === "advancedSearch") {
+      getIsVisible();
+    }
+  }, [resource]);
 
-  if(resource === "AdvancedSearch"){
-    getIsVisible();
-  }
+  const data = searchResults || advancedSearchResults;
 
   return (
-    <Container maxWidth="xl" sx={{ minWidth: "1500px", minHeight: "3220px" }}>
+    <Container maxWidth="xl" sx={{ minWidth: "100vh", }}>
       <CssBaseline />
       <Box
         sx={{
@@ -47,8 +56,13 @@ export const HomePage = () => {
           ml: "10px",
         }}
       >
-        <Buttons page={page} setPage={setPage} /> 
-        {isVisible && <AdvancedSearch disabled={true}/>}
+        <Buttons page={page} setPage={setPage} />
+        {isVisible && (
+          <AdvancedSearch
+            disabled={isDisabled}
+            onResults={handleAdvancedSearchResults}
+          />
+        )}
         <Search_Bar onResults={handleSearchResults} resource="search/movie" />
       </Box>
       <Typography
@@ -60,7 +74,7 @@ export const HomePage = () => {
       >
         {title}
       </Typography>
-      <Body resource={resource} page={page} data={searchResults} />
+      <Body resource={resource} page={page} data={data} />
       <Box
         sx={{
           display: "flex",

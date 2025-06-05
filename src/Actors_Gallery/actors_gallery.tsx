@@ -18,7 +18,7 @@ export const ActorsGallery = () => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ minWidth: '1500px', minHeight: '1050px' }}>
+    <Container maxWidth="xl" sx={{ minWidth: "100vh", minHeight: "1050px" }}>
       <CssBaseline />
       <Box
         sx={{

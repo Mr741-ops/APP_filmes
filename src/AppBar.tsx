@@ -4,11 +4,11 @@ import { Link, matchPath, useLocation } from "react-router-dom";
 import { LanguageMenu, TabWithMenu } from "./Menu_AppBar";
 import SearchBar from "./SearchBar";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const location = useLocation();
-  const movieResource = ["popular", "top_rated", "now_playing", "upcoming"];
+  const movieResource = ["popular", "top_rated", "now_playing", "upcoming","advancedSearch"];
   const seriesResource = ["popular", "top_rated", "on_the_air", "airing_today"];
   const { t } = useTranslation();
 
@@ -49,29 +49,23 @@ const Header = () => {
                 textColor="inherit"
               >
                 <Tab
-                  label={t('Home')}
+                  label={t("Home")}
                   component={Link}
                   to="/Main"
                   value="/Main"
                 />
-                <Tab
-                  label={t('AdvancedSearch')}
-                  component={Link}
-                  to="/AdvancedSearchPage"
-                  value="/AdvancedSearchPage"
-                />
                 <TabWithMenu
-                  name={t('Movies')}
+                  name={t("Movies")}
                   value={"/home_page"}
                   resourceOptions={movieResource}
                 />
                 <TabWithMenu
-                  name={t('TvSeries')}
+                  name={t("TvSeries")}
                   value={"/tv_page"}
                   resourceOptions={seriesResource}
                 />
                 <Tab
-                  label={t('People')}
+                  label={t("People")}
                   component={Link}
                   to="/actors_gallery"
                   value="/actors_gallery"

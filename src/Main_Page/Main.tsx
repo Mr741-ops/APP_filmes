@@ -51,7 +51,7 @@ export const MainPage = () => {
   }
 
   return (
-    <Box sx={{ mb: 3 }}>
+    <Box sx={{ mb: 3, minWidth: "100vh", minHeight: "100vh" }}>
       <Typography
         variant="h1"
         sx={{

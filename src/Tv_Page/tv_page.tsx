@@ -27,7 +27,7 @@ export const TVPage = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ minWidth: "100vh", minHeight: "3220px" }}>
       <CssBaseline />
       <Box
         sx={{

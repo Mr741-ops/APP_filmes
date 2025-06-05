@@ -17,29 +17,31 @@ interface Movie {
   overview: string;
 }
 
-const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }) => {
-  const shouldFetch = !searchData;
+const Body: React.FC<BodyProps> = ({ resource, page, data: searchData}) => {
+  const shouldFetch = resource != "advancedSearch" && !searchData;
 
   const {
-    data: fetchedData,
-    total,
-    error,
-    isPending,
-  } = useGetList(
-    `movie/${resource}`,
-    {
-      pagination: {
-        page: page,
-        perPage: 0,
+      data: fetchedData,
+      error,
+      isPending,
+    } = useGetList(
+      `movie/${resource}`,
+      {
+        pagination: {
+          page: page,
+          perPage: 0,
+        },
       },
-    },
-    {
-      enabled: shouldFetch,
-    }
-  );
+      {
+        enabled: shouldFetch,
+      }
+    );
+  
 
   const displayData = searchData ?? fetchedData ?? [];
   const [selectedMovie, setSelectedMovie] = React.useState<Movie | null>(null);
+
+  console.log("Display Data: ", searchData)
 
   ///////////////////// Functions /////////////////////////////
 

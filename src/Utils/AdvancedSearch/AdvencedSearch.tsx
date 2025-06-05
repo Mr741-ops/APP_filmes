@@ -10,22 +10,54 @@ import {
 import Grid from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
 import getGenres from "../../Data/advancedSearchProvider";
+import { useGetList } from "react-admin";
 
 interface Genre {
   id: number;
   name: string;
 }
 
-interface AdvancedSearchProps {
-  disabled?: boolean;
+interface SearchResult {
+  id: number;
+  title?: string;
+  name?: string;
+  poster_path?: string;
+  profile_path?: string;
 }
 
-export const AdvancedSearch = ({ disabled = false }: AdvancedSearchProps) => {
+interface AdvancedSearchProps {
+  disabled?: boolean;
+  onResults: (results: SearchResult[] | null) => void;
+}
+
+export const AdvancedSearch = ({
+  disabled = false,
+  onResults,
+}: AdvancedSearchProps) => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const { data = [], isLoading } = useGetList(
+    "discover/movie",
+    {
+      pagination: { page: 1, perPage: 10 },
+      filter: searchQuery,
+    },
+    { enabled: !!searchQuery }
+  );
+
+  console.log("Data: ", data);
+
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
-  const [year, setYear] = useState<string>();
-  const [minRating, setMinRating] = useState<string>();
+  const [year, setYear] = useState<string>("");
+  const [minRating, setMinRating] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("popularity.desc");
+
+  useEffect(() => {
+  if (data && data.length > 0) {
+    onResults(data);
+  }
+}, [data, onResults]);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -56,20 +88,33 @@ export const AdvancedSearch = ({ disabled = false }: AdvancedSearchProps) => {
   };
 
   const handleSearch = () => {
-    const query = queryBuild();
-    console.log("Query: ", query);
+    const builtQuery = queryBuild();
+    onResults(null);
+    setSearchQuery(builtQuery);
+    console.log("Query:", builtQuery);
   };
 
   return (
     <Grid
       container
       spacing={2}
-      sx={{ padding: 2, width: "100%", maxWidth: "100%", flexWrap: "wrap" }}
+      sx={{
+        width: "100%",
+        maxWidth: "100%",
+        flexWrap: "wrap",
+        maxHeight: 40,
+        minWidth: 200,
+      }}
     >
       <Grid>
         <FormControl
           fullWidth
-          sx={{ minWidth: 200, bgcolor: "secondary.main", borderRadius: 1 }}
+          sx={{
+            minWidth: 200,
+            bgcolor: "secondary.main",
+            borderRadius: 1,
+            height: "75%",
+          }}
           disabled={disabled}
         >
           <InputLabel id="genres-select-label">Genre</InputLabel>
@@ -93,7 +138,12 @@ export const AdvancedSearch = ({ disabled = false }: AdvancedSearchProps) => {
       <Grid>
         <FormControl
           fullWidth
-          sx={{ minWidth: 200, bgcolor: "secondary.main", borderRadius: 1 }}
+          sx={{
+            minWidth: 200,
+            bgcolor: "secondary.main",
+            borderRadius: 1,
+            height: "75%",
+          }}
           disabled={disabled}
         >
           <InputLabel id="sort-by-label">Sort By</InputLabel>
@@ -117,7 +167,12 @@ export const AdvancedSearch = ({ disabled = false }: AdvancedSearchProps) => {
           variant="outlined"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          sx={{ minWidth: 120, bgcolor: "secondary.main", borderRadius: 1 }}
+          sx={{
+            minWidth: 120,
+            bgcolor: "secondary.main",
+            borderRadius: 1,
+            height: "75%",
+          }}
           disabled={disabled}
         />
       </Grid>
@@ -130,7 +185,12 @@ export const AdvancedSearch = ({ disabled = false }: AdvancedSearchProps) => {
           disabled={disabled}
           value={minRating}
           onChange={(e) => setMinRating(e.target.value)}
-          sx={{ minWidth: 150, bgcolor: "secondary.main", borderRadius: 1 }}
+          sx={{
+            minWidth: 150,
+            bgcolor: "secondary.main",
+            borderRadius: 1,
+            height: "75%",
+          }}
         />
       </Grid>
 
@@ -140,10 +200,12 @@ export const AdvancedSearch = ({ disabled = false }: AdvancedSearchProps) => {
           variant="contained"
           onClick={handleSearch}
           sx={{
-            height: "100%",
-            minHeight: 40,
+            height: "75%",
           }}
-        ></Button>
+        >
+          {" "}
+          Search{" "}
+        </Button>
       </Grid>
     </Grid>
   );
