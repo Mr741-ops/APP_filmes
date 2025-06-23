@@ -1,4 +1,4 @@
-import "./GlobalCSS.css";
+import "../GlobalCSS.css";
 import Body from "./Body";
 import { useEffect, useState } from "react";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
@@ -10,43 +10,57 @@ import { TitleMovies } from "../Utils/title";
 
 export const HomePage = () => {
   const { t } = useTranslation();
-  /* 
-  ------------------------------ Variables ------------------------
-  */
+
   const resource = localStorage.getItem("resource") ?? "";
+
+  useEffect(() => {
+    if (resource === "advancedSearchMovies") {
+      getIsVisible();
+    }
+  }, [resource]);
+
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
   const title = TitleMovies(resource, t);
-  const [isVisible, setIsVisible] = useState(false);
-  const [advancedSearchResults, setAdvancedSearchResults] = useState<any[] | null> ();
-  const [isDisabled, setIsDisabled] = useState(true);
-
-  /* 
-  --------------------------------- Functions ----------------------
-  */
+  const [isAdvancedSearchVisible, setAdvancedSearchVisible] = useState(false);
+  const [advancedSearchResults, setAdvancedSearchResults] = useState<
+    any[] | null
+  >(null);
+  const [isEnabled, setEnabled] = useState(true);
 
   const handleSearchResults = (results: any[] | null) => {
     setSearchResults(results);
   };
   const handleAdvancedSearchResults = (results: any[] | null) => {
     setAdvancedSearchResults(results);
+    setEnabled(true);
   };
 
   const getIsVisible = (): void => {
-    setIsVisible(true);
-    setIsDisabled(false);
+    setAdvancedSearchVisible(true);
+    setEnabled(false);
   };
-  useEffect(() => {
-    if (resource === "advancedSearch") {
-      getIsVisible();
-    }
-  }, [resource]);
 
-  const data = searchResults || advancedSearchResults;
+  const data =
+    resource === "advancedSearchMovies"
+      ? advancedSearchResults
+      : (searchResults ?? null);
 
   return (
-    <Container maxWidth="xl" sx={{ minWidth: "100vh", }}>
+    <Container maxWidth="xl" sx={{ maxWidth: "100vw", minWidth: "99%" }}>
       <CssBaseline />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          justifyItems: "center",
+          mb: 3,
+        }}
+      >
+        {isAdvancedSearchVisible && (
+          <AdvancedSearch onResults={handleAdvancedSearchResults} page={page} resource={resource} />
+        )}
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -56,14 +70,10 @@ export const HomePage = () => {
           ml: "10px",
         }}
       >
-        <Buttons page={page} setPage={setPage} />
-        {isVisible && (
-          <AdvancedSearch
-            disabled={isDisabled}
-            onResults={handleAdvancedSearchResults}
-          />
+        {isEnabled && <Buttons page={page} setPage={setPage} />}
+        {!isAdvancedSearchVisible && (
+          <Search_Bar onResults={handleSearchResults} resource="search/movie" />
         )}
-        <Search_Bar onResults={handleSearchResults} resource="search/movie" />
       </Box>
       <Typography
         variant="h3"
@@ -81,7 +91,7 @@ export const HomePage = () => {
           ml: "10px",
         }}
       >
-        <Buttons page={page} setPage={setPage} />
+        {isEnabled && <Buttons page={page} setPage={setPage}/>}
       </Box>
     </Container>
   );

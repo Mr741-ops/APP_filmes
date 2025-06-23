@@ -9,16 +9,24 @@ const settings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 6,
+  slidesToShow: 5,
   slidesToScroll: 5,
   responsive: [
     {
-      breakpoint: 768,
-      settings: { slidesToShow: 2 },
+      breakpoint: 1530,
+      settings: { slidesToShow: 4, slidesToScroll: 4 },
+    },
+    {
+      breakpoint: 1435,
+      settings: { slidesToShow: 3, slidesToScroll: 3 },
+    },
+    {
+      breakpoint: 1200,
+      settings: { slidesToShow: 2, slidesToScroll: 2 },
     },
     {
       breakpoint: 480,
-      settings: { slidesToShow: 1 },
+      settings: { slidesToShow: 1, slidesToScroll: 1 },
     },
   ],
   nextArrow: (
@@ -26,8 +34,7 @@ const settings = {
       sx={{
         position: "absolute",
         top: "50%",
-        right: "0px",
-        zIndex: 10,
+        right: "-10px",
         backgroundColor: "rgba(0, 0, 0, 0)",
         borderRadius: "50%",
         cursor: "pointer",
@@ -44,8 +51,7 @@ const settings = {
       sx={{
         position: "absolute",
         top: "50%",
-        left: "0px",
-        zIndex: 10,
+        left: "-10px",
         backgroundColor: "rgba(0, 0, 0, 0)",
         borderRadius: "50%",
         cursor: "pointer",
@@ -85,11 +91,14 @@ export const Carroussel = ({ title, items, size }: Props) => {
       </Typography>
       <Box
         sx={{
-          width: size,
-          maxWidth: "100vw",
+          position: "relative",
+          width: "100%",
+          maxWidth: "100vh",
           overflow: "hidden",
+          mx: "auto",
+          px: { xs: 1, sm: 2, md: 5 },
           ".slick-slide": {
-            padding: "0 8px",
+            padding: "0 4px",
             display: "flex",
             justifyContent: "center",
           },

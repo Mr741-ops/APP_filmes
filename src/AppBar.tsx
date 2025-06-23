@@ -8,8 +8,8 @@ import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const location = useLocation();
-  const movieResource = ["popular", "top_rated", "now_playing", "upcoming","advancedSearch"];
-  const seriesResource = ["popular", "top_rated", "on_the_air", "airing_today"];
+  const movieResource = ["popular", "top_rated", "now_playing", "upcoming","advancedSearchMovies"];
+  const seriesResource = ["popular", "top_rated", "on_the_air", "airing_today","advancedSearchSeries"];
   const { t } = useTranslation();
 
   let currentPath: string | boolean = "/";

@@ -28,41 +28,49 @@ interface SearchResult {
 interface AdvancedSearchProps {
   disabled?: boolean;
   onResults: (results: SearchResult[] | null) => void;
+  page: number;
+  resource: string;
 }
 
 export const AdvancedSearch = ({
   disabled = false,
   onResults,
+  page,
+  resource,
 }: AdvancedSearchProps) => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchParams, setSearchParams] = useState<string | null>(null);
+
+  let endpoint;
+
+  if (resource === "advancedSearchMovies") endpoint = "discover/movie";
+  else endpoint = "discover/tv";
 
   const { data = [], isLoading } = useGetList(
-    "discover/movie",
+    endpoint,
     {
-      pagination: { page: 1, perPage: 10 },
-      filter: searchQuery,
+      pagination: { page: page, perPage: 10 },
+      filter: searchParams ?? "",
     },
-    { enabled: !!searchQuery }
   );
-
-  console.log("Data: ", data);
 
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [year, setYear] = useState<string>("");
   const [minRating, setMinRating] = useState<string>("");
-  const [sortBy, setSortBy] = useState<string>("popularity.desc");
+  const [avgRating, setAvgRating] = useState<string>("");
+  const [sortBy, setSortBy] = useState<string>("");
+  const [originCountry, setOriginCountry] = useState<string>("");
 
   useEffect(() => {
-  if (data && data.length > 0) {
-    onResults(data);
-  }
-}, [data, onResults]);
+    if (data && data.length > 0) {
+      onResults(data);
+    }
+  }, [data, onResults]);
 
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const result = await getGenres("genre/movie/list");
+        const result = await getGenres(resource);
         setGenres(result.data.genres);
       } catch (error) {
         console.error("Error fetching genres:", error);
@@ -75,11 +83,28 @@ export const AdvancedSearch = ({
   const queryBuild = () => {
     const query = new URLSearchParams();
 
-    if (selectedGenres) [query.append("with_genres", selectedGenres.join(","))];
-    if (year && year.length == 4) [query.append("primary_release_year", year)];
-    if (minRating && minRating.length < 3)
-      [query.append("vote_average.gte", minRating)];
-    if (sortBy) [query.append("sortBy", sortBy)];
+    if (resource === "advancedSearchMovies") {
+      if (selectedGenres)
+        [query.append("with_genres", selectedGenres.join(","))];
+      if (year && year.length == 4)
+        [query.append("primary_release_year", year)];
+      if (minRating && minRating.length < 3)
+        [query.append("vote_average.gte", minRating)];
+      if (avgRating && avgRating.length < 3)
+        [query.append("vote_average.gte", avgRating)];
+      if (sortBy) [query.append("sort_by", sortBy)];
+      if (originCountry) [query.append("with_origin_country", originCountry)];
+    } else if (resource === "advancedSearchSeries") {
+      if (selectedGenres)
+        [query.append("with_genres", selectedGenres.join(","))];
+      if (year && year.length == 4) [query.append("first_air_date_year", year)];
+      if (minRating && minRating.length < 3)
+        [query.append("vote_average.gte", minRating)];
+      if (avgRating && avgRating.length < 3)
+        [query.append("vote_average.gte", minRating)];
+      if (sortBy) [query.append("sort_by", sortBy)];
+      if (originCountry) [query.append("with_origin_country", originCountry)];
+    }
     return query.toString();
   };
 
@@ -89,9 +114,9 @@ export const AdvancedSearch = ({
 
   const handleSearch = () => {
     const builtQuery = queryBuild();
+    if (!builtQuery || builtQuery == searchParams) return;
     onResults(null);
-    setSearchQuery(builtQuery);
-    console.log("Query:", builtQuery);
+    setSearchParams(builtQuery);
   };
 
   return (
@@ -100,20 +125,28 @@ export const AdvancedSearch = ({
       spacing={2}
       sx={{
         width: "100%",
-        maxWidth: "100%",
-        flexWrap: "wrap",
-        maxHeight: 40,
-        minWidth: 200,
+        maxWidth: "100vw",
+        justifyContent: "center",
       }}
     >
       <Grid>
         <FormControl
           fullWidth
           sx={{
-            minWidth: 200,
-            bgcolor: "secondary.main",
+            width: 200,
+            bgcolor: "primary.dark",
             borderRadius: 1,
-            height: "75%",
+            height: "100%",
+            "& .MuiOutlinedInput-root": {
+              height: 45,
+              padding: 0,
+            },
+            "& .MuiInputLabel-root": {
+              color: "secondary.main",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "secondary.main",
+            },
           }}
           disabled={disabled}
         >
@@ -139,10 +172,20 @@ export const AdvancedSearch = ({
         <FormControl
           fullWidth
           sx={{
-            minWidth: 200,
-            bgcolor: "secondary.main",
+            width: 200,
+            bgcolor: "primary.dark",
             borderRadius: 1,
-            height: "75%",
+            height: "100%",
+            "& .MuiOutlinedInput-root": {
+              height: 45,
+              padding: 0,
+            },
+            "& .MuiInputLabel-root": {
+              color: "secondary.main",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "secondary.main",
+            },
           }}
           disabled={disabled}
         >
@@ -161,6 +204,45 @@ export const AdvancedSearch = ({
       </Grid>
 
       <Grid>
+        <FormControl
+          fullWidth
+          sx={{
+            width: 200,
+            bgcolor: "primary.dark",
+            borderRadius: 1,
+            height: "100%",
+            "& .MuiOutlinedInput-root": {
+              height: 45,
+              padding: 0,
+            },
+            "& .MuiInputLabel-root": {
+              color: "secondary.main",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "secondary.main",
+            },
+          }}
+          disabled={disabled}
+        >
+          <InputLabel id="sort-by-label">Origin Country</InputLabel>
+          <Select
+            labelId="sort-by-label"
+            id="sort-by"
+            value={originCountry}
+            label="Origin Country"
+            onChange={(e) => setOriginCountry(e.target.value)}
+          >
+            <MenuItem value="PT">Portugal</MenuItem>
+            <MenuItem value="GB">United Kingdom</MenuItem>
+            <MenuItem value="US">United States</MenuItem>
+            <MenuItem value="BR">Brazil</MenuItem>
+            <MenuItem value="FR">France</MenuItem>
+            <MenuItem value="DE">Germany</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+
+      <Grid>
         <TextField
           label="Year"
           placeholder="Year"
@@ -168,10 +250,21 @@ export const AdvancedSearch = ({
           value={year}
           onChange={(e) => setYear(e.target.value)}
           sx={{
-            minWidth: 120,
-            bgcolor: "secondary.main",
+            width: 200,
+            bgcolor: "primary.dark",
             borderRadius: 1,
-            height: "75%",
+            color: "secondary.main",
+            height: "100%",
+            "& .MuiOutlinedInput-root": {
+              height: 45,
+              padding: 0,
+            },
+            "& .MuiInputLabel-root": {
+              color: "secondary.main",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "secondary.main",
+            },
           }}
           disabled={disabled}
         />
@@ -179,32 +272,68 @@ export const AdvancedSearch = ({
 
       <Grid>
         <TextField
-          label="Min. Rating"
+          label="Average Rating"
+          placeholder="Average Rating"
+          variant="outlined"
+          disabled={disabled}
+          value={avgRating}
+          onChange={(e) => setAvgRating(e.target.value)}
+          sx={{
+            width: 200,
+            bgcolor: "primary.dark",
+            borderRadius: 1,
+            height: "100%",
+            "& .MuiOutlinedInput-root": {
+              height: 45,
+              padding: 0,
+            },
+            "& .MuiInputLabel-root": {
+              color: "secondary.main",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "secondary.main",
+            },
+          }}
+        />
+      </Grid>
+
+      <Grid>
+        <TextField
+          label="Minimum Rating"
           placeholder="Minimum Rating"
           variant="outlined"
           disabled={disabled}
           value={minRating}
           onChange={(e) => setMinRating(e.target.value)}
           sx={{
-            minWidth: 150,
-            bgcolor: "secondary.main",
+            width: 200,
+            bgcolor: "primary.dark",
             borderRadius: 1,
-            height: "75%",
+            height: "100%",
+            "& .MuiOutlinedInput-root": {
+              height: 45,
+              padding: 0,
+            },
+            "& .MuiInputLabel-root": {
+              color: "secondary.main",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "secondary.main",
+            },
           }}
         />
       </Grid>
 
       <Grid>
         <Button
-          disabled={disabled}
+          disabled={disabled ?? isLoading}
           variant="contained"
           onClick={handleSearch}
           sx={{
-            height: "75%",
+            height: 45,
           }}
         >
-          {" "}
-          Search{" "}
+          Search
         </Button>
       </Grid>
     </Grid>

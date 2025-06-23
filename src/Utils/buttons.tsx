@@ -8,7 +8,7 @@ interface ButtonsProps {
   setPage: (value: (prev: number) => number) => void;
 }
 
-const Buttons: React.FC<ButtonsProps> = ({ page, setPage }) => {
+const Buttons: React.FC<ButtonsProps> = ({ page, setPage}) => {
   const { t } = useTranslation();
 
   const incrementPage = (): void => {

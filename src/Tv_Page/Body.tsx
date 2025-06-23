@@ -1,9 +1,9 @@
 /* import useApiCall from "../Data/apiCall"; */
-import { CustomDialog } from './dialogBox';
-import { Button, Loading, useGetList } from 'react-admin';
-import * as Poster from './poster';
-import { Box } from '@mui/material';
-import React from 'react';
+import { CustomDialog } from "./dialogBox";
+import { Button, Loading, useGetList } from "react-admin";
+import * as Poster from "../Home_page/poster";
+import { Box } from "@mui/material";
+import React from "react";
 
 interface BodyProps {
   resource: string;
@@ -18,60 +18,78 @@ interface Series {
   overview: string;
 }
 
-const Body: React.FC<BodyProps> = ({ resource, page, data: searchData }: BodyProps) => {
+const Body: React.FC<BodyProps> = ({
+  resource,
+  page,
+  data: searchData,
+}: BodyProps) => {
+  const shouldFetch = resource != "advancedSearchTv" && !searchData;
+
   const {
     data: fetchedData,
     error,
-    isPending
-  } = useGetList(`tv/${resource}`, {
-    pagination: {
-      page: page,
-      perPage: 0
+    isPending,
+  } = useGetList(
+    `tv/${resource}`,
+    {
+      pagination: {
+        page: page,
+        perPage: 0,
+      },
+    },
+    {
+      enabled: shouldFetch,
     }
-  });
+  );
 
-  const displayData = searchData || fetchedData || [];
-  const [selectedSeries, setSelectedSeries] = React.useState<Series | null>(null);
+  const displayData = searchData ?? fetchedData ?? [];
 
-  const handleClickOpen = (movie: Series) => () => {
-    setSelectedSeries(movie);
+  const [selectedSeries, setSelectedSeries] = React.useState<Series | null>(
+    null
+  );
+
+  const handleClickOpen = (series: Series) => () => {
+    setSelectedSeries(series);
   };
   const handleClose = () => {
     setSelectedSeries(null);
   };
 
-  if (isPending) {
+  if (shouldFetch && isPending) {
     return <Loading />;
   }
-  if (error) {
-    return <p>ERROR</p>;
+  if (shouldFetch && error) {
+    return <p>Error</p>;
   }
 
   return (
     <Box
       className="container"
       sx={{
-        display: 'flex',
-        justifycontent: 'center',
-        aligncontent: 'center',
-        alignitems: 'center',
-        gap: '10px',
-        flexWrap: 'wrap',
-        width: '88vw',
-        maxwidth: '100%',
-        padding: '20px 0'
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+        gap: "10px",
+        flexWrap: "wrap",
+        width: "88vw",
+        maxWidth: "100%",
+        padding: "20px 0",
       }}
     >
-      {displayData.map(series => (
+      {displayData.map((series) => (
         <Box key={series.id}>
           <Button
             variant="outlined"
             onClick={handleClickOpen(series)}
             sx={{
-              width: '360px'
+              width: "360px",
+              bgcolor: "primary.dark",
             }}
           >
-            <Box className="movie-item">{Poster.poster(series.poster_path, series.name, series.id)}</Box>
+            <Box className="movie-item">
+              {Poster.poster(series.poster_path, series.name, series.id)}
+            </Box>
           </Button>
         </Box>
       ))}

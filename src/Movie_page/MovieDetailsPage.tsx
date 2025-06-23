@@ -33,10 +33,20 @@ const MovieDetailsPage = () => {
       }}
     >
       <BackButton />
-      <Grid size={{ xs: 12, md: 3 }} sx={{ justifyContent: "center" }}>
+      <Grid
+        size={{ xs: 12, md: 3 }}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
         <SideBar movie={movie} />
       </Grid>
-      <Grid size={{ xs: 12, md: 6 }} sx={{ justifyContent: "center" }}>
+      <Grid
+        size={{ xs: 12, md: 7 }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+        }}
+      >
         <Body movie={movie} id={id} />
       </Grid>
     </Grid>

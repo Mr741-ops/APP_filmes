@@ -59,15 +59,15 @@ const Body: React.FC<Props> = ({ resource, page, data: searchData }) => {
     <Box
       className="container"
       sx={{
-        display: 'flex',
-        justifycontent: 'center',
-        aligncontent: 'center',
-        alignitems: 'center',
-        gap: '10px',
-        flexWrap: 'wrap',
-        width: '88vw',
-        maxwidth: '100%',
-        padding: '20px 0',
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+        gap: "10px",
+        flexWrap: "wrap",
+        width: "88vw",
+        maxWidth: "100%",
+        padding: "20px 0",
 
         '&.MuiContainer-root': {
           maxheight: 'fit-content'
@@ -80,7 +80,8 @@ const Body: React.FC<Props> = ({ resource, page, data: searchData }) => {
             variant="outlined"
             onClick={handleClickOpen(person)}
             sx={{
-              width: '360px'
+              width: "360px",
+              bgcolor: "primary.dark",
             }}
           >
             <Box className="movie-item">{Poster.poster(person.profile_path, person.name, person.id)}</Box>

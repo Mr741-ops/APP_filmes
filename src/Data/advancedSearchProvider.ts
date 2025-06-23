@@ -18,16 +18,22 @@ const headers = new Headers({
 });
 
 const getGenres = async (resource: string) => {
-    const lang = localStorage.getItem("language") ?? "en";
-    const response = await fetchUtils
-      .fetchJson(`${API_URL}/${resource}?language=${lang}`, {
-        method: "GET",
-        headers,
-      })
+  const lang = localStorage.getItem("language") ?? "en";
+  let endpoint;
+  if (resource === "advancedSearchMovies") endpoint = "genre/movie/list";
+  else endpoint = "genre/tv/list";
 
-    return {
-      data: response.json as GenreApiResponse,
-    };
+  const response = await fetchUtils.fetchJson(
+    `${API_URL}/${endpoint}?language=${lang}`,
+    {
+      method: "GET",
+      headers,
+    }
+  );
+
+  return {
+    data: response.json as GenreApiResponse,
+  };
 };
 
 export default getGenres;

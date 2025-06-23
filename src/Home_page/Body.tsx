@@ -18,7 +18,7 @@ interface Movie {
 }
 
 const Body: React.FC<BodyProps> = ({ resource, page, data: searchData}) => {
-  const shouldFetch = resource != "advancedSearch" && !searchData;
+  const shouldFetch = resource != "advancedSearchMovies" && !searchData;
 
   const {
       data: fetchedData,
@@ -41,9 +41,6 @@ const Body: React.FC<BodyProps> = ({ resource, page, data: searchData}) => {
   const displayData = searchData ?? fetchedData ?? [];
   const [selectedMovie, setSelectedMovie] = React.useState<Movie | null>(null);
 
-  console.log("Display Data: ", searchData)
-
-  ///////////////////// Functions /////////////////////////////
 
   const handleClickOpen = (movie: Movie) => () => {
     setSelectedMovie(movie);

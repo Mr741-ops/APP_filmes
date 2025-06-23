@@ -116,6 +116,8 @@ export const TabWithMenu = ({
     upcoming: t("Upcoming"),
     on_the_air: t("OnTheAir"),
     airing_today: t("AiringToday"),
+    advancedSearchMovies: "Advanced Search",
+    advancedSearchSeries: "Advanced Search",
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

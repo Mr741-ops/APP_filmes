@@ -81,13 +81,15 @@ export const themeSettings = () => {
     palette: {
       primary: {
         main: colors.blue[600],
-        dark: colors.white[800],
+        dark: colors.white[700],
         light: colors.blue[300],
         contrast:colors.white[500],
       },
       secondary: {
         main: colors.white[500],
+        contrast: colors.black[900],
         dark: colors.platinnum[900],
+        light: colors.black[500],
       },
       background: {
         main: colors.white[700],

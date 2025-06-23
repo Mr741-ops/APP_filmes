@@ -39,8 +39,12 @@ export const dataProvider: DataProvider = {
     const lang = localStorage.getItem("language") ?? "en";
     const { page } = params?.pagination;
     const query = params.filter?.query ?? "";
+    const advancedQuery = params.filter ?? "";
 
-    const URL = `${API_URL}/${resource}?language=${lang}&page=${page}${query ? `&query=${query}` : ""}`;
+    const URL = `${API_URL}/${resource}?language=${lang}&page=${page}${query ? `&query=${query}` : ""}${advancedQuery ? `&${advancedQuery}`: ""}`;
+
+    
+    console.log("URL: ", URL)
 
     const { json } = await fetchUtils.fetchJson(URL, {
       method: "GET",

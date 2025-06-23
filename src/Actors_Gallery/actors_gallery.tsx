@@ -22,10 +22,11 @@ export const ActorsGallery = () => {
       <CssBaseline />
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          justifyItems: 'center',
-          mr: '15px'
+          display: "flex",
+          justifyContent: "space-between",
+          justifyItems: "center",
+          mr: "10px",
+          ml: "10px",
         }}
       >
         <Buttons page={page} setPage={setPage} />
