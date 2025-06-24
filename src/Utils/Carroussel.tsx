@@ -82,71 +82,77 @@ type Props = {
 export const Carroussel = ({ title, items, size }: Props) => {
   const handleClick = useHandleClick();
 
-  if (!items || items.length === 0) return null;
+  const dynamicSettings = {
+    ...settings,
+    slidesToShow: Math.min(items.length, settings.slidesToShow),
+    slidesToScroll: Math.min(items.length, settings.slidesToScroll),
+  };
 
-  return (
-    <Box sx={{ mt: 4 }}>
-      <Typography variant="h5" sx={{ mb: 2, color: "secondary.main" }}>
-        <strong>{title}</strong>
-      </Typography>
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "100vh",
-          overflow: "hidden",
-          mx: "auto",
-          px: { xs: 1, sm: 2, md: 5 },
-          ".slick-slide": {
-            padding: "0 4px",
-            display: "flex",
-            justifyContent: "center",
-          },
-          ".slick-track": {
-            display: "flex",
-          },
-        }}
-      >
-        <Slider {...settings}>
-          {items.map((item, index) => (
-            <Box key={index}>
-              <Button
-                onClick={() => handleClick(item.navigateTo, item.id)}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Box
+  if (!items || items.length === 0) return null;
+  else {
+    return (
+      <Box sx={{ mt: 4 }}>
+        <Typography variant="h5" sx={{ mb: 2, color: "secondary.main" }}>
+          <strong>{title}</strong>
+        </Typography>
+        <Box
+          sx={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "100vh",
+            overflow: "hidden",
+            mx: "auto",
+            px: { xs: 1, sm: 2, md: 5 },
+            ".slick-slide": {
+              padding: "0 4px",
+              display: "flex",
+              justifyContent: "center",
+            },
+            ".slick-track": {
+              display: "flex",
+            },
+          }}
+        >
+          <Slider {...dynamicSettings}>
+            {items.map((item, index) => (
+              <Box key={index}>
+                <Button
+                  onClick={() => handleClick(item.navigateTo, item.id)}
                   sx={{
-                    width: "100%",
-                    maxWidth: "140px",
-                    height: "auto",
-                    overflow: "hidden",
                     display: "flex",
-                    justifyContent: "center",
+                    flexDirection: "column",
                     alignItems: "center",
                   }}
                 >
-                  {item.navigateTo === "actor_page"
-                    ? Poster.miniPersonImage(item.imagePath)
-                    : Poster.miniMovieImage(item.imagePath)}
-                </Box>
-                <Typography
-                  variant="caption"
-                  sx={{ mt: 1, color: "secondary.main" }}
-                >
-                  <strong> {item.title} </strong> <br />
-                  {item.character ? `(${item.character}) ` : ""}
-                </Typography>
-              </Button>
-            </Box>
-          ))}
-        </Slider>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      maxWidth: "140px",
+                      height: "auto",
+                      overflow: "hidden",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {item.navigateTo === "actor_page"
+                      ? Poster.miniPersonImage(item.imagePath)
+                      : Poster.miniMovieImage(item.imagePath)}
+                  </Box>
+                  <Typography
+                    variant="caption"
+                    sx={{ mt: 1, color: "secondary.main" }}
+                  >
+                    <strong> {item.title} </strong> <br />
+                    {item.character ? `(${item.character}) ` : ""}
+                  </Typography>
+                </Button>
+              </Box>
+            ))}
+          </Slider>
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  }
 };
-
 export default Carroussel;

@@ -23,7 +23,7 @@ interface DialogProps {
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
-    overflow:"hidden"
+    overflow: "hidden",
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
@@ -65,7 +65,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
           position: "absolute",
           right: 8,
           top: 8,
-          color:"secondary.main"
+          color: "secondary.main",
         }}
       >
         <CloseIcon />
@@ -83,7 +83,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
           sx={{
             justifyContent: "space-between",
             maxHeight: "555px",
-            mb:0
+            mb: 0,
           }}
         >
           <Grid
@@ -96,8 +96,8 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
           >
             {Poster.movieImage(selectedMovie?.poster_path ?? "")}
           </Grid>
-          <Grid size={7}>
-            <Box sx={{height:"288px"}}>
+          <Grid size={6} sx={{mr:3}}>
+            <Box sx={{ height: "288px" }}>
               <Typography
                 variant="h4"
                 gutterBottom
@@ -105,19 +105,24 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   textAlign: "center",
                 }}
               >
-                <strong>{t('Overview')}</strong>
+                <strong>{t("Overview")}</strong>
               </Typography>
-              <Typography gutterBottom>
+              <Typography
+                gutterBottom
+                sx={{
+                  textAlign: "justify",
+                }}
+              >
                 {selectedMovie?.overview
                   ? `${selectedMovie.overview}`
                   : `The overview on this film is unavailable at the moment.`}
               </Typography>
               <Typography gutterBottom sx={{ mt: 5 }}>
-                <strong>{t('ReleaseDate')}: </strong>
+                <strong>{t("ReleaseDate")}: </strong>
                 {selectedMovie?.release_date}
               </Typography>
             </Box>
-            <DialogActions sx={{ justifyContent: "flex-end" }}>
+            <DialogActions sx={{ justifyContent: "flex-end"}}>
               <Button
                 autoFocus
                 onClick={(event) => movieDetailsPage(selectedMovie?.id)}
@@ -127,7 +132,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   mt: 25,
                 }}
               >
-                {t('DetailsPage')}
+                {t("DetailsPage")}
               </Button>
             </DialogActions>
           </Grid>

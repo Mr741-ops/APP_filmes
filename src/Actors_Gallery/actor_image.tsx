@@ -45,7 +45,7 @@ export const personImage = (profile_Path: string) => {
       className="movie-poster"
       style={{
         width: "100%",
-        height: "525px",
+        height: "650px",
         objectFit: "cover",
         display: "block",
       }}

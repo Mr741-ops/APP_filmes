@@ -16,7 +16,7 @@ const useLists = (id: any) => {
       meta: { type: 'credits' }
     },
     {
-      enabled: !!id // só faz a query se o id estiver definido
+      enabled: !!id
     }
   );
 
@@ -27,15 +27,15 @@ const useLists = (id: any) => {
     }
   });
 
-  const isLoading = similarMovies.isLoading || persons.isLoading;
-  const isError = similarMovies.error || persons.error;
+  const isLoading = similarMovies.isLoading ?? persons.isLoading;
+  const isError = similarMovies.error ?? persons.error;
 
   return {
     isLoading,
     isError,
     data: {
-      similarMovies: similarMovies.data || [],
-      persons: persons.data || []
+      similarMovies: similarMovies.data ?? [],
+      persons: persons.data ?? {}
     }
   };
 };
@@ -45,8 +45,11 @@ export const Body = ({ movie, id }: Props) => {
 
   const { data, isLoading, isError } = useLists(id);
 
+
+  console.log("persons:", data.persons);
+  
   if (isLoading) {
-    return <Loading />; // or custom loading UI
+    return <Loading />;
   }
 
   if (isError) {

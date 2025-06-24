@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
 export const poster = (posterPath: string, title: string, id: any) => {
-  const fallbackImage = "src/Home_page/Rendering.jpg";
+  const fallbackImage = "src/Utils/film_not_found.png";
 
   const baseUrl = "https://image.tmdb.org/t/p/w342/";
   const isFallback = !posterPath;
@@ -36,7 +36,7 @@ export const poster = (posterPath: string, title: string, id: any) => {
 };
 
 export const movieImage = (posterPath: string) => {
-  const fallbackImage = "src/Home_page/Rendering.jpg";
+  const fallbackImage = "src/Utils/film_not_found.png";
 
   const baseUrl = "https://image.tmdb.org/t/p/w342/";
   const isFallback = !posterPath;
@@ -90,7 +90,7 @@ export const miniPersonImage = (posterPath: string) => {
       src={imageUrl}
       alt="Profile"
       sx={{
-        width: "100%",
+        width: "140px",
         height: "200px",
         objectFit: "cover",
         display: "block",

@@ -1,18 +1,18 @@
-import * as Poster from './poster';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid2';
+import * as Poster from "./poster";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid2";
 
-import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface DialogProps {
   selectedSeries: any | null;
@@ -20,16 +20,16 @@ interface DialogProps {
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2)
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
   },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1)
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
   },
-  '& .MuiDialog-paper': {
-    backgroundColor: '#010d22', // Change background color
-    color: '#e6e8e6' // Change text color
-  }
+  "& .MuiDialog-paper": {
+    backgroundColor: "#010d22",
+    color: "#e6e8e6",
+  },
 }));
 
 export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
@@ -37,7 +37,7 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
   const navigate = useNavigate();
 
   const tvSeriesDetailsPage = (id: number | undefined) => {
-    navigate('/tv_series_page', { state: { id: id } });
+    navigate("/tv_series_page", { state: { id: id } });
     handleClose();
   };
 
@@ -54,19 +54,20 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
       slotProps={{
         backdrop: {
           sx: {
-            backgroundColor: 'rgba(255, 255, 255, 0.03)',
-            backdropFilter: 'blur(8px)'
-          }
-        }
+            backgroundColor: "rgba(255, 255, 255, 0.03)",
+            backdropFilter: "blur(8px)",
+          },
+        },
       }}
     >
       <IconButton
         aria-label="close"
         onClick={handleClose}
         sx={{
-          position: 'absolute',
+          position: "absolute",
           right: 8,
-          top: 8
+          top: 8,
+          color: "secondary.main",
         }}
       >
         <CloseIcon />
@@ -78,50 +79,52 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
         <Grid
           container
           sx={{
-            justifyContent: 'space-between'
+            justifyContent: "space-between",
           }}
         >
           <Grid
             size={5}
             sx={{
-              maxWidth: '342px',
-              height: '525px',
-              overflow: 'hidden'
+              maxWidth: "342px",
+              height: "525px",
+              overflow: "hidden",
             }}
           >
-            {Poster.movieImage(selectedSeries?.poster_path ?? '')}
+            {Poster.movieImage(selectedSeries?.poster_path ?? "")}
           </Grid>
-          <Grid size={7}>
+          <Grid size={6} sx={{ mr: 3 }}>
             <Box>
               <Typography
                 variant="h4"
                 gutterBottom
                 sx={{
-                  textAlign: 'center'
+                  textAlign: "center",
                 }}
               >
-                <strong>{t('Overview')}</strong>
+                <strong>{t("Overview")}</strong>
               </Typography>
-              <Typography gutterBottom sx={{ textAlign: 'justify' }}>
-                {overview}
+              <Typography gutterBottom sx={{ textAlign: "justify" }}>
+                {overview
+                  ? overview
+                  : `The overview on this film is unavailable at the moment.`}
               </Typography>
               <Typography gutterBottom>
-                <strong>{t('ReleaseDate')}: </strong>
+                <strong>{t("ReleaseDate")}: </strong>
                 {selectedSeries?.first_air_date}
               </Typography>
             </Box>
             <DialogActions>
               <Button
                 autoFocus
-                onClick={event => tvSeriesDetailsPage(selectedSeries?.id)}
+                onClick={(event) => tvSeriesDetailsPage(selectedSeries?.id)}
                 sx={{
-                  bgcolor: 'primary.main',
-                  color: 'secondary.main',
-                  position: 'fixed',
-                  bottom: '180px'
+                  bgcolor: "primary.main",
+                  color: "secondary.main",
+                  position: "fixed",
+                  bottom: "180px",
                 }}
               >
-                {t('DetailsPage')}
+                {t("DetailsPage")}
               </Button>
             </DialogActions>
           </Grid>
