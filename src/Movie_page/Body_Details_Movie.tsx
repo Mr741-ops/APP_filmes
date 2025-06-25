@@ -57,7 +57,7 @@ export const Body = ({ movie, id }: Props) => {
   }
   return (
     <Box
-      className="Biography"
+      className="Body"
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -70,14 +70,14 @@ export const Body = ({ movie, id }: Props) => {
       }}
     >
       <Typography variant="h3" sx={{ mt: 4, textWrap: 'wrap' }}>
-        <strong> {t('Overview')}</strong>
+        <strong> {t('movieDetails.Overview')}</strong>
       </Typography>
       <Typography variant="body1" sx={{ mt: 5, textAlign: 'justify' }}>
         {movie.overview}
       </Typography>
       <Carroussel
-        title={t('Cast')}
-        items={data.persons.cast.map((person: any) => ({
+        title={t('movieDetails.Cast')}
+        items={(data.persons.cast ?? []).map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
@@ -87,8 +87,8 @@ export const Body = ({ movie, id }: Props) => {
         size={1000}
       />
       <Carroussel
-        title={t('Crew')}
-        items={data.persons.crew.map((person: any) => ({
+        title={t('movieDetails.Crew')}
+        items={(data.persons.crew ?? []).map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
@@ -98,7 +98,7 @@ export const Body = ({ movie, id }: Props) => {
         size={1000}
       />
       <Carroussel
-        title={t('SimilarMovies')}
+        title={t('movieDetails.SimilarMovies')}
         items={data.similarMovies.map((movie: any) => ({
           id: movie.id,
           title: movie.title,

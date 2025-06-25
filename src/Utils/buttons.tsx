@@ -8,7 +8,7 @@ interface ButtonsProps {
   setPage: (value: (prev: number) => number) => void;
 }
 
-const Buttons: React.FC<ButtonsProps> = ({ page, setPage}) => {
+const Buttons: React.FC<ButtonsProps> = ({ page, setPage }) => {
   const { t } = useTranslation();
 
   const incrementPage = (): void => {
@@ -32,8 +32,17 @@ const Buttons: React.FC<ButtonsProps> = ({ page, setPage}) => {
           maxHeight: "40px",
         }}
       >
-        <Button variant="contained" onClick={decreasePage} disabled={page <= 1}>
-          {t("PreviousPage")}
+        <Button
+          variant="contained"
+          onClick={decreasePage}
+          disabled={page <= 1}
+          sx={{
+            "&.Mui-disabled": {
+              bgcolor: "primary.dark",
+            },
+          }}
+        >
+          {t("navigation.PreviousPage")}
         </Button>
         <Box
           sx={{
@@ -43,7 +52,7 @@ const Buttons: React.FC<ButtonsProps> = ({ page, setPage}) => {
           }}
         >
           <TextField
-            label={page}
+            label={t("navigation.Page")}
             value={page}
             onChange={(e) => {
               const value = Number(e.target.value);
@@ -57,18 +66,24 @@ const Buttons: React.FC<ButtonsProps> = ({ page, setPage}) => {
               color: "secondary.dark",
               width: "100%",
               height: "100%",
-              bgcolor: "secondary.main",
+              bgcolor: "primary.dark",
               textAlign: "center",
               borderRadius: 1,
               "& .MuiOutlinedInput-root": {
                 height: 40,
                 padding: 0,
               },
+              "& .MuiInputLabel-root": {
+                color: "secondary.main",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "secondary.main",
+              },
             }}
           ></TextField>
         </Box>
         <Button variant="contained" onClick={incrementPage}>
-          {t("NextPage")}
+          {t("navigation.NextPage")}
         </Button>
       </Grid>
     </Box>

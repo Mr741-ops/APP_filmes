@@ -34,7 +34,8 @@ export const poster = (profile_Path: string, name: string, id: any) => {
 export const personImage = (profile_Path: string) => {
   const fallbackImage = "src/Utils/person.jpg";
 
-  const baseUrl = "https://image.tmdb.org/t/p/original/";
+  const baseUrl = "https://image.tmdb.org/t/p/w342/";
+  const isFallback = !profile_Path;
   const imageUrl = profile_Path
     ? `${baseUrl}${profile_Path}`
     : `${fallbackImage}`;
@@ -45,7 +46,8 @@ export const personImage = (profile_Path: string) => {
       className="movie-poster"
       style={{
         width: "100%",
-        height: "650px",
+        maxWidth: isFallback ? "342px" : "none",
+        height: "525px",
         objectFit: "cover",
         display: "block",
       }}

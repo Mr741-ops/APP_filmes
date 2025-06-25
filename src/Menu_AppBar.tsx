@@ -54,7 +54,7 @@ export function LanguageMenu() {
         }}
       >
         {" "}
-        {t("Language")}{":"}
+        {t("misc.Language")}{":"}
       </InputLabel>
       <IconButton
         onClick={handleClick}
@@ -110,14 +110,14 @@ export const TabWithMenu = ({
   const { t } = useTranslation();
 
   const displayNames: Record<string, string> = {
-    popular: t("Popular"),
-    top_rated: t("TopRated"),
-    now_playing: t("NowPlaying"),
-    upcoming: t("Upcoming"),
-    on_the_air: t("OnTheAir"),
-    airing_today: t("AiringToday"),
-    advancedSearchMovies: "Advanced Search",
-    advancedSearchSeries: "Advanced Search",
+    popular: t("movies.Popular"),
+    top_rated: t("movies.TopRated"),
+    now_playing: t("movies.NowPlaying"),
+    upcoming: t("movies.Upcoming"),
+    on_the_air: t("series.OnTheAir"),
+    airing_today: t("series.AiringToday"),
+    advancedSearchMovies: t("navigation.AdvancedSearch"),
+    advancedSearchSeries: t("navigation.AdvancedSearch"),
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

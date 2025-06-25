@@ -105,7 +105,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   textAlign: "center",
                 }}
               >
-                <strong>{t("Overview")}</strong>
+                <strong>{t("movieDetails.Overview")}</strong>
               </Typography>
               <Typography
                 gutterBottom
@@ -115,10 +115,10 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
               >
                 {selectedMovie?.overview
                   ? `${selectedMovie.overview}`
-                  : `The overview on this film is unavailable at the moment.`}
+                  : `${t("errorMessages.FilmOverviewNull")}`}
               </Typography>
               <Typography gutterBottom sx={{ mt: 5 }}>
-                <strong>{t("ReleaseDate")}: </strong>
+                <strong>{t("movieDetails.ReleaseDate")}: </strong>
                 {selectedMovie?.release_date}
               </Typography>
             </Box>
@@ -132,7 +132,7 @@ export function CustomDialog({ selectedMovie, handleClose }: DialogProps) {
                   mt: 25,
                 }}
               >
-                {t("DetailsPage")}
+                {t("navigation.DetailsPage")}
               </Button>
             </DialogActions>
           </Grid>

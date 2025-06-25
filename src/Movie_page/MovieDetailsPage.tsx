@@ -23,7 +23,7 @@ const MovieDetailsPage = () => {
       container
       className="Body"
       direction="row"
-      gap={7}
+      
       sx={{
         width: "100%",
         flexWrap: "wrap",
@@ -35,7 +35,7 @@ const MovieDetailsPage = () => {
       <BackButton />
       <Grid
         size={{ xs: 12, md: 3 }}
-        sx={{ display: "flex", justifyContent: "center" }}
+        sx={{ display: "flex", justifyContent: "center", }}
       >
         <SideBar movie={movie} />
       </Grid>

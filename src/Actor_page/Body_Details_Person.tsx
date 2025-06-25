@@ -26,6 +26,13 @@ export const Body = ({ person, id }: Props) => {
   if (error) return <Typography>Erro ao carregar os dados.</Typography>;
   if (!data) return <Typography>Nenhum dado encontrado.</Typography>;
 
+  let biography;
+
+  if(!person.biography){
+    biography = t("errorMessages.BiographyNull");
+  } else {
+    biography = person.biography;
+  }
 
   return (
     <Box
@@ -42,13 +49,13 @@ export const Body = ({ person, id }: Props) => {
     }}
     >
       <Typography variant="h3" sx={{ mt: 4 }}>
-        <strong>{t('Biography')}</strong>
+        <strong>{t('peopleDetails.Biography')}</strong>
       </Typography>
       <Typography variant="body1" sx={{ mt: 5, textAlign: "justify" }}>
-        {person.biography}
+        {biography}
       </Typography>
       <Carroussel
-        title={t('Titles')}
+        title={t('peopleDetails.Titles')}
         items={data.cast.map((movie: any) => ({
           id: movie.id,
           title: movie.title,

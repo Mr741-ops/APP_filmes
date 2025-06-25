@@ -1,6 +1,7 @@
 import { useGetList } from "react-admin";
 import { useEffect, useState } from "react";
 import { Box, CircularProgress, InputAdornment, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface SearchResult {
   id: number;
@@ -17,6 +18,7 @@ interface SearchBarProps {
 
 export const Search_Bar = ({ onResults, resource }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState("");
+  const { t } = useTranslation();
 
   const { data = [], isLoading } = useGetList(
     resource,
@@ -33,13 +35,13 @@ export const Search_Bar = ({ onResults, resource }: SearchBarProps) => {
 
   switch (resource) {
     case "search/movie":
-      placeHolder = "Search movies";
+      placeHolder = t("searchBars.MovieSearchBar");
       break;
     case "search/tv":
-      placeHolder = "Search series";
+      placeHolder = t("searchBars.SeriesSearchBar");
       break;
     case "search/person":
-      placeHolder = "Search people";
+      placeHolder = t("searchBars.PeopleSearchBar");
       break;
   }
 

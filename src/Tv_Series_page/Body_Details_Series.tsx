@@ -9,7 +9,7 @@ type Props = {
 };
 
 const useLists = (id: any) => {
-  const movies = useGetOne(
+  const series = useGetOne(
     "tv",
     {
       id,
@@ -27,15 +27,15 @@ const useLists = (id: any) => {
     },
   });
 
-  const isLoading = similarSeries.isLoading ?? movies.isLoading;
-  const isError = similarSeries.error ?? movies.error;
+  const isLoading = similarSeries.isLoading ?? series.isLoading;
+  const isError = similarSeries.error ?? series.error;
 
   return {
     isLoading,
     isError,
     data: {
       similarSeries: similarSeries.data ?? [],
-      movies: movies.data ?? [],
+      people: series.data ?? [],
     },
   };
 };
@@ -50,6 +50,14 @@ export const Body = ({ series, id }: Props) => {
 
   if (isError) {
     return <Typography>Error loading movie lists.</Typography>;
+  }
+
+  let overview;
+
+  if(!series.overview){ 
+    overview = t("errorMessages.OverviewNull");
+  }else{
+    overview = series.overview;
   }
 
   return (
@@ -67,14 +75,14 @@ export const Body = ({ series, id }: Props) => {
       }}
     >
       <Typography variant="h3" sx={{ mt: 4, textWrap: "wrap" }}>
-        <strong>{t("Overview")}</strong>
+        <strong>{t("seriesDetails.Overview")}</strong>
       </Typography>
       <Typography variant="body1" sx={{ mt: 5, textAlign: "justify" }}>
-        {series.overview}
+        {overview}
       </Typography>
       <Carroussel
-        title={t("Cast")}
-        items={data.movies.cast.map((person: any) => ({
+        title={t("seriesDetails.Cast")}
+        items={(data.people.cast ?? []).map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
@@ -84,8 +92,8 @@ export const Body = ({ series, id }: Props) => {
         size={900}
       />
       <Carroussel
-        title={t("Crew")}
-        items={data.movies.crew.map((person: any) => ({
+        title={t("seriesDetails.Crew")}
+        items={(data.people.crew ?? []).map((person: any) => ({
           id: person.id,
           title: person.name,
           imagePath: person.profile_path,
@@ -95,7 +103,7 @@ export const Body = ({ series, id }: Props) => {
         size={900}
       />
       <Carroussel
-        title={t("SimilarSeries")}
+        title={t("seriesDetails.SimilarSeries")}
         items={data.similarSeries.map((series: any) => ({
           id: series.id,
           title: series.name,

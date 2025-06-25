@@ -1,27 +1,25 @@
 export const TitleMovies = (resource: string, t: (key: string) => string) => {
     switch (resource) {
       case "popular":
-        return t('PopularMovies');
+        return t('movies.Popular');
       case "top_rated":
-        return t('TopRatedMovies');
+        return t('movies.TopRated');
       case "now_playing":
-        return t('NowPlayingMovies');
+        return t('movies.NowPlaying');
       case "upcoming":
-        return t('UpcomingMovies');
-      case "search":
-        return t('SearchMovies');
+        return t('movies.Upcoming');
     }
   };
 
   export const TitleSeries = (resource: string, t: (key: string) => string) => {
     switch (resource) {
       case "popular":
-        return t('PopularSeries');
+        return t('series.Popular');
       case "top_rated":
-        return t('TopRatedSeries');
+        return t('series.TopRated');
       case "on_the_air":
-        return t('CurrentlyAiringSeries');
+        return t('series.OnTheAir');
       case "airing_today":
-        return t('AiringToday');
+        return t('series.AiringToday');
     }
   };

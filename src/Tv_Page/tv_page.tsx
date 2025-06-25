@@ -10,7 +10,7 @@ import { AdvancedSearch } from "../Utils/AdvancedSearch/AdvencedSearch";
 
 export const TVPage = () => {
   const { t } = useTranslation();
-  const resource = localStorage.getItem("resource") || "popular";
+  const resource = localStorage.getItem("resource") ?? "popular";
 
   useEffect(() => {
     if (resource === "advancedSearchSeries") {

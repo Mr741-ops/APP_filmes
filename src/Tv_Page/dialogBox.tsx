@@ -43,7 +43,7 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
 
   const overview = selectedSeries?.overview
     ? `${selectedSeries.overview}`
-    : `The overview on this series is unavailable at the moment try again later.`;
+    : `${t("errorMessages.OverviewNull")}`;
 
   return (
     <BootstrapDialog
@@ -101,15 +101,13 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
                   textAlign: "center",
                 }}
               >
-                <strong>{t("Overview")}</strong>
+                <strong>{t("seriesDetails.Overview")}</strong>
               </Typography>
               <Typography gutterBottom sx={{ textAlign: "justify" }}>
-                {overview
-                  ? overview
-                  : `The overview on this film is unavailable at the moment.`}
+                {overview}
               </Typography>
               <Typography gutterBottom>
-                <strong>{t("ReleaseDate")}: </strong>
+                <strong>{t("seriesDetails.FirstAirDate")}: </strong>
                 {selectedSeries?.first_air_date}
               </Typography>
             </Box>
@@ -124,7 +122,7 @@ export function CustomDialog({ selectedSeries, handleClose }: DialogProps) {
                   bottom: "180px",
                 }}
               >
-                {t("DetailsPage")}
+                {t("navigation.DetailsPage")}
               </Button>
             </DialogActions>
           </Grid>

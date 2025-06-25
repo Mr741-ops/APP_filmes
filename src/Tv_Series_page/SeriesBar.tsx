@@ -39,7 +39,9 @@ export const Image = ({ series, id }: InfoProps) => {
         {Poster.personImage(series.poster_path)}
       </Box>
       <Box sx={{ display: "flex", mt: 3 }}>
-        <Typography component="legend">{t('Rating')}: </Typography>
+        <Typography component="legend">
+          {t("seriesDetails.Rating")}:{" "}
+        </Typography>
         <Rating
           value={series?.vote_average}
           readOnly
@@ -60,25 +62,26 @@ export const Image = ({ series, id }: InfoProps) => {
         }}
       >
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('Title')}</strong>: {series.name ?? "N/A"}
+          <strong>{t("seriesDetails.EpisodeRuntime")}</strong>:{" "}
+          {series.episode_run_time[0] ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('EpisodeRuntime')}</strong>: {series.episode_run_time ?? "N/A"}
+          <strong>{t("seriesDetails.FirstAirDate")}</strong>:{" "}
+          {series.first_air_date ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('FirstAirDate')}</strong>: {series.first_air_date ?? "N/A"}
+          <strong>{t("seriesDetails.Episodes")}</strong>:{" "}
+          {series.number_of_episodes ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('Episodes')}</strong>: {series.number_of_episodes ?? "N/A"}
+          <strong>{t("seriesDetails.Seasons")}</strong>:{" "}
+          {series.number_of_seasons ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('Seasons')}</strong>: {series.number_of_seasons ?? "N/A"}
+          <strong>{t("seriesDetails.Status")}</strong>: {series.status ?? "N/A"}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('Status')}</strong>: {series.status ?? "N/A"}
-        </Typography>
-        <Typography sx={{ mt: 2 }}>
-          <strong>{t('Type')}</strong>: {series.type ?? "N/A"}
+          <strong>{t("seriesDetails.Type")}</strong>: {series.type ?? "N/A"}
         </Typography>
       </Box>
     </Box>

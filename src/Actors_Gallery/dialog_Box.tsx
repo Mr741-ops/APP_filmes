@@ -12,6 +12,7 @@ import * as Poster from "./actor_image";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface DialogProps {
   selectedPerson: any | null;
@@ -34,6 +35,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const personDetailsPage = (id: number | undefined) => {
     navigate("/actor_page", { state: { id: id } });
@@ -46,10 +48,12 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
       aria-labelledby="customized-dialog-title"
       open={Boolean(selectedPerson)}
       maxWidth="md"
-      sx={{
-        "& .MuiBackdrop-root": {
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          backdropFilter: "blur(8px)",
+      slotProps={{
+        backdrop: {
+          sx: {
+            backgroundColor: "rgba(255, 255, 255, 0.03)",
+            backdropFilter: "blur(8px)",
+          },
         },
       }}
     >
@@ -69,62 +73,58 @@ export function CustomDialog({ selectedPerson, handleClose }: DialogProps) {
         {selectedPerson?.name}
       </DialogTitle>
       <DialogContent>
-        <Grid container spacing={4}>
+        <Grid
+          container
+          sx={{
+            justifyContent: "space-between",
+          }}
+        >
           <Grid size={5}>
             <Box
               sx={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "8px",
+                maxWidth: "342px",
+                height: "525px",
                 overflow: "hidden",
               }}
             >
               {Poster.personImage(selectedPerson?.profile_path ?? "")}
             </Box>
           </Grid>
-          <Grid size={6}>
-            <Typography
-              variant="h4"
-              gutterBottom
-              sx={{
-                textAlign: "center",
-              }}
-            >
-              <strong>Details</strong>
-            </Typography>
-
-            <Typography variant="subtitle1" sx={{ mt: 3 }}>
-              <strong>Original name:</strong> {selectedPerson?.original_name}
-            </Typography>
-
-            <Typography variant="subtitle1" sx={{ mt: 1 }}>
-              <strong>Known for department:</strong>{" "}
-              {selectedPerson?.known_for_department}
-            </Typography>
-
-            <Typography variant="subtitle1" sx={{ mt: 1 }}>
-              <strong>Known for:</strong>
-            </Typography>
-            {selectedPerson?.known_for.map((movie: any, index: number) => (
-              <Typography key={index} sx={{ ml: 2, flexWrap: "wrap" }}>
-                - {movie.title};
+          <Grid size={6} sx={{ mr: 3 }}>
+            <Box>
+              <Typography variant="subtitle1" sx={{ mt: 3 }}>
+                <strong>{t("peopleDetails.OriginalName")}:</strong> {selectedPerson?.original_name}
               </Typography>
-            ))}
+              <Typography variant="subtitle1" sx={{ mt: 1 }}>
+                <strong>{t("peopleDetails.KnownForDepartment")}:</strong>{" "}
+                {selectedPerson?.known_for_department}
+              </Typography>
+              <Typography variant="subtitle1" sx={{ mt: 1 }}>
+                <strong>{t("peopleDetails.Titles")}:</strong>
+              </Typography>
+              {selectedPerson?.known_for.map((movie: any, index: number) => (
+                <Typography key={index} sx={{ ml: 2, flexWrap: "wrap" }}>
+                  - {movie.title ? movie.title : "N/A"};
+                </Typography>
+              ))}
+            </Box>
+            <DialogActions>
+              <Button
+                autoFocus
+                onClick={(event) => personDetailsPage(selectedPerson?.id)}
+                sx={{
+                  bgcolor: "primary.main",
+                  color: "secondary.main",
+                  position: "fixed",
+                  bottom: "180px",
+                }}
+              >
+                {t("navigation.DetailsPage")}
+              </Button>
+            </DialogActions>
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogActions>
-        <Button
-          autoFocus
-          onClick={(event) => personDetailsPage(selectedPerson?.id)}
-          sx={{ color: "#0081a7" }}
-        >
-          Details page
-        </Button>
-      </DialogActions>
     </BootstrapDialog>
   );
 }

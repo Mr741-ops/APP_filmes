@@ -1,5 +1,5 @@
 import { Autocomplete, TextField, CircularProgress, Box } from "@mui/material";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useGetList } from "react-admin";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -55,9 +55,9 @@ export default function SearchBar() {
         }}
         renderOption={(props, option) => {
           let prefix = "";
-          if (option.media_type === "movie") prefix = "Movies: " ;
-          else if (option.media_type === "tv") prefix = "Series: ";
-          else if (option.media_type === "person") prefix = "Person: ";
+          if (option.media_type === "movie") prefix = t("navigation.Movies") + ": "  ;
+          else if (option.media_type === "tv") prefix = t("navigation.TvSeries") + ": ";
+          else if (option.media_type === "person") prefix = t("navigation.People") + ": ";
 
           const label = option.name ?? option.title ?? "No title";
 
@@ -71,7 +71,7 @@ export default function SearchBar() {
         renderInput={(params) => (
           <TextField
             {...params}
-            placeholder={t("AppBarSearchBar")}
+            placeholder={t("searchBars.AppBarSearchBar")}
             variant="outlined"
             InputProps={{
               ...params.InputProps,

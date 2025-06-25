@@ -49,23 +49,23 @@ const Header = () => {
                 textColor="inherit"
               >
                 <Tab
-                  label={t("Home")}
+                  label={t("navigation.Home")}
                   component={Link}
                   to="/Main"
                   value="/Main"
                 />
                 <TabWithMenu
-                  name={t("Movies")}
+                  name={t("navigation.Movies")}
                   value={"/home_page"}
                   resourceOptions={movieResource}
                 />
                 <TabWithMenu
-                  name={t("TvSeries")}
+                  name={t("navigation.TvSeries")}
                   value={"/tv_page"}
                   resourceOptions={seriesResource}
                 />
                 <Tab
-                  label={t("People")}
+                  label={t("navigation.People")}
                   component={Link}
                   to="/actors_gallery"
                   value="/actors_gallery"

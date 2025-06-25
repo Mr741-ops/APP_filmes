@@ -34,7 +34,7 @@ export const SideBar = ({ movie }: { movie: Movie }) => {
         {Poster.personImage(movie.poster_path)}
       </Box>
       <Box sx={{ display: 'flex', mt: 3 }}>
-        <Typography component="legend">{t('Rating')}: </Typography>
+        <Typography component="legend">{t('movieDetails.Rating')}: </Typography>
         <Rating
           value={movie?.vote_average}
           readOnly
@@ -55,19 +55,19 @@ export const SideBar = ({ movie }: { movie: Movie }) => {
         }}
       >
         <Typography sx={{ mt: 6 }}>
-          <strong>{t('Title')}</strong>: {movie.title ?? 'N/A'}
+          <strong>{t('movieDetails.Title')}</strong>: {movie.title ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('ReleaseDate')}</strong>: {movie.release_date ?? 'N/A'}
+          <strong>{t('movieDetails.ReleaseDate')}</strong>: {movie.release_date ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('Runtime')}</strong>: {movie.runtime ?? 'N/A'}
+          <strong>{t('movieDetails.Runtime')}</strong>: {movie.runtime ?? 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('Budget')}</strong>: {movie.budget ? `$ ${movie.budget.toLocaleString()}` : 'N/A'}
+          <strong>{t('movieDetails.Budget')}</strong>: {movie.budget ? `$ ${movie.budget.toLocaleString()}` : 'N/A'}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          <strong>{t('Revenue')}</strong>: {movie.revenue ? `$ ${movie.revenue.toLocaleString()}` : 'N/A'}
+          <strong>{t('movieDetails.Revenue')}</strong>: {movie.revenue ? `$ ${movie.revenue.toLocaleString()}` : 'N/A'}
         </Typography>
       </Box>
     </Box>

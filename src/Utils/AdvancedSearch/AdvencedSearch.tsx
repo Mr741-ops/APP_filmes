@@ -5,12 +5,16 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Stack,
+  Switch,
   TextField,
+  Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
 import getGenres from "../../Data/advancedSearchProvider";
 import { useGetList } from "react-admin";
+import { useTranslation } from "react-i18next";
 
 interface Genre {
   id: number;
@@ -39,19 +43,17 @@ export const AdvancedSearch = ({
   resource,
 }: AdvancedSearchProps) => {
   const [searchParams, setSearchParams] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   let endpoint;
 
   if (resource === "advancedSearchMovies") endpoint = "discover/movie";
   else endpoint = "discover/tv";
 
-  const { data = [], isLoading } = useGetList(
-    endpoint,
-    {
-      pagination: { page: page, perPage: 10 },
-      filter: searchParams ?? "",
-    },
-  );
+  const { data = [], isLoading } = useGetList(endpoint, {
+    pagination: { page: page, perPage: 10 },
+    filter: searchParams ?? "",
+  });
 
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
@@ -60,6 +62,8 @@ export const AdvancedSearch = ({
   const [avgRating, setAvgRating] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("");
   const [originCountry, setOriginCountry] = useState<string>("");
+  const [adultContent, setAdultContent] = useState(false);
+  const label = { inputProps: { "aria-label": "Adult Content" } };
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -84,6 +88,7 @@ export const AdvancedSearch = ({
     const query = new URLSearchParams();
 
     if (resource === "advancedSearchMovies") {
+      [query.append("include_adult", String(adultContent))];
       if (selectedGenres)
         [query.append("with_genres", selectedGenres.join(","))];
       if (year && year.length == 4)
@@ -95,13 +100,14 @@ export const AdvancedSearch = ({
       if (sortBy) [query.append("sort_by", sortBy)];
       if (originCountry) [query.append("with_origin_country", originCountry)];
     } else if (resource === "advancedSearchSeries") {
+      [query.append("include_adult", String(adultContent))];
       if (selectedGenres)
         [query.append("with_genres", selectedGenres.join(","))];
       if (year && year.length == 4) [query.append("first_air_date_year", year)];
       if (minRating && minRating.length < 3)
         [query.append("vote_average.gte", minRating)];
       if (avgRating && avgRating.length < 3)
-        [query.append("vote_average.gte", minRating)];
+        [query.append("vote_average.gte", avgRating)];
       if (sortBy) [query.append("sort_by", sortBy)];
       if (originCountry) [query.append("with_origin_country", originCountry)];
     }
@@ -119,6 +125,10 @@ export const AdvancedSearch = ({
     setSearchParams(builtQuery);
   };
 
+  const handleChangeAdult = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAdultContent(event.target.checked);
+  };
+
   return (
     <Grid
       container
@@ -129,6 +139,20 @@ export const AdvancedSearch = ({
         justifyContent: "center",
       }}
     >
+      <Grid
+        sx={{
+          height: "45px",
+        }}
+      >
+        <Stack direction="row" color="secondary.main" alignItems="center">
+          <Typography>Adult Content</Typography>
+          <Switch
+            {...label}
+            checked={adultContent}
+            onChange={handleChangeAdult}
+          />
+        </Stack>
+      </Grid>
       <Grid>
         <FormControl
           fullWidth
@@ -156,7 +180,7 @@ export const AdvancedSearch = ({
             labelId="genres-select-label"
             id="genres-select"
             value={selectedGenres}
-            label="Genre"
+            label={t("advancedSearch.Genre")}
             onChange={handleChangeGenres}
           >
             {genres.map((genre) => (
@@ -189,12 +213,14 @@ export const AdvancedSearch = ({
           }}
           disabled={disabled}
         >
-          <InputLabel id="sort-by-label">Sort By</InputLabel>
+          <InputLabel id="sort-by-label">
+            {t("advancedSearch.SortBy")}
+          </InputLabel>
           <Select
             labelId="sort-by-label"
             id="sort-by"
             value={sortBy}
-            label="Sort By"
+            label={t("advancedSearch.SortBy")}
             onChange={(e) => setSortBy(e.target.value)}
           >
             <MenuItem value="popularity.desc">Decrescent</MenuItem>
@@ -224,12 +250,14 @@ export const AdvancedSearch = ({
           }}
           disabled={disabled}
         >
-          <InputLabel id="sort-by-label">Origin Country</InputLabel>
+          <InputLabel id="sort-by-label">
+            {t("advancedSearch.OriginCountry")}
+          </InputLabel>
           <Select
             labelId="sort-by-label"
             id="sort-by"
             value={originCountry}
-            label="Origin Country"
+            label={t("advancedSearch.OriginCountry")}
             onChange={(e) => setOriginCountry(e.target.value)}
           >
             <MenuItem value="PT">Portugal</MenuItem>
@@ -244,8 +272,8 @@ export const AdvancedSearch = ({
 
       <Grid>
         <TextField
-          label="Year"
-          placeholder="Year"
+          label={t("advancedSearch.ReleaseYear")}
+          placeholder={t("advancedSearch.ReleaseYear")}
           variant="outlined"
           value={year}
           onChange={(e) => setYear(e.target.value)}
@@ -272,14 +300,14 @@ export const AdvancedSearch = ({
 
       <Grid>
         <TextField
-          label="Average Rating"
-          placeholder="Average Rating"
+          label={t("advancedSearch.AverageRating")}
+          placeholder={t("advancedSearch.AverageRating")}
           variant="outlined"
-          disabled={disabled}
+          disabled={disabled || !!minRating}
           value={avgRating}
           onChange={(e) => setAvgRating(e.target.value)}
           sx={{
-            width: 200,
+            width: 150,
             bgcolor: "primary.dark",
             borderRadius: 1,
             height: "100%",
@@ -299,14 +327,14 @@ export const AdvancedSearch = ({
 
       <Grid>
         <TextField
-          label="Minimum Rating"
-          placeholder="Minimum Rating"
+          label={t("advancedSearch.MinimumRating")}
+          placeholder={t("advancedSearch.MinimumRating")}
           variant="outlined"
-          disabled={disabled}
+          disabled={disabled || !!avgRating}
           value={minRating}
           onChange={(e) => setMinRating(e.target.value)}
           sx={{
-            width: 200,
+            width: 150,
             bgcolor: "primary.dark",
             borderRadius: 1,
             height: "100%",
@@ -333,7 +361,7 @@ export const AdvancedSearch = ({
             height: 45,
           }}
         >
-          Search
+          {t("misc.Search")}
         </Button>
       </Grid>
     </Grid>
