@@ -64,7 +64,7 @@ export const translationsPT = {
     OriginalName: "Nome original",
   },
 
-  trending: {
+  mainPage: {
     Greetings: "Bem-vindo ao site",
     TrendingMovies: "Filmes em tendência",
     TrendingPeople: "Pessoas em tendência",
@@ -96,7 +96,7 @@ export const translationsPT = {
 
   misc: {
     Language: "Idioma",
-    Search:"Pesquisar",
+    Search: "Pesquisar",
   },
 
   errorMessages: {

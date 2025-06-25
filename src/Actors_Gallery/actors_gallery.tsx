@@ -7,9 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 export const ActorsGallery = () => {
   const { t } = useTranslation();
-  /* 
-  ------------------------------ Variables ------------------------
-  */
+
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<any[] | null>(null);
 
@@ -39,7 +37,7 @@ export const ActorsGallery = () => {
           color: 'secondary.main'
         }}
       >
-        {t('PopularPeople')}
+        {t('people.Popular')}
       </Typography>
       <Body resource="popular" page={page} data={searchResults} />
       <Box

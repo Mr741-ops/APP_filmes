@@ -64,7 +64,7 @@ export const translationsEN = {
     OriginalName: "Original Name",
   },
 
-  trending: {
+  mainPage: {
     Greetings: "Welcome to the App",
     TrendingMovies: "Trending Movies",
     TrendingPeople: "Trending People",
@@ -86,17 +86,17 @@ export const translationsEN = {
   },
 
   advancedSearch: {
-    Genre:"Genre",
-    SortBy:"Sort by",
-    OriginCountry:"Origin Country",
-    ReleaseYear:"Release Year",
-    AverageRating:"Average Rating",
-    MinimumRating:"Minimum Rating",
+    Genre: "Genre",
+    SortBy: "Sort by",
+    OriginCountry: "Origin Country",
+    ReleaseYear: "Release Year",
+    AverageRating: "Average Rating",
+    MinimumRating: "Minimum Rating",
   },
 
   misc: {
     Language: "Language",
-    Search:"Search",
+    Search: "Search",
   },
 
   errorMessages: {

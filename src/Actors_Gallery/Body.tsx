@@ -37,7 +37,7 @@ const Body: React.FC<Props> = ({ resource, page, data: searchData }) => {
     }
   );
 
-  const displayData = searchData || fetchedData || [];
+  const displayData = searchData ?? fetchedData ?? [];
   const [selectedPerson, setSelectedPerson] = React.useState<Person | null>(null);
 
   const handleClickOpen = (person: Person) => () => {

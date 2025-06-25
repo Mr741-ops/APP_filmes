@@ -65,11 +65,11 @@ export const MainPage = () => {
           textWrap: "wrap",
         }}
       >
-        <strong>{t('Greetings')}</strong>
+        <strong>{t('mainPage.Greetings')}</strong>
       </Typography>
 
       <Carroussel
-        title={t('TrendingMovies')}
+        title={t('mainPage.TrendingMovies')}
         items={data.movies.map((movie: any) => ({
           id: movie.id,
           title: movie.title,
@@ -79,7 +79,7 @@ export const MainPage = () => {
         size={1200}
       />
       <Carroussel
-        title={t('TrendingSeries')}
+        title={t('mainPage.TrendingSeries')}
         items={data.series.map((series: any) => ({
           id: series.id,
           title: series.name,
@@ -89,7 +89,7 @@ export const MainPage = () => {
         size={1200}
       />
       <Carroussel
-        title={t('TrendingPeople')}
+        title={t('mainPage.TrendingPeople')}
         items={data.persons.map((person: any) => ({
           id: person.id,
           title: person.name,
