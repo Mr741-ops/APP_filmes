@@ -35,6 +35,7 @@ export const translationsEN = {
     People: "People",
     AdvancedSearch: "Advanced Search",
     DetailsPage: "Details Page",
+    Games:"Games",
   },
 
   movieDetails: {
@@ -92,6 +93,7 @@ export const translationsEN = {
     ReleaseYear: "Release Year",
     AverageRating: "Average Rating",
     MinimumRating: "Minimum Rating",
+    AdultContent: "Adult Content",
   },
 
   misc: {
@@ -103,6 +105,12 @@ export const translationsEN = {
     BiographyNull: "At the moment this biography is not available.",
     FilmOverviewNull: "At the moment this overview is unavailable.",
   },
+
+  hangedman:{
+    TryAgain:"Try Again",
+    YouWin:"You won!!! Click on try again to play again",
+    YouLose:"You lost, better lcuk next time! Click on try again to play again",
+  }
 };
 
 export default translationsEN;

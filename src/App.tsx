@@ -12,6 +12,7 @@ import ActorPage from './Actor_page/actor_page.tsx';
 import TVPage from './Tv_Page/tv_page.tsx';
 import TvSeriesPage from './Tv_Series_page/tv_series_page.tsx';
 import MainPage from './Main_Page/Main.tsx';
+import HangedMan from './hangedman/hangedman.tsx'
 
 export const App = () => (
   <Admin dashboard={MainPage} layout={MyLayout} dataProvider={dataProvider} theme={theme}>
@@ -23,6 +24,7 @@ export const App = () => (
       <Route path="/actor_page" element={<ActorPage />} />
       <Route path="/tv_series_page" element={<TvSeriesPage />} />
       <Route path="/Main" element={<MainPage />} />
+      <Route path="/hangedman" element={<HangedMan />} />
     </CustomRoutes>
   </Admin>
 );

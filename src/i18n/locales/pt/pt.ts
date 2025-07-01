@@ -35,6 +35,7 @@ export const translationsPT = {
     People: "Pessoas",
     AdvancedSearch: "Pesquisa Avançada",
     DetailsPage: "Página de Detalhes",
+    Games:"Jogos",
   },
 
   movieDetails: {
@@ -92,6 +93,7 @@ export const translationsPT = {
     ReleaseYear: "Ano de lançamento",
     AverageRating: "Classificação média",
     MinimumRating: "Classificação Miníma",
+    AdultContent: "Conteúdo Adulto",
   },
 
   misc: {
@@ -103,6 +105,12 @@ export const translationsPT = {
     BiographyNull: "De momento esta biografia não se encontra disponível.",
     OverviewNull: "De momento esta sinopse não se encontra disponível.",
   },
+
+  hangedman:{
+    TryAgain:"Tentar novamente",
+    YouWin:"Ganhaste!!! Carrega no butão tentar novamente para jogar outra vez!",
+    YouLose:"Perdeste! Carrega no butão tentar novamente para jogar de novo!",
+  }
 };
 
 export default translationsPT;

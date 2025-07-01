@@ -145,7 +145,7 @@ export const AdvancedSearch = ({
         }}
       >
         <Stack direction="row" color="secondary.main" alignItems="center">
-          <Typography>Adult Content</Typography>
+          <Typography>{t("advancedSearch.AdultContent")}</Typography>
           <Switch
             {...label}
             checked={adultContent}

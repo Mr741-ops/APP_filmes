@@ -21,7 +21,10 @@ const Header = () => {
     currentPath = "/actors_gallery";
   } else if (!!matchPath("/tv_page", location.pathname)) {
     currentPath = "/tv_page";
-  } else {
+  } else if (!!matchPath("/hangedman", location.pathname)) {
+    currentPath = "/hangedman";
+  } 
+  else {
     currentPath = false;
   }
 
@@ -69,6 +72,12 @@ const Header = () => {
                   component={Link}
                   to="/actors_gallery"
                   value="/actors_gallery"
+                />
+                <Tab
+                  label={t("navigation.Games")}
+                  component={Link}
+                  to="/hangedman"
+                  value="/hangedman"
                 />
               </Tabs>
             </Box>
